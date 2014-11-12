@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="type">
+        <item>xml layout</item>
+        <item>Java call</item>
+        <item>layout sample</item>
+        <item>dialog sample</item>
+        <item>size sample</item>
+        <item>icon sample</item>
+        <item>interstitial sample</item>
+    </string-array>
+    <string-array name="icon_menu">
+        <item>xml layout</item>
+        <item>xml layout separate</item>
+        <item>Java call</item>
+        <item>dialog sample</item>
+        <item>attach and dettach</item>
+        <item>space example</item>
+    </string-array>
+    <string-array name="javacall_type">
+        <item>Java call LinearLayout</item>
+        <item>Java call RelativeLayout</item>
+        <item>Java call with listener</item>
+    </string-array>
+    <string-array name="layout_type">
+        <item>top</item>
+        <item>bottom</item>
+        <item>attach and dettach</item>
+        <item>ListView</item>
+        <item>ViewPager</item>
+        <item>ViewPager and ListView</item>
+        <item>Fragment replace</item>
+    </string-array>
+    <string-array name="dialog_type">
+        <item>dialog</item>
+        <item>exit dialog</item>
+    </string-array>
+    <string-array name="size_type">
+        <item>320 x 50</item>
+        <item>320 x 100</item>
+        <item>300 x 100</item>
+        <item>300 x 250</item>
+        <item>728 x 90</item>
+    </string-array>
+    <string-array name="interstitial_menu">
+        <item>interstitial</item>
+        <item>finish ad</item>
+    </string-array>
+    
+    <item name="pager" type="id"/>
+
+</resources>

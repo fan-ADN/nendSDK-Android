@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NendSample</string>
+    <string name="nend_logo_discription">Nend</string>
+    
+    <string name="replace">replace</string>
+    <string name="show_dialog">show dialog</string>
+    <string name="add_icon">AddIcon</string>
+    <string name="remove_icon">RemoveIcon</string>
+    
+    <string name="show_interstitial">show interstitial</string>
+</resources>

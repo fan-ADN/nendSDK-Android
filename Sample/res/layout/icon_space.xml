@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <net.nend.android.NendAdIconLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        NendApiKey="0c734134519f25412ae9a9bff94783b81048ffbe"
+        NendIconCount="4"
+        NendIconSpaceEnabled="false"
+        NendSpotId="101282"
+        NendTitleVisible="false"
+        android:background="@android:color/white" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal" >
+
+        <net.nend.android.NendAdIconView
+            android:id="@+id/icon1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            NendIconSpaceEnabled="false"
+            android:background="@android:color/white" />
+
+        <net.nend.android.NendAdIconView
+            android:id="@+id/icon2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            NendIconSpaceEnabled="false"
+            NendTitleVisible="false"
+            android:background="@android:color/white" />
+
+        <net.nend.android.NendAdIconView
+            android:id="@+id/icon3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            NendIconSpaceEnabled="false"
+            android:background="@android:color/white" />
+
+        <net.nend.android.NendAdIconView
+            android:id="@+id/icon4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            NendIconSpaceEnabled="false"
+            NendTitleVisible="false"
+            android:background="@android:color/white" />
+    </LinearLayout>
+
+</RelativeLayout>

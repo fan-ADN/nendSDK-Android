@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/nend_logo_discription"
+        android:src="@drawable/nend_logo" />
+
+    <HorizontalScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:orientation="horizontal" >
+
+            <net.nend.android.NendAdIconView
+                android:id="@+id/icon1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <net.nend.android.NendAdIconView
+                android:id="@+id/icon2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <net.nend.android.NendAdIconView
+                android:id="@+id/icon3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <net.nend.android.NendAdIconView
+                android:id="@+id/icon4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <net.nend.android.NendAdIconView
+                android:id="@+id/icon5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <net.nend.android.NendAdIconView
+                android:id="@+id/icon6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <net.nend.android.NendAdIconView
+                android:id="@+id/icon7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <net.nend.android.NendAdIconView
+                android:id="@+id/icon8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <net.nend.android.NendAdIconView
+                android:id="@+id/icon9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <net.nend.android.NendAdIconView
+                android:id="@+id/icon10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <net.nend.android.NendAdIconView
+                android:id="@+id/icon11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <net.nend.android.NendAdIconView
+                android:id="@+id/icon12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</RelativeLayout>

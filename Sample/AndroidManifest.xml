@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.nend.sample"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="10"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" >
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        
+        <activity
+            android:name=".NendSampleActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".XmlLayoutActivity" />
+        <activity android:name=".JavaCallActivity" />
+        <activity android:name=".LayoutSampleActivity" />
+        <activity android:name=".SizeSampleActivity" />
+        <activity android:name=".SizeActivity" />
+        <activity android:name=".TopActivity" />
+        <activity android:name=".BottomActivity" />
+        <activity android:name=".WebActivity" />
+        <activity android:name=".JavaCallLinearActivity" />
+        <activity android:name=".JavaCallRelativeActivity" />
+        <activity android:name=".JavaCallWithListenerActivity" />
+        <activity android:name=".AttachAndDettachActivity" />
+        <activity android:name=".ListViewActivity" />
+        <activity android:name=".ViewPagerActivity" />
+        <activity android:name=".PagerAndListActivity" />
+        <activity android:name=".FragmentReplaceActivity" />
+        <activity android:name=".DialogSampleActivity" />
+        <activity
+            android:name=".DialogActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ExitDialogActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".IconSampleActivity" />
+        <activity android:name=".IconLayoutActivity" />
+        <activity android:name=".IconActivity" />
+        <activity android:name=".IconJavaCallActivity" />
+        <activity android:name=".IconDialogSampleActivity" />
+        <activity android:name=".IconDialogActivity" />
+        <activity android:name=".IconExitDialogActivity" />
+        <activity android:name=".IconAttachAndDettachActivity" />
+        <activity android:name=".IconSpaceActivity" />
+        <activity android:name=".InterstitialSampleActivity" android:configChanges="orientation|screenSize" />
+        <activity android:name=".InterstitialActivity" android:configChanges="orientation|screenSize" />
+        <activity android:name=".FinishAdActivity" android:configChanges="orientation|screenSize" />
+        
+        <meta-data
+            android:name="NendDebuggable"
+            android:value="true" />
+        
+    </application>
+
+</manifest>
