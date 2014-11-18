@@ -9,5 +9,5 @@ Android版nendSDKのサンプルプロジェクトです。
 
 Requirement
 ---------------------------------
-* [nendの管理画面](https://www.nend.net/admin/login)よりAndroid版のSDKをダウンロードし、nendSDK-X.X.X.jarファイルをlibsフォルダに追加してください。
-* マニュアルに従い、Google Play servicesライブラリをプロジェクトに追加してください。
+1. [nendの管理画面](https://www.nend.net/admin/login)からAndroid版のSDKをダウンロードし、nendSDK-X.X.X.jarファイルをlibsフォルダに追加してください。
+2. nendSDKのマニュアル等を参考に、Google Play servicesライブラリをプロジェクトに追加してください。
