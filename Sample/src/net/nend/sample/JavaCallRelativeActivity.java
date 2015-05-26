@@ -21,7 +21,7 @@ public class JavaCallRelativeActivity extends Activity {
          *
          */
         NendAdView nendAdView = 
-                new NendAdView(getApplicationContext(), 3174, "c5cb8bc474345961c6e7a9778c947957ed8e1e4f");
+                new NendAdView(getApplicationContext(), 3174, "c5cb8bc474345961c6e7a9778c947957ed8e1e4f", false);
         // 中央下部表示の場合
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);

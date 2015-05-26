@@ -1,9 +1,6 @@
 package net.nend.sample;
 
 import net.nend.android.NendAdIconLoader;
-import net.nend.android.NendAdIconLoader.OnClickListner;
-import net.nend.android.NendAdIconLoader.OnFailedListner;
-import net.nend.android.NendAdIconLoader.OnReceiveListner;
 import net.nend.android.NendAdIconView;
 import net.nend.android.NendAdView.NendError;
 import net.nend.android.NendIconError;
@@ -36,8 +33,8 @@ public class IconActivity extends Activity implements SampleConstants {
         mIconLoader.addIconView(view3);
         mIconLoader.addIconView(view4);
         mIconLoader.loadAd();
-        
-        mIconLoader.setOnReceiveLisner(new OnReceiveListner() {
+                
+        mIconLoader.setOnReceiveListener(new NendAdIconLoader.OnReceiveListener() {
             @Override
             public void onReceiveAd(NendAdIconView iconView) {
                 switch (iconView.getId()) {
@@ -53,13 +50,13 @@ public class IconActivity extends Activity implements SampleConstants {
                 Toast.makeText(getApplicationContext(), "Recieved", Toast.LENGTH_SHORT).show();
             }
         });
-        mIconLoader.setOnClickListner(new OnClickListner() {
+        mIconLoader.setOnClickListener(new NendAdIconLoader.OnClickListener() {
             @Override
             public void onClick(NendAdIconView iconView) {
                 Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_SHORT).show();
             }
         });
-        mIconLoader.setOnFailedListner(new OnFailedListner() {
+        mIconLoader.setOnFailedListener(new NendAdIconLoader.OnFailedListener() {
             @Override
             public void onFailedToReceiveAd(NendIconError iconError) {
                 NendError nendError = iconError.getNendError();

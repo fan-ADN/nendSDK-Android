@@ -22,7 +22,7 @@ public class JavaCallLinearActivity extends Activity {
          *
          */
         NendAdView nendAdView = new NendAdView(getApplicationContext(), 
-                3174, "c5cb8bc474345961c6e7a9778c947957ed8e1e4f");
+                3174, "c5cb8bc474345961c6e7a9778c947957ed8e1e4f", true);
         // 中央下部表示の場合
         rootLayout.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
         // 上部表示の場合
