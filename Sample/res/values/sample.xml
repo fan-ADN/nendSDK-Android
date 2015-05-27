@@ -9,6 +9,7 @@
         <item>size sample</item>
         <item>icon sample</item>
         <item>interstitial sample</item>
+        <item>adjust size sample</item>
     </string-array>
     <string-array name="icon_menu">
         <item>xml layout</item>
@@ -46,6 +47,10 @@
     <string-array name="interstitial_menu">
         <item>interstitial</item>
         <item>finish ad</item>
+    </string-array>
+    <string-array name="adjust_size_menu">
+        <item>xml layout</item>
+        <item>java call</item>
     </string-array>
     
     <item name="pager" type="id"/>

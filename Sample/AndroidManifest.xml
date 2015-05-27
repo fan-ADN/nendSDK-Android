@@ -63,7 +63,10 @@
         <activity android:name=".InterstitialSampleActivity" android:configChanges="orientation|screenSize" />
         <activity android:name=".InterstitialActivity" android:configChanges="orientation|screenSize" />
         <activity android:name=".FinishAdActivity" android:configChanges="orientation|screenSize" />
-        
+        <activity android:name=".AdjustSizeActivity" />
+        <activity android:name=".AdjustSizeJavaCallActivity" />
+        <activity android:name=".AdjustSizeXmlLayoutActivity" />
+ 
         <meta-data
             android:name="NendDebuggable"
             android:value="true" />
