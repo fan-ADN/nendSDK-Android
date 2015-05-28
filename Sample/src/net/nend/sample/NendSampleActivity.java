@@ -41,6 +41,9 @@ public class NendSampleActivity extends ListActivity {
         case 6:
             cls = InterstitialSampleActivity.class;
             break;
+        case 7:
+        	cls = AdjustSizeActivity.class;
+        	break;
         }
         if(cls != null){
             startActivity(new Intent(getApplicationContext(), cls));
