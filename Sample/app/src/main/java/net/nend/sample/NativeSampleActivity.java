@@ -37,18 +37,15 @@ public class NativeSampleActivity extends ListActivity {
                 cls = NativeListActivity.class;
                 break;
             case 5:
-                cls = NativeRepeatListActivity.class;
-                break;
-            case 6:
                 cls = NativeMultipleLayoutListActivity.class;
                 break;
-            case 7:
+            case 6:
                 cls = NativeGridActivity.class;
                 break;
-            case 8:
+            case 7:
                 cls = NativeRecyclerActivity.class;
                 break;
-            case 9:
+            case 8:
                 cls = NativeViewPagerActivity.class;
                 break;
         }

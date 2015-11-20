@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,18 +15,22 @@ import android.widget.TextView;
 
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeClient;
-import net.nend.android.NendAdNativeListener;
+import net.nend.android.NendAdNativeListListener;
 import net.nend.android.NendAdNativeViewBinder;
 import net.nend.android.NendAdNativeViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class NativeMultipleLayoutListActivity extends ListActivity {
 
     private final int NORMAL = 0;
     private final int AD1 = 1;
     private final int AD2 = 2;
+
+    private Handler mHandler = new Handler();
+    private ArrayList<NendAdNative> mLoadedAd = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +49,11 @@ public class NativeMultipleLayoutListActivity extends ListActivity {
 
         private NendAdNativeClient mClient;
         private NendAdNativeViewBinder mBinder;
+        private List<String> mList;
 
         public NativeListAdapter(Context context, int resource, List<String> list) {
             super(context, resource, list);
+            mList = list;
 
             mBinder = new NendAdNativeViewBinder.Builder()
                     .adImageId(R.id.ad_image)
@@ -56,23 +63,36 @@ public class NativeMultipleLayoutListActivity extends ListActivity {
                     .build();
 
             mClient = new NendAdNativeClient(context, 24443, "4e418660631509c2466b9b719a267e376b5ddb66");
-            mClient.setListener(new NendAdNativeListener() {
+            mClient.setListener(new NendAdNativeListListener() {
                 @Override
-                public void onReceiveAd(NendAdNative ad, NendAdNativeClient.NendError nendError) {
+                public void onReceiveAd(NendAdNative nendAdNative, int i, final View view, NendAdNativeClient.NendError nendError) {
                     if (nendError == null) {
                         Log.i(getClass().getSimpleName(), "広告取得成功");
+                        mLoadedAd.add(nendAdNative);
                     } else {
                         Log.i(getClass().getSimpleName(), "広告取得失敗 " + nendError.getMessage());
+
+                        // 広告リクエスト制限を越えた場合
+                        if(nendError == NendAdNativeClient.NendError.EXCESSIVE_AD_CALLS){
+                            // すでに取得済みの広告をランダムで表示
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    NendAdNative ad = mLoadedAd.get(new Random().nextInt(mLoadedAd.size()));
+                                    ad.intoView(view, mBinder);
+                                }
+                            });
+                        }
                     }
                 }
 
                 @Override
-                public void onClick(NendAdNative ad) {
+                public void onClick(NendAdNative nendAdNative) {
                     Log.i(getClass().getSimpleName(), "クリック");
                 }
 
                 @Override
-                public void onDisplayAd(Boolean result) {
+                public void onDisplayAd(Boolean result, View view) {
                     Log.i(getClass().getSimpleName(), "広告表示 = " + result);
                 }
             });

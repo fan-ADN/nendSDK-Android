@@ -63,7 +63,6 @@
         <activity android:name=".NativeSampleActivity" />
         <activity android:name=".NativeLayoutActivity" />
         <activity android:name=".NativeListActivity" />
-        <activity android:name=".NativeRepeatListActivity" />
         <activity android:name=".NativeMultipleLayoutListActivity" />
         <activity android:name=".NativeGridActivity" />
         <activity android:name=".NativeRecyclerActivity" />

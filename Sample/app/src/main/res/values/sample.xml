@@ -59,7 +59,6 @@
         <item>LargeWide</item>
         <item>TextOnly</item>
         <item>ListView</item>
-        <item>ListView (repeat)</item>
         <item>ListView (multiple layout)</item>
         <item>GridView</item>
         <item>RecyclerView</item>

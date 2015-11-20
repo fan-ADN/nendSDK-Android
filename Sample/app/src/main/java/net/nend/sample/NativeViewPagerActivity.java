@@ -12,7 +12,7 @@ import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeClient;
 import net.nend.android.NendAdNativeViewBinder;
 
-public class NativeViewPagerActivity extends AppCompatActivity {
+public class NativeViewPagerActivity extends AppCompatActivity implements NativePagerFragment.OnAdListener {
 
     private ViewPager mViewPager;
     private NendAdNativeViewBinder mBinder;
@@ -40,7 +40,8 @@ public class NativeViewPagerActivity extends AppCompatActivity {
         mClient = new NendAdNativeClient(this, 24516, "89c4239f085dc934d6dcda8af1d6098706c06d38");
     }
 
-    public void onAdRequest(View view, int position){
+    @Override
+    public void onAdRequest(View view, int position) {
         mClient.loadAd(view, mBinder, position);
     }
 
