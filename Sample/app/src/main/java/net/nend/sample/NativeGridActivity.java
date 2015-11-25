@@ -61,7 +61,7 @@ public class NativeGridActivity extends AppCompatActivity {
                     .prId(R.id.ad_pr, NendAdNative.AdvertisingExplicitly.SPONSORED)
                     .build();
 
-            mClient = new NendAdNativeClient(context, 24515, "c89d1fd14081f8959e7c5a8db689e10be7bbe128");
+            mClient = new NendAdNativeClient(context, 485517, "186927de979c5e542ee1ef111cc69c52e37a58f9");
             mClient.setListener(new NendAdNativeListListener() {
                 @Override
                 public void onReceiveAd(NendAdNative nendAdNative, int i, final View view, NendAdNativeClient.NendError nendError) {

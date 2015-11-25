@@ -59,7 +59,7 @@ public class NativeListActivity extends ListActivity {
                     .prId(R.id.ad_pr, NendAdNative.AdvertisingExplicitly.SPONSORED)
                     .build();
 
-            mClient = new NendAdNativeClient(context, 24443, "4e418660631509c2466b9b719a267e376b5ddb66");
+            mClient = new NendAdNativeClient(context, 485516, "16cb170982088d81712e63087061378c71e8aa5c");
             mClient.setListener(new NendAdNativeListListener() {
                 @Override
                 public void onReceiveAd(NendAdNative nendAdNative, int i, final View view, NendAdNativeClient.NendError nendError) {

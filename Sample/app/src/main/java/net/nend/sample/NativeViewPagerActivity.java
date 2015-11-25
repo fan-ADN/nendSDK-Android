@@ -37,7 +37,7 @@ public class NativeViewPagerActivity extends AppCompatActivity implements Native
                 .promotionNameId(R.id.ad_promotion_name)
                 .actionId(R.id.ad_action)
                 .build();
-        mClient = new NendAdNativeClient(this, 24516, "89c4239f085dc934d6dcda8af1d6098706c06d38");
+        mClient = new NendAdNativeClient(this, 485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff");
     }
 
     @Override

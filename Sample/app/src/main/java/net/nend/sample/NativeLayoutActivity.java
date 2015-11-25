@@ -29,23 +29,23 @@ public class NativeLayoutActivity extends AppCompatActivity {
         switch (type){
             default:
                 layout = R.layout.native_small_square;
-                spotId = 24443;
-                apiKey = "4e418660631509c2466b9b719a267e376b5ddb66";
+                spotId = 485516;
+                apiKey = "16cb170982088d81712e63087061378c71e8aa5c";
                 break;
             case 1:
                 layout = R.layout.native_small_wide;
-                spotId = 24515;
-                apiKey = "c89d1fd14081f8959e7c5a8db689e10be7bbe128";
+                spotId = 485517;
+                apiKey = "186927de979c5e542ee1ef111cc69c52e37a58f9";
                 break;
             case 2:
                 layout = R.layout.native_large_wide;
-                spotId = 24516;
-                apiKey = "89c4239f085dc934d6dcda8af1d6098706c06d38";
+                spotId = 485520;
+                apiKey = "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff";
                 break;
             case 3:
                 layout = R.layout.native_text_only;
-                spotId = 24517;
-                apiKey = "8e80307ddb20f70dd78f4e0fd5714b60d3895201";
+                spotId = 485522;
+                apiKey = "2b2381a116290c90b936e409482127efb7123dbc";
                 break;
         }
 

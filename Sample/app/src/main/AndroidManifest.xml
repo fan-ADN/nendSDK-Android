@@ -72,8 +72,6 @@
             android:name="NendDebuggable"
             android:value="true" />
 
-        <meta-data android:name="NendAdAuthority" android:value="yamada2.ad.dev.nend.net" />
-
     </application>
 
 </manifest>
