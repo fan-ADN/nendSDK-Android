@@ -19,10 +19,15 @@ android {
     }
 }
 
+repositories {
+    maven {
+        // nendSDK
+        url 'http://fan-adn.github.io/nendSDK-Android-lib/library'
+    }
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.0.+'
-    compile 'com.android.support:recyclerview-v7:23.0.+'
     compile "com.android.support:cardview-v7:+"
-    compile 'com.google.android.gms:play-services:8.1.0'
+    compile 'net.nend.android:nend-sdk:3.0.0'
 }
