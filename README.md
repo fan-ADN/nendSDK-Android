@@ -13,6 +13,4 @@ AndroidOS 2.3以上
 
 Usage
 ---------------------------------
-1. eclipseにプロジェクトをインポートしてください。
-1. [nendの管理画面](https://www.nend.net/admin/login)からAndroid版のSDKをダウンロードし、nendSDK-X.X.X.jarファイルをlibsフォルダに追加してください。
-1. nendSDKのマニュアル等を参考に、Google Play servicesライブラリをプロジェクトに追加してください。
+AndroidStudioにプロジェクトをインポートしてください。
