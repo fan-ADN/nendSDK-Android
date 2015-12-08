@@ -22,7 +22,7 @@ public class JavaCallWithListenerActivity extends Activity implements NendAdList
          * NendAdView(Context context, int [Spotid], String [Apikey])
          */
         NendAdView nendAdView = 
-                new NendAdView(getApplicationContext(), 3174, "c5cb8bc474345961c6e7a9778c947957ed8e1e4f");
+                new NendAdView(this, 3174, "c5cb8bc474345961c6e7a9778c947957ed8e1e4f");
         // 2) リスナーを登録
         nendAdView.setListener(this);
         // 中央上部表示の場合
