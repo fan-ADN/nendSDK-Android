@@ -21,7 +21,7 @@ public class JavaCallLinearActivity extends Activity {
          * NendAdView(Context context, int [Spotid], String [Apikey])
          *
          */
-        NendAdView nendAdView = new NendAdView(getApplicationContext(), 
+        NendAdView nendAdView = new NendAdView(this,
                 3174, "c5cb8bc474345961c6e7a9778c947957ed8e1e4f");
         // 中央下部表示の場合
         rootLayout.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);

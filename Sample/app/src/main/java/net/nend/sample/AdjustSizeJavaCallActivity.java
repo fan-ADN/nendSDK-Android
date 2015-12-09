@@ -15,7 +15,7 @@ public class AdjustSizeJavaCallActivity extends Activity {
         setContentView(R.layout.javacall_relative);
         
         ViewGroup root = (ViewGroup) findViewById(R.id.root);
-        NendAdView adView = new NendAdView(getApplicationContext(), 3174, "c5cb8bc474345961c6e7a9778c947957ed8e1e4f", true);
+        NendAdView adView = new NendAdView(this, 3174, "c5cb8bc474345961c6e7a9778c947957ed8e1e4f", true);
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
         lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
         lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
