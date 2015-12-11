@@ -29,5 +29,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.0.+'
     compile "com.android.support:cardview-v7:+"
-    compile 'net.nend.android:nend-sdk:3.0.1'
+    compile 'net.nend.android:nend-sdk:3.0.2'
 }
