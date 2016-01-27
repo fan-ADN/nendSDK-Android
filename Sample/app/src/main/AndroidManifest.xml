@@ -20,7 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".XmlLayoutActivity" />
+        <activity android:name=".XmlSampleActivity" />
+        <activity android:name=".XmlLayoutActivity"/>
+        <activity android:name=".XmlResourceActivity"/>
         <activity android:name=".JavaCallActivity" />
         <activity android:name=".LayoutSampleActivity" />
         <activity android:name=".SizeSampleActivity" />
@@ -45,6 +47,7 @@
             android:configChanges="orientation|screenSize" />
         <activity android:name=".IconSampleActivity" />
         <activity android:name=".IconLayoutActivity" />
+        <activity android:name=".IconResourceActivity"/>
         <activity android:name=".IconActivity" />
         <activity android:name=".IconJavaCallActivity" />
         <activity android:name=".IconDialogSampleActivity" />
