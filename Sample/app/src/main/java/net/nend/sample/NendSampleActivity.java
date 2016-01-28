@@ -21,7 +21,7 @@ public class NendSampleActivity extends ListActivity {
         Class<?> cls = null;
         switch (position) {
         case 0:
-            cls = XmlLayoutActivity.class;
+            cls = XmlSampleActivity.class;
             break;
         case 1:
             cls = JavaCallActivity.class;

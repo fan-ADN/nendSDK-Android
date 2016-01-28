@@ -9,4 +9,7 @@
     <string name="remove_icon">RemoveIcon</string>
     
     <string name="show_interstitial">show interstitial</string>
+
+    <string name="api_key">c5cb8bc474345961c6e7a9778c947957ed8e1e4f</string>
+    <string name="icon_api_key">0c734134519f25412ae9a9bff94783b81048ffbe</string>
 </resources>

@@ -2,7 +2,7 @@
 <resources>
 
     <string-array name="type">
-        <item>xml layout</item>
+        <item>xml sample</item>
         <item>Java call</item>
         <item>layout sample</item>
         <item>dialog sample</item>
@@ -12,9 +12,14 @@
         <item>adjust size sample</item>
         <item>native ad sample</item>
     </string-array>
+    <string-array name="xml_type">
+        <item>xml layout</item>
+        <item>xml use resource file</item>
+    </string-array>
     <string-array name="icon_menu">
         <item>xml layout</item>
         <item>xml layout separate</item>
+        <item>xml layout use resource file</item>
         <item>Java call</item>
         <item>dialog sample</item>
         <item>attach and dettach</item>

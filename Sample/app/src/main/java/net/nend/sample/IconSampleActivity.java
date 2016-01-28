@@ -27,15 +27,18 @@ public class IconSampleActivity extends ListActivity {
             cls = IconActivity.class;
             break;
         case 2:
-            cls = IconJavaCallActivity.class;
+            cls = IconResourceActivity.class;
             break;
         case 3:
-            cls = IconDialogSampleActivity.class;
+            cls = IconJavaCallActivity.class;
             break;
         case 4:
+            cls = IconDialogSampleActivity.class;
+            break;
+        case 5:
         	cls = IconAttachAndDettachActivity.class;
         	break;
-        case 5:
+        case 6:
         	cls = IconSpaceActivity.class;
         	break;
         }
