@@ -11,9 +11,5 @@
     <string name="show_interstitial">show interstitial</string>
 
     <string name="api_key">c5cb8bc474345961c6e7a9778c947957ed8e1e4f</string>
-    <integer name="spot_id">3174</integer>
     <string name="icon_api_key">0c734134519f25412ae9a9bff94783b81048ffbe</string>
-    <integer name="icon_spot_id">101282</integer>
-    <integer name="icon_count_three">3</integer>
-    <color name="icon_title_green">#1FEB00</color>
 </resources>
