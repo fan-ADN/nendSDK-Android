@@ -69,6 +69,8 @@
         <activity android:name=".NativeGridActivity" />
         <activity android:name=".NativeRecyclerActivity" />
         <activity android:name=".NativeViewPagerActivity" />
+        <activity android:name=".NativeCarouselActivity" />
+        <activity android:name=".NativeAutoCarouselActivity" />
 
         <meta-data
             android:name="NendDebuggable"
