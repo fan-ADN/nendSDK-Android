@@ -50,10 +50,6 @@
         <item>300 x 250</item>
         <item>728 x 90</item>
     </string-array>
-    <string-array name="interstitial_menu">
-        <item>interstitial</item>
-        <item>finish ad</item>
-    </string-array>
     <string-array name="adjust_size_menu">
         <item>xml layout</item>
         <item>java call</item>

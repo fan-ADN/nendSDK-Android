@@ -55,9 +55,7 @@
         <activity android:name=".IconExitDialogActivity" />
         <activity android:name=".IconAttachAndDettachActivity" />
         <activity android:name=".IconSpaceActivity" />
-        <activity android:name=".InterstitialSampleActivity" android:configChanges="orientation|screenSize" />
         <activity android:name=".InterstitialActivity" android:configChanges="orientation|screenSize" />
-        <activity android:name=".FinishAdActivity" android:configChanges="orientation|screenSize" />
         <activity android:name=".AdjustSizeActivity" />
         <activity android:name=".AdjustSizeJavaCallActivity" />
         <activity android:name=".AdjustSizeXmlLayoutActivity" />

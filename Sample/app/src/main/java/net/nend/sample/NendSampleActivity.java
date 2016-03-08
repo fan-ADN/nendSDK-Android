@@ -39,7 +39,7 @@ public class NendSampleActivity extends ListActivity {
             cls = IconSampleActivity.class;
             break;
         case 6:
-            cls = InterstitialSampleActivity.class;
+            cls = InterstitialActivity.class;
             break;
         case 7:
             cls = AdjustSizeActivity.class;
