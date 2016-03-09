@@ -15,6 +15,7 @@
     <string-array name="xml_type">
         <item>xml layout</item>
         <item>xml use resource file</item>
+        <item>xml with listener</item>
     </string-array>
     <string-array name="icon_menu">
         <item>xml layout</item>
@@ -38,10 +39,6 @@
         <item>ViewPager</item>
         <item>ViewPager and ListView</item>
         <item>Fragment replace</item>
-    </string-array>
-    <string-array name="dialog_type">
-        <item>dialog</item>
-        <item>exit dialog</item>
     </string-array>
     <string-array name="size_type">
         <item>320 x 50</item>

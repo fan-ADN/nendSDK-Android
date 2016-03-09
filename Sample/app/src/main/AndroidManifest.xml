@@ -33,26 +33,21 @@
         <activity android:name=".JavaCallLinearActivity" />
         <activity android:name=".JavaCallRelativeActivity" />
         <activity android:name=".JavaCallWithListenerActivity" />
+        <activity android:name=".XmlWithListenerActivity" />
         <activity android:name=".AttachAndDettachActivity" />
         <activity android:name=".ListViewActivity" />
         <activity android:name=".ViewPagerActivity" />
         <activity android:name=".PagerAndListActivity" />
         <activity android:name=".FragmentReplaceActivity" />
-        <activity android:name=".DialogSampleActivity" />
         <activity
             android:name=".DialogActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".ExitDialogActivity"
             android:configChanges="orientation|screenSize" />
         <activity android:name=".IconSampleActivity" />
         <activity android:name=".IconLayoutActivity" />
         <activity android:name=".IconResourceActivity"/>
         <activity android:name=".IconActivity" />
         <activity android:name=".IconJavaCallActivity" />
-        <activity android:name=".IconDialogSampleActivity" />
         <activity android:name=".IconDialogActivity" />
-        <activity android:name=".IconExitDialogActivity" />
         <activity android:name=".IconAttachAndDettachActivity" />
         <activity android:name=".IconSpaceActivity" />
         <activity android:name=".InterstitialActivity" android:configChanges="orientation|screenSize" />

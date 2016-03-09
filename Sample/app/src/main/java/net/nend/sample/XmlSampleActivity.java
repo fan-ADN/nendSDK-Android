@@ -26,6 +26,9 @@ public class XmlSampleActivity extends ListActivity {
             case 1:
                 cls = XmlResourceActivity.class;
                 break;
+            case 2:
+                cls = XmlWithListenerActivity.class;
+                break;
         }
         if(cls != null){
             startActivity(new Intent(getApplicationContext(), cls));

@@ -56,6 +56,12 @@ public class IconActivity extends Activity implements SampleConstants {
                 Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_SHORT).show();
             }
         });
+//        mIconLoader.setOnInformationClickListener(new NendIconLoader.OnInformationClickListener() {
+//            @Override
+//            public void onClickInformation(NendAdIconView iconView) {
+//                Toast.makeText(getApplicationContext(), "Clicked Information", Toast.LENGTH_SHORT).show();
+//            }
+//        });
         mIconLoader.setOnFailedListener(new NendAdIconLoader.OnFailedListener() {
             @Override
             public void onFailedToReceiveAd(NendIconError iconError) {

@@ -30,7 +30,7 @@ public class NendSampleActivity extends ListActivity {
             cls = LayoutSampleActivity.class;
             break;
         case 3:
-            cls = DialogSampleActivity.class;
+            cls = DialogActivity.class;
             break;
         case 4:
             cls = SizeSampleActivity.class;
