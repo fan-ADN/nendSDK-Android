@@ -67,7 +67,7 @@ public class NativeCarouselActivity extends AppCompatActivity {
                     .prId(R.id.ad_pr, NendAdNative.AdvertisingExplicitly.AD)
                     .actionId(R.id.ad_action)
                     .build();
-            mClient = new NendAdNativeClient(context, 485517, "186927de979c5e542ee1ef111cc69c52e37a58f9");
+            mClient = new NendAdNativeClient(context, 485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff");
             mClient.setListener(new NendAdNativeListListener() {
                 @Override
                 public void onReceiveAd(NendAdNative nendAdNative, int i, final View view, NendAdNativeClient.NendError nendError) {
