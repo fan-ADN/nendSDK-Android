@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -35,10 +34,10 @@ public class NativeCarouselActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.native_carousel);
+        setContentView(R.layout.native_carousel_recycler);
 
         ArrayList<String> list = new ArrayList<>();
-        for (int i = 1; i < 100; i++) {
+        for (int i = 1; i < 10; i++) {
             list.add("item"+i);
         }
 
@@ -64,7 +63,7 @@ public class NativeCarouselActivity extends AppCompatActivity {
                     .adImageId(R.id.ad_image)
                     .titleId(R.id.ad_title)
                     .promotionNameId(R.id.ad_promotion_name)
-                    .prId(R.id.ad_pr, NendAdNative.AdvertisingExplicitly.AD)
+                    .prId(R.id.ad_pr, NendAdNative.AdvertisingExplicitly.SPONSORED)
                     .actionId(R.id.ad_action)
                     .build();
             mClient = new NendAdNativeClient(context, 485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff");
