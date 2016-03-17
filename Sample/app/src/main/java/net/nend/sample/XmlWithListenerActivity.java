@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import net.nend.android.NendAdInformationListener;
 import net.nend.android.NendAdView;
 
 public class XmlWithListenerActivity extends AppCompatActivity {
