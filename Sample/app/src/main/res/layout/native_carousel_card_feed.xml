@@ -4,11 +4,8 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    >
-    <!-- A CardView that contains a TextView -->
-
+    android:layout_margin="0dp"
+    android:padding="5dp">
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
@@ -21,65 +18,51 @@
             android:id="@+id/feed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:id="@+id/linearLayout">
-
+                android:layout_margin="5dp"
+                android:id="@+id/carousel_feed_linear_top">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageView" />
-
-                <TextView
-                    android:layout_width="166dp"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
-                    android:id="@+id/textView"
-                    android:layout_gravity="right" />
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/carousel_feed_icon" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Medium Text"
+                        android:paddingBottom="3dp"
+                        android:id="@+id/carousel_feed_name" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="New Text"
+                        android:id="@+id/carousel_feed_date"/>
+                </LinearLayout>
             </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textView2"
-                android:layout_below="@+id/linearLayout"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-             android:layout_below="@+id/textView2"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="38dp"
-                android:layout_marginEnd="38dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageView2"
-                    />
-
+                android:layout_margin="5dp"
+                android:layout_below="@+id/carousel_feed_linear_top">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Medium Text"
-                    android:id="@+id/textView3"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-
+                    android:paddingBottom="5dp"
+                    android:id="@+id/carousel_feed_comment"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:id="@+id/carousel_feed_image" />
             </LinearLayout>
-
         </RelativeLayout>
     </android.support.v7.widget.CardView>
-
 </LinearLayout>

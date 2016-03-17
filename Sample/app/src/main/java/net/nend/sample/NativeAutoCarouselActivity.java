@@ -1,68 +1,190 @@
 package net.nend.sample;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeClient;
+import net.nend.android.NendAdNativeListListener;
 import net.nend.android.NendAdNativeViewBinder;
 
-public class NativeAutoCarouselActivity extends AppCompatActivity implements NativePagerFragment.OnAdListener {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-    private ViewPager mViewPager;
-    private NendAdNativeViewBinder mBinder;
-    private NendAdNativeClient mClient;
+public class NativeAutoCarouselActivity extends AppCompatActivity {
+
+    private final int NORMAL = 0;
+    private final int AD = 1;
+
+    private Handler mHandler = new Handler();
+    private ArrayList<NendAdNative> mLoadedAd = new ArrayList<>();
+
+    private boolean mIsLoading = false;
+    private boolean mHasNext = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.native_carousel_recycler);
 
-        setContentView(R.layout.native_viewpager);
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 1; i < 10; i++) {
+            list.add("item"+i);
+        }
 
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(new CustomPagerAdapter(getSupportFragmentManager()));
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.carousel_recycler);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
+        recyclerView.setAdapter(new NativeRecyclerAdapter(this, list));
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
-        mBinder = new NendAdNativeViewBinder.Builder()
-                .adImageId(R.id.ad_image)
-                .logoImageId(R.id.logo_image)
-                .titleId(R.id.ad_title)
-                .contentId(R.id.ad_content)
-                .prId(R.id.ad_pr, NendAdNative.AdvertisingExplicitly.SPONSORED)
-                .promotionUrlId(R.id.ad_promotion_url)
-                .promotionNameId(R.id.ad_promotion_name)
-                .actionId(R.id.ad_action)
-                .build();
-        mClient = new NendAdNativeClient(this, 485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff");
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+Log.d(" ### ", "dx:"+dx + " dy:"+dy);
+                if (mIsLoading || !mHasNext) {
+                    return;
+                }
+
+                LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int lastItemPosition = manager.findLastVisibleItemPosition();
+                if (lastItemPosition >= manager.getItemCount() - 1) {
+
+                    Log.d(" #### ", "last:"+lastItemPosition+" count:"+(manager.getItemCount()-1));
+                    mIsLoading = true;
+
+                    //TODO
+                    //追加のリクエスト
+                }
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                //do nothing
+            }
+        });
+
     }
 
-    @Override
-    public void onAdRequest(View view, int position) {
-        mClient.loadAd(view, mBinder, position);
-    }
+    class NativeRecyclerAdapter extends RecyclerView.Adapter {
 
-    public class CustomPagerAdapter extends FragmentPagerAdapter {
+        private LayoutInflater mLayoutInflater;
+        private List<String> mList;
+        private NendAdNativeClient mClient;
+        private NendAdNativeViewBinder mBinder;
 
-        public CustomPagerAdapter(FragmentManager fm) {
-            super(fm);
+        public NativeRecyclerAdapter(Context context, List<String> list) {
+            super();
+
+            mLayoutInflater = LayoutInflater.from(context);
+            mList = list;
+
+            mBinder = new NendAdNativeViewBinder.Builder()
+                    .adImageId(R.id.ad_image)
+                    .titleId(R.id.ad_title)
+                    .promotionNameId(R.id.ad_promotion_name)
+                    .prId(R.id.ad_pr, NendAdNative.AdvertisingExplicitly.SPONSORED)
+                    .actionId(R.id.ad_action)
+                    .build();
+            mClient = new NendAdNativeClient(context, 485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff");
+            mClient.setListener(new NendAdNativeListListener() {
+                @Override
+                public void onReceiveAd(NendAdNative nendAdNative, int i, final View view, NendAdNativeClient.NendError nendError) {
+                    if (nendError == null) {
+                        Log.i(getClass().getSimpleName(), "広告取得成功");
+                        mLoadedAd.add(nendAdNative);
+                    } else {
+                        Log.i(getClass().getSimpleName(), "広告取得失敗 " + nendError.getMessage());
+
+                        // 広告リクエスト制限を越えた場合
+                        if(nendError == NendAdNativeClient.NendError.EXCESSIVE_AD_CALLS){
+                            // すでに取得済みの広告をランダムで表示
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    NendAdNative ad = mLoadedAd.get(new Random().nextInt(mLoadedAd.size()));
+                                    ad.intoView(view, mBinder);
+                                }
+                            });
+                        }
+                    }
+                }
+
+                @Override
+                public void onClick(NendAdNative nendAdNative) {
+                    Log.i(getClass().getSimpleName(), "クリック");
+                }
+
+                @Override
+                public void onDisplayAd(Boolean result, View view) {
+                    Log.i(getClass().getSimpleName(), "広告表示 = " + result);
+                }
+            });
         }
 
         @Override
-        public Fragment getItem(int position) {
-            NativePagerFragment fragment = new NativePagerFragment();
-            Bundle extras = new Bundle();
-            extras.putInt("position", position);
-            fragment.setArguments(extras);
-            return fragment;
+        public int getItemCount() {
+            return mList.size();
         }
 
         @Override
-        public int getCount() {
-            return 5;
+        public int getItemViewType(int position) {
+            return AD;
+        }
+
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+            View view;
+            RecyclerView.ViewHolder viewHolder = null;
+            switch (viewType) {
+//                case NORMAL:
+//                    view = mLayoutInflater.inflate(R.layout.native_list_row, viewGroup, false);
+//                    viewHolder = new ViewHolder(view);
+//                    break;
+                case AD:
+                    view = mLayoutInflater.inflate(R.layout.native_carousel_card, viewGroup, false);
+                    viewHolder = mBinder.createRecyclerViewHolder(view);
+                    break;
+            }
+            return viewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, int position) {
+            switch (getItemViewType(position)) {
+                case NORMAL:
+                    ((ViewHolder) viewHolder).textView.setText(mList.get(position));
+                    ((ViewHolder) viewHolder).imageView.setBackgroundColor(Color.LTGRAY);
+                    break;
+                case AD:
+                    mClient.loadAd(viewHolder, position);
+                    break;
+            }
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder {
+
+            TextView textView;
+            ImageView imageView;
+
+            public ViewHolder(View v) {
+                super(v);
+                textView = (TextView) v.findViewById(R.id.title);
+                imageView = (ImageView) v.findViewById(R.id.thumbnail);
+            }
         }
     }
 }

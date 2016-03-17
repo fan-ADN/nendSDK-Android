@@ -4,10 +4,9 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    >
-    <!-- A CardView that contains a TextView -->
+    android:layout_margin="5dp"
+    android:background="#CCDEFF"
+    android:paddingLeft="20dp">
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
@@ -27,15 +26,13 @@
                 android:scaleType="fitStart"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/shapes" />
-
             <LinearLayout
                 android:id="@+id/inner_linear"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ad_image"
-                android:layout_marginBottom="10dp">
-
+                android:layout_marginBottom="5dp">
                 <net.nend.android.NendAdNativeTextView
                     android:id="@+id/ad_pr"
                     android:layout_width="wrap_content"
@@ -44,19 +41,18 @@
                     android:textColor="@android:color/white"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:background="#5CAAA8"
-                    />
-
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:background="#5CAAA8"/>
                 <net.nend.android.NendAdNativeTextView
                     android:id="@+id/ad_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:textSize="12sp"/>
-
             </LinearLayout>
-
             <net.nend.android.NendAdNativeTextView
                 android:id="@+id/ad_action"
                 android:layout_width="match_parent"
@@ -64,8 +60,7 @@
                 android:layout_margin="10dp"
                 android:textColor="@android:color/white"
                 android:layout_below="@+id/inner_linear"
-                android:background="@drawable/orange_button"
-                />
+                android:background="@drawable/orange_button" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>
