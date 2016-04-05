@@ -1,19 +1,20 @@
 package net.nend.sample;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
-import android.graphics.PointF;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.nend.android.NendAdNative;
@@ -25,36 +26,81 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class NativeCarouselActivity extends AppCompatActivity {
 
-    private final int NORMAL = 0;
+    private final int FEED = 0;
     private final int AD = 1;
 
-    private Handler mHandler = new Handler();
     private ArrayList<NendAdNative> mLoadedAd = new ArrayList<>();
-    NativeRecyclerAdapter adAdapter;
+    private NativeRecyclerAdapter adAdapter;
+    private int mWidth;
+
+    private RecyclerView mParentRecyclerView;
+    private int mThreePieceWidth;
+    LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.native_carousel);
 
-        // カルーセル広告以外のリスト
+        // フィード用リスト
         ArrayList<String> list = new ArrayList<>();
         for (int i = 1; i < 20; i++) {
             list.add("sample name" + i);
         }
 
-        // 広告のRecyclerView
-        adAdapter = new NativeRecyclerAdapter(this);
-
         // 親のRecyclerView
-        RecyclerView parentRecycler = (RecyclerView) findViewById(R.id.carousel_recycler_parent);
-        parentRecycler.setLayoutManager(new LinearLayoutManager(this));
-        parentRecycler.setAdapter(new CarouselAdapter(this, list));
+        mParentRecyclerView = (RecyclerView) findViewById(R.id.carousel_recycler_parent);
+        linearLayoutManager = new LinearLayoutManager(this);
+//        linearLayoutManager.setRecycleChildrenOnDetach(true);
+        mParentRecyclerView.setLayoutManager(linearLayoutManager);
+        mParentRecyclerView.setAdapter(new CarouselAdapter(this, list));
 
+        // 広告のRecyclerView表示をリスナで取得
+        mParentRecyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+            @Override
+            public void onChildViewAttachedToWindow(View view) {
+                if (view.getId() == R.id.carousel_linear) {
+                    initAdRecyclerView();
+                }
+            }
+
+            @Override
+            public void onChildViewDetachedFromWindow(View view) {
+                if (view.getId() == R.id.carousel_linear) {
+                }
+            }
+        });
+//        mParentRecyclerView.setRecyclerListener(new RecyclerView.RecyclerListener() {
+//            @Override
+//            public void onViewRecycled(RecyclerView.ViewHolder holder) {
+//                if (holder.getLayoutPosition() == 3) {
+//                Log.d("", "AAAA");
+//                mParentRecyclerView.getLayoutManager().stopIgnoringView(findViewById(R.id.carousel_linear));
+//
+//                 }
+//            }
+//        });
+
+        adAdapter = new NativeRecyclerAdapter(NativeCarouselActivity.this);
+    }
+
+    private void initAdRecyclerView() {
+        RecyclerView adRecyclerView = (RecyclerView) findViewById(R.id.carousel_recycler);
+        NativeCarouselLayoutManager mLayoutManager = (NativeCarouselLayoutManager) adRecyclerView.getLayoutManager();
+        int quadrantWidth = mWidth / 4;
+        mThreePieceWidth = quadrantWidth * 3;
+        mLayoutManager.setStartCoordinate((mWidth - mThreePieceWidth) / 2);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        mWidth = mParentRecyclerView.getWidth();
     }
 
     // 広告用アダプター
@@ -71,24 +117,29 @@ public class NativeCarouselActivity extends AppCompatActivity {
             mBinder = new NendAdNativeViewBinder.Builder()
                     .adImageId(R.id.ad_image)
                     .titleId(R.id.ad_title)
-                    .promotionNameId(R.id.ad_promotion_name)
+                    .contentId(R.id.ad_content)
                     .prId(R.id.ad_pr, NendAdNative.AdvertisingExplicitly.SPONSORED)
                     .actionId(R.id.ad_action)
                     .build();
-            mClient = new NendAdNativeClient(context, 485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff");
+            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                mClient = new NendAdNativeClient(context, 485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff");
+            } else {
+                mClient = new NendAdNativeClient(context, 485516, "16cb170982088d81712e63087061378c71e8aa5c");
+            }
             mClient.setListener(new NendAdNativeListListener() {
                 @Override
                 public void onReceiveAd(NendAdNative nendAdNative, int i, final View view, NendAdNativeClient.NendError nendError) {
                     if (nendError == null) {
-                        Log.d(getClass().getSimpleName(), "広告取得成功");
+                        Log.d("NativeRecyclerAdapter", "広告取得成功");
                         mLoadedAd.add(nendAdNative);
                     } else {
-                        Log.d(getClass().getSimpleName(), "広告取得失敗 " + nendError.getMessage());
+                        Log.d("NativeRecyclerAdapter", "広告取得失敗 " + nendError.getMessage());
 
                         // 広告リクエスト制限を越えた場合
                         if (nendError == NendAdNativeClient.NendError.EXCESSIVE_AD_CALLS) {
                             // すでに取得済みの広告をランダムで表示
-                            mHandler.post(new Runnable() {
+                            Handler handler = new Handler();
+                            handler.post(new Runnable() {
                                 @Override
                                 public void run() {
                                     NendAdNative ad = mLoadedAd.get(new Random().nextInt(mLoadedAd.size()));
@@ -101,12 +152,12 @@ public class NativeCarouselActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(NendAdNative nendAdNative) {
-                    Log.i(getClass().getSimpleName(), "クリック");
+                    Log.i("NativeRecyclerAdapter", "クリック");
                 }
 
                 @Override
-                public void onDisplayAd(Boolean result, View view) {
-                    Log.i(getClass().getSimpleName(), "広告表示 = " + result);
+                public void onDisplayAd(Boolean result, final View view) {
+                    Log.i("NativeRecyclerAdapter", "広告表示 = " + result);
                 }
             });
         }
@@ -119,6 +170,7 @@ public class NativeCarouselActivity extends AppCompatActivity {
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
             View view = mLayoutInflater.inflate(R.layout.native_carousel_card, viewGroup, false);
+            view.setLayoutParams(new LinearLayout.LayoutParams(mThreePieceWidth, LinearLayout.LayoutParams.WRAP_CONTENT));
             return mBinder.createRecyclerViewHolder(view);
         }
 
@@ -145,7 +197,7 @@ public class NativeCarouselActivity extends AppCompatActivity {
             View view;
             RecyclerView.ViewHolder viewHolder = null;
             switch (viewType) {
-                case NORMAL:
+                case FEED:
                     view = mLayoutInflater.inflate(R.layout.native_carousel_card_feed, parent, false);
                     viewHolder = new FeedHolder(view);
                     break;
@@ -160,24 +212,29 @@ public class NativeCarouselActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
             switch (getItemViewType(position)) {
-                case NORMAL:
+                case FEED:
                     Date date = new Date();
                     // 表示形式を設定
-                    SimpleDateFormat currentDate = new SimpleDateFormat("yyyy'年'MM'月'dd'日'　kk'時'mm'分'ss'秒'");
-                    String longText = "LONG TEXT FOR CAROUSEL AD. LONG TEXT FOR CAROUSEL AD.";
+                    SimpleDateFormat currentDate = new SimpleDateFormat("yyyy'年'MM'月'dd'日'　kk'時'mm'分'ss'秒'", Locale.JAPAN);
+                    String longText = getResources().getString(R.string.carousel_longtext);
                     ((FeedHolder) viewHolder).textName.setText(mList.get(position));
                     ((FeedHolder) viewHolder).textName.setTextColor(Color.DKGRAY);
+                    ((FeedHolder) viewHolder).textName.setTypeface(Typeface.DEFAULT_BOLD);
                     ((FeedHolder) viewHolder).textDate.setText(currentDate.format(date));
-                    ((FeedHolder) viewHolder).textDate.setTextColor(Color.DKGRAY);
-                    ((FeedHolder) viewHolder).textComment.setText(longText + longText);
+                    ((FeedHolder) viewHolder).textDate.setTextColor(Color.LTGRAY);
+                    ((FeedHolder) viewHolder).textDate.setTextSize(11);
+                    ((FeedHolder) viewHolder).textComment.setText(longText);
                     ((FeedHolder) viewHolder).textComment.setTextColor(Color.DKGRAY);
                     ((FeedHolder) viewHolder).imageIcon.setBackgroundColor(Color.LTGRAY);
                     ((FeedHolder) viewHolder).imageImage.setBackgroundColor(Color.LTGRAY);
 
                     break;
                 case AD:
-                    ((AdHolder) viewHolder).recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+                    ((AdHolder) viewHolder).recyclerView.setLayoutManager(new NativeCarouselLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
                     ((AdHolder) viewHolder).recyclerView.setAdapter(adAdapter);
+                    ((AdHolder) viewHolder).recyclerView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+                    ((AdHolder) viewHolder).recyclerView.setHasFixedSize(true);
+                    //((AdHolder) viewHolder).recyclerView.;
                     ((AdHolder) viewHolder).recyclerView.addOnScrollListener(new ScrollEventListener());
                     break;
             }
@@ -185,7 +242,7 @@ public class NativeCarouselActivity extends AppCompatActivity {
 
         @Override
         public int getItemViewType(int position) {
-            return position == 3 ? AD : NORMAL;
+            return position == 3 ? AD : FEED;
         }
 
         @Override
@@ -227,7 +284,6 @@ public class NativeCarouselActivity extends AppCompatActivity {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
-
         }
 
         @Override
@@ -236,90 +292,35 @@ public class NativeCarouselActivity extends AppCompatActivity {
 
             // スクロール状態が止まった
             if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-
-                LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                int mCurrentViewPosition = manager.findFirstVisibleItemPosition();
+                NativeCarouselLayoutManager nativeCarouselLayoutManager = (NativeCarouselLayoutManager) recyclerView.getLayoutManager();
+                // 現在要素の番号
+                int mCurrentViewPosition = nativeCarouselLayoutManager.findFirstVisibleItemPosition();
                 // 次要素の番号
-                int mNextViewPosition = manager.findLastVisibleItemPosition();
-                // 次要素を取得
-                View nextView = manager.findViewByPosition(mNextViewPosition);
-
-                // リサイクラービューのサイズ
-                int recyclerViewWidth = recyclerView.getWidth();
-                // 次要素のサイズ
-                int viewWidth = nextView.getWidth();
-                // セットする座標
-                final int startCoordinate = (recyclerViewWidth - viewWidth - 20) / 2;
-
-                // 次要素の左端の座標取得
+                int mNextViewPosition = nativeCarouselLayoutManager.findLastVisibleItemPosition();
+                // 次要素取得
+                View nextView = nativeCarouselLayoutManager.findViewByPosition(mNextViewPosition);
+                // 次要素の左端座標
                 int nextViewLeftCoordinate = nextView.getLeft();
-
                 // 画面中央座標取得
-                int centerCoordinate = recyclerView.getWidth() / 2;
-
-
-                // 次要素左端座標が中央より右にあれば
+                int centerCoordinate = mWidth / 2;
+                // 次要素左端座標が中央より左
                 if (nextViewLeftCoordinate <= centerCoordinate) {
-//                    manager.scrollToPositionWithOffset(mNextViewPosition, startCoordinate);
-                    Smoother ss = new Smoother(getApplicationContext(), startCoordinate);
-                    ss.setTargetPosition(mNextViewPosition);
-                    manager.startSmoothScroll(ss);
-                    manager.smoothScrollToPosition(recyclerView, null, mNextViewPosition);
+                    // 次要素をセンタリング
+                    nativeCarouselLayoutManager.smoothScrollToPosition(recyclerView, null, mNextViewPosition);
+
+                    // 次要素左が中央より右
                 } else if (nextViewLeftCoordinate > centerCoordinate) {
+
+                    // 要素が3つ表示されている場合
                     if (mNextViewPosition - mCurrentViewPosition == 2) {
-                        mCurrentViewPosition++;
+                        int centralViewPosition = mCurrentViewPosition + 1;
+                        nativeCarouselLayoutManager.smoothScrollToPosition(recyclerView, null, centralViewPosition);
+                    } else {
+                        nativeCarouselLayoutManager.smoothScrollToPosition(recyclerView, null, mCurrentViewPosition);
                     }
-                    //    manager.scrollToPositionWithOffset(mCurrentViewPosition, startCoordinate);
-                    //    manager.smoothScrollToPosition(recyclerView, null, mCurrentViewPosition);
-                    Smoother ss = new Smoother(getApplicationContext(), startCoordinate);
-                    ss.setTargetPosition(mCurrentViewPosition);
-                    manager.startSmoothScroll(ss);
-                    manager.smoothScrollToPosition(recyclerView, null, mCurrentViewPosition);
                 }
-
             }
         }
     }
 
-    class Smoother extends LinearSmoothScroller {
-
-        int startCoordinate;
-
-        public Smoother(Context context) {
-            super(context);
-
-        }
-
-        public Smoother(Context context, int dx) {
-            super(context);
-            startCoordinate = dx;
-        }
-
-        @Override
-        protected void onStart() {
-
-        }
-
-        @Override
-        protected void onStop() {
-
-        }
-
-        @Override
-        public PointF computeScrollVectorForPosition(int targetPosition) {
-            return null;
-        }
-
-        @Override
-        protected void onSeekTargetStep(int dx, int dy, RecyclerView.State state, Action action) {
-            if (dx == startCoordinate) {
-                stop();
-            }
-        }
-
-        @Override
-        protected void onTargetFound(View targetView, RecyclerView.State state, Action action) {
-
-        }
-    }
 }

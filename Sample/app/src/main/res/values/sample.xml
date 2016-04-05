@@ -15,6 +15,7 @@
     <string-array name="xml_type">
         <item>xml layout</item>
         <item>xml use resource file</item>
+        <item>xml with listener</item>
     </string-array>
     <string-array name="icon_menu">
         <item>xml layout</item>
@@ -39,20 +40,12 @@
         <item>ViewPager and ListView</item>
         <item>Fragment replace</item>
     </string-array>
-    <string-array name="dialog_type">
-        <item>dialog</item>
-        <item>exit dialog</item>
-    </string-array>
     <string-array name="size_type">
         <item>320 x 50</item>
         <item>320 x 100</item>
         <item>300 x 100</item>
         <item>300 x 250</item>
         <item>728 x 90</item>
-    </string-array>
-    <string-array name="interstitial_menu">
-        <item>interstitial</item>
-        <item>finish ad</item>
     </string-array>
     <string-array name="adjust_size_menu">
         <item>xml layout</item>

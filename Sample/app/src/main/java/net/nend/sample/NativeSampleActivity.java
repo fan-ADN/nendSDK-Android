@@ -52,7 +52,7 @@ public class NativeSampleActivity extends ListActivity {
                 cls = NativeCarouselActivity.class;
                 break;
             case 10:
-                cls = NativeAutoCarouselActivity.class;
+                cls = NativeCarouselAdActivity.class;
                 break;
         }
         if(cls != null){
