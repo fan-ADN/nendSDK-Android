@@ -13,8 +13,12 @@ public class NativeCarouselPagerFragment extends Fragment {
 
     OnAdListener mCallback;
 
-    public interface OnAdListener {
-        void onAdRequest(View view, int position);
+    static NativeCarouselPagerFragment newInstance(int position) {
+        NativeCarouselPagerFragment fragment = new NativeCarouselPagerFragment();
+        Bundle extras = new Bundle();
+        extras.putInt("position", position);
+        fragment.setArguments(extras);
+        return fragment;
     }
 
     @Override
@@ -29,6 +33,12 @@ public class NativeCarouselPagerFragment extends Fragment {
     }
 
     @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallback = null;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.native_carousel_fragment, container, false);
@@ -38,5 +48,9 @@ public class NativeCarouselPagerFragment extends Fragment {
         mCallback.onAdRequest(adLayout, position);
 
         return view;
+    }
+
+    public interface OnAdListener {
+        void onAdRequest(View view, int position);
     }
 }

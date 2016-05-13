@@ -54,13 +54,14 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
         parentRecyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
             @Override
             public void onChildViewAttachedToWindow(View view) {
-                if(view.getTag() == "CAROUSEL" && mMenuPosition == 10){
+                if ((view.getTag() != null && view.getTag().equals("CAROUSEL")) && mMenuPosition == 10) {
                     mHandler.postDelayed(mAutoCarouselRunnable, INTERVAL);
                 }
             }
+
             @Override
             public void onChildViewDetachedFromWindow(View view) {
-                if(view.getTag() == "CAROUSEL" && mMenuPosition == 10){
+                if ((view.getTag() != null && view.getTag().equals("CAROUSEL")) && mMenuPosition == 10) {
                     mHandler.removeCallbacks(mAutoCarouselRunnable);
                 }
             }
@@ -80,6 +81,11 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
 
         // オートカルーセル用
         mMenuPosition = getIntent().getIntExtra("type", 0);
+    }
+
+    @Override
+    public void onAdRequest(View view, int position) {
+        mClient.loadAd(view, mBinder, position);
     }
 
     // リスト全体のアダプター
@@ -159,6 +165,7 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
         // 広告用ホルダー
         class AdHolder extends RecyclerView.ViewHolder {
             NativeCarouselViewPager viewPager;
+
             public AdHolder(View itemView) {
                 super(itemView);
                 viewPager = (NativeCarouselViewPager) itemView.findViewById(R.id.carousel_pager);
@@ -166,7 +173,7 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
                 viewPager.setPageMargin(getResources().getDisplayMetrics().widthPixels / -10);
 
                 // オートカルーセル
-                if(mMenuPosition == 10) {
+                if (mMenuPosition == 10) {
                     mHandler = new Handler();
                     mAutoCarouselRunnable = new Runnable() {
                         @Override
@@ -184,11 +191,6 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
         }
     }
 
-    @Override
-    public void onAdRequest(View view, int position) {
-        mClient.loadAd(view, mBinder, position);
-    }
-
     // カルーセル部分ViewPager用Adapter
     public class CustomPagerAdapter extends FragmentPagerAdapter {
 
@@ -198,11 +200,7 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
 
         @Override
         public Fragment getItem(int position) {
-            NativeCarouselPagerFragment fragment = new NativeCarouselPagerFragment();
-            Bundle extras = new Bundle();
-            extras.putInt("position", position);
-            fragment.setArguments(extras);
-            return fragment;
+            return NativeCarouselPagerFragment.newInstance(position);
         }
 
         @Override
