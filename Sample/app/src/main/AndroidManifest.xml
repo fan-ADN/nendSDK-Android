@@ -64,10 +64,7 @@
         <activity android:name=".NativeGridActivity" />
         <activity android:name=".NativeRecyclerActivity" />
         <activity android:name=".NativeViewPagerActivity" />
-        <activity android:name=".NativeAutoCarouselActivity" />
-        <!--<activity android:name=".NativeCarouselActivity"  android:configChanges="orientation|screenSize" />-->
-        <activity android:name=".NativeCarouselActivity" />
-        <activity android:name=".NativeCarouselAdActivity"/>
+        <activity android:name=".NativeCarouselAdActivity" />
         <meta-data
             android:name="NendDebuggable"
             android:value="true" />

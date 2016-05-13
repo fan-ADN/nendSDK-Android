@@ -49,8 +49,6 @@ public class NativeSampleActivity extends ListActivity {
                 cls = NativeViewPagerActivity.class;
                 break;
             case 9:
-                cls = NativeCarouselActivity.class;
-                break;
             case 10:
                 cls = NativeCarouselAdActivity.class;
                 break;
