@@ -61,6 +61,8 @@
         <item>GridView</item>
         <item>RecyclerView</item>
         <item>ViewPager</item>
+        <item>Carousel (manual)</item>
+        <item>Carousel (auto)</item>
     </string-array>
 
     <item name="pager" type="id"/>

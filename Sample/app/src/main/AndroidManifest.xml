@@ -1,10 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="net.nend.sample">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="net.nend.sample">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="false"
+        tools:replace="android:allowBackup"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
@@ -62,7 +64,7 @@
         <activity android:name=".NativeGridActivity" />
         <activity android:name=".NativeRecyclerActivity" />
         <activity android:name=".NativeViewPagerActivity" />
-
+        <activity android:name=".NativeCarouselAdActivity" />
         <meta-data
             android:name="NendDebuggable"
             android:value="true" />

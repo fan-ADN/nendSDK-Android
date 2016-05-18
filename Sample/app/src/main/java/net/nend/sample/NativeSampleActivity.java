@@ -48,6 +48,10 @@ public class NativeSampleActivity extends ListActivity {
             case 8:
                 cls = NativeViewPagerActivity.class;
                 break;
+            case 9:
+            case 10:
+                cls = NativeCarouselAdActivity.class;
+                break;
         }
         if(cls != null){
             Intent intent = new Intent(getApplicationContext(), cls);
