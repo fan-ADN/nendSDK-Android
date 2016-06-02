@@ -52,6 +52,9 @@ public class NativeSampleActivity extends ListActivity {
             case 10:
                 cls = NativeCarouselAdActivity.class;
                 break;
+            case 11:
+                cls = NativeMarqueeActivity.class;
+                break;
         }
         if(cls != null){
             Intent intent = new Intent(getApplicationContext(), cls);
