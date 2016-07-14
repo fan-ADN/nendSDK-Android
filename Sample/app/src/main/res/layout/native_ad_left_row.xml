@@ -1,5 +1,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ad"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="5dp"
@@ -7,11 +8,11 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:orientation="horizontal">
-    <net.nend.android.NendAdNativeImageView
+    <ImageView
         android:id="@+id/ad_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:scaleType="center"
+        android:scaleType="fitXY"
         android:adjustViewBounds="false"/>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,18 +21,18 @@
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
-        <net.nend.android.NendAdNativeTextView
+        <TextView
             android:id="@+id/ad_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="2"/>
-        <net.nend.android.NendAdNativeTextView
+        <TextView
             android:id="@+id/ad_promotion_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="10sp"
             android:layout_alignParentBottom="true"/>
-        <net.nend.android.NendAdNativeTextView
+        <TextView
             android:id="@+id/ad_pr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

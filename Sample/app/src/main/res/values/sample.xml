@@ -64,6 +64,8 @@
         <item>Carousel (manual)</item>
         <item>Carousel (auto)</item>
         <item>Marquee</item>
+        <item>Get Ad data</item>
+        <item>AutoReload</item>
     </string-array>
 
     <item name="pager" type="id"/>

@@ -13,10 +13,6 @@ public class NativePagerFragment extends Fragment {
 
     OnAdListener mCallback;
 
-    public interface OnAdListener {
-        void onAdRequest(View view, int position);
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -39,5 +35,9 @@ public class NativePagerFragment extends Fragment {
         mCallback.onAdRequest(adLayout, position);
 
         return view;
+    }
+
+    public interface OnAdListener {
+        void onAdRequest(View view, int position);
     }
 }

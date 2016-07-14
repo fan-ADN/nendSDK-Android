@@ -15,12 +15,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp">
-            <net.nend.android.NendAdNativeTextView
+            <TextView
                 android:id="@+id/ad_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"/>
-            <net.nend.android.NendAdNativeTextView
+            <TextView
                 android:id="@+id/ad_pr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeClient;
-import net.nend.android.NendAdNativeListener;
-import net.nend.android.NendAdNativeTextView;
 import net.nend.android.NendAdNativeViewBinder;
 
 /**
@@ -16,9 +16,10 @@ import net.nend.android.NendAdNativeViewBinder;
  */
 public class NativeMarqueeActivity extends AppCompatActivity {
 
-    private String TAG = "MARQUEE_VIEW";
+    private String TAG = getClass().getSimpleName();
     private MarqueeView mMarqueeView;
-    private NendAdNativeTextView mNendTextView;
+    private TextView mTextView;
+    private View mAdContainer;
 
     private boolean mThreadStopper = false; // for leaving the loop
     private int mScrollViewWidth;           // MarqueeView width
@@ -101,12 +102,13 @@ public class NativeMarqueeActivity extends AppCompatActivity {
         setContentView(R.layout.native_marquee);
 
         mMarqueeView = (MarqueeView) findViewById(R.id.horizontalScrollView);
-        mNendTextView = (NendAdNativeTextView) findViewById(R.id.ad_content);
+        mTextView = (TextView) findViewById(R.id.ad_content);
+        mAdContainer = findViewById(R.id.ad);
 
         final int SPOT_ID = 485516;
         final String API_KEY = "16cb170982088d81712e63087061378c71e8aa5c";
 
-        NendAdNativeViewBinder mBinder = new NendAdNativeViewBinder.Builder()
+        final NendAdNativeViewBinder mBinder = new NendAdNativeViewBinder.Builder()
                 .adImageId(R.id.ad_image)
                 .titleId(R.id.ad_title)
                 .contentId(R.id.ad_content)
@@ -115,30 +117,21 @@ public class NativeMarqueeActivity extends AppCompatActivity {
 
         // small square size
         NendAdNativeClient mClient = new NendAdNativeClient(getApplicationContext(), SPOT_ID, API_KEY);
-        mClient.setListener(new NendAdNativeListener() {
+
+        mClient.loadAd(new NendAdNativeClient.Callback() {
             @Override
-            public void onReceiveAd(NendAdNative ad, NendAdNativeClient.NendError nendError) {
-                if (nendError == null) {
-                    Log.i(TAG, "広告取得成功");
-                    setPortraitPR();
-                    setBlank();
-                } else {
-                    Log.i(TAG, "広告取得失敗 " + nendError.getMessage());
-                }
+            public void onSuccess(final NendAdNative nendAdNative) {
+                Log.i(TAG, "広告取得成功");
+                nendAdNative.intoView(mAdContainer, mBinder);
+                setPortraitPR();
+                setBlank();
             }
 
             @Override
-            public void onClick(NendAdNative ad) {
-                Log.i(TAG, "クリック");
-            }
-
-            @Override
-            public void onDisplayAd(Boolean result) {
-                Log.i(TAG, "広告表示 = " + result);
-                startMarquee();
+            public void onFailure(NendAdNativeClient.NendError nendError) {
+                Log.i(TAG, "広告取得失敗 " + nendError.getMessage());
             }
         });
-        mClient.loadAd(findViewById(R.id.ad), mBinder);
         setEndless(true);
     }
 
@@ -162,20 +155,22 @@ public class NativeMarqueeActivity extends AppCompatActivity {
     private void setBlank() {
 
         // get future title text size
-        int nendTextWidth = (int) Layout.getDesiredWidth(mNendTextView.getText(), mNendTextView.getPaint());
+        int nendTextWidth = (int) Layout.getDesiredWidth(mTextView.getText(), mTextView.getPaint());
         mWidthWithBlank = nendTextWidth + (mScrollViewWidth * 2);
         // first, set text view size
-        mNendTextView.setWidth(mWidthWithBlank);
+        mTextView.setWidth(mWidthWithBlank);
 
         // second, set padding
-        mNendTextView.setPadding(mScrollViewWidth, 0, mScrollViewWidth, 0);
+        mTextView.setPadding(mScrollViewWidth, 0, mScrollViewWidth, 0);
+        startMarquee();
+
     }
 
     /**
      * Set portrait to PR text
      */
     private void setPortraitPR() {
-        NendAdNativeTextView pr = (NendAdNativeTextView) findViewById(R.id.ad_pr);
+        TextView pr = (TextView) findViewById(R.id.ad_pr);
         assert pr != null;
         float scale = getResources().getDisplayMetrics().density;
         int paddingDp = (int) (10 * scale + 0.5f);

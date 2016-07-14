@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,13 +23,17 @@ import net.nend.android.NendAdNativeViewBinder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 public class NativeCarouselAdActivity extends AppCompatActivity implements NativeCarouselPagerFragment.OnAdListener {
 
+    private final String TAG = getClass().getSimpleName();
     private NendAdNativeViewBinder mBinder;
     private NendAdNativeClient mClient;
+    private HashMap<Integer, NendAdNative> mLoadedAd = new HashMap<>();
+
     private int mMenuPosition;
     private int INTERVAL = 3000;
     private Runnable mAutoCarouselRunnable;
@@ -47,6 +52,7 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
 
         // 親のRecyclerView
         RecyclerView parentRecyclerView = (RecyclerView) findViewById(R.id.carousel_recycler_parent);
+        assert parentRecyclerView != null;
         parentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         parentRecyclerView.setAdapter(new CarouselAdapter(this, list));
 
@@ -84,8 +90,43 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
     }
 
     @Override
-    public void onAdRequest(View view, int position) {
-        mClient.loadAd(view, mBinder, position);
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (null != mHandler && mMenuPosition == 10) {
+            if (!hasFocus) {
+                mHandler.removeCallbacks(mAutoCarouselRunnable);
+            } else {
+                mHandler.postDelayed(mAutoCarouselRunnable, INTERVAL);
+            }
+        }
+    }
+
+    @Override
+    public void onAdRequest(final View view, final int position) {
+        if (mLoadedAd.containsKey(position)) {
+            mLoadedAd.get(position).intoView(view, mBinder);
+        } else {
+
+            mClient.loadAd(new NendAdNativeClient.Callback() {
+                @Override
+                public void onSuccess(NendAdNative nendAdNative) {
+                    Log.i(TAG, "広告取得成功");
+                    mLoadedAd.put(position, nendAdNative);
+                    mLoadedAd.get(position).intoView(view, mBinder);
+                    mLoadedAd.get(position).setOnClickListener(new NendAdNative.OnClickListener() {
+                        @Override
+                        public void onClick(NendAdNative nendAdNative) {
+                            Log.i(TAG, "クリック");
+                        }
+                    });
+                }
+
+                @Override
+                public void onFailure(NendAdNativeClient.NendError nendError) {
+                    Log.i(TAG, "広告取得失敗" + nendError.getMessage());
+                }
+            });
+        }
     }
 
     // リスト全体のアダプター

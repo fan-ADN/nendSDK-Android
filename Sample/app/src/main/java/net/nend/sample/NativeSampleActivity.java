@@ -17,7 +17,7 @@ public class NativeSampleActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        
+
         Class<?> cls = null;
 
         switch (position) {
@@ -55,8 +55,14 @@ public class NativeSampleActivity extends ListActivity {
             case 11:
                 cls = NativeMarqueeActivity.class;
                 break;
+            case 12:
+                cls = NativeGetAdDataActivity.class;
+                break;
+            case 13:
+                cls = NativeAutoReloadActivity.class;
+                break;
         }
-        if(cls != null){
+        if (cls != null) {
             Intent intent = new Intent(getApplicationContext(), cls);
             intent.putExtra("type", position);
             startActivity(intent);

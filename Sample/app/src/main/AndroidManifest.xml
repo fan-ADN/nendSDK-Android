@@ -66,6 +66,8 @@
         <activity android:name=".NativeViewPagerActivity" />
         <activity android:name=".NativeCarouselAdActivity" />
         <activity android:name=".NativeMarqueeActivity" />
+        <activity android:name=".NativeGetAdDataActivity" />
+        <activity android:name=".NativeAutoReloadActivity" />
         <meta-data
             android:name="NendDebuggable"
             android:value="true" />
