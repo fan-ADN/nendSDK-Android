@@ -107,26 +107,37 @@ public class NativeAutoReloadActivity extends AppCompatActivity {
 
     // 自動リロードのサンプル
     private void setAutoReload() {
-        isEnableAutoReload = true;
-        progressCount();
-        mClient.enableAutoReload(AUTO_RELOAD_INTERVAL, new NendAdNativeClient.Callback() {
-            @Override
-            public void onSuccess(NendAdNative nendAdNative) {
-                Log.i(TAG, "広告取得成功（自動リロード）");
-                mNendAdNative = nendAdNative;
-                setAdTexts();
-                getAndSetAdImage();
-                activateAd();
-                setClickListener();
-            }
+        if(!isEnableAutoReload) {
+            isEnableAutoReload = true;
+            progressCount();
+            mClient.enableAutoReload(AUTO_RELOAD_INTERVAL, new NendAdNativeClient.Callback() {
+                @Override
+                public void onSuccess(NendAdNative nendAdNative) {
+                    Log.i(TAG, "広告取得成功（自動リロード）");
+                    mNendAdNative = nendAdNative;
+                    setAdTexts();
+                    getAndSetAdImage();
+                    activateAd();
+                    setClickListener();
+                }
 
-            @Override
-            public void onFailure(NendAdNativeClient.NendError nendError) {
-                Log.i(TAG, "広告取得失敗（自動リロード）");
-                isEnableAutoReload = false;
-                mClient.disableAutoReload();
-            }
-        });
+                @Override
+                public void onFailure(NendAdNativeClient.NendError nendError) {
+                    Log.i(TAG, "広告取得失敗（自動リロード）");
+                    isEnableAutoReload = false;
+                    mClient.disableAutoReload();
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!isEnableAutoReload) {
+            Log.i(TAG, "自動リロード開始");
+            setAutoReload();
+        }
     }
 
     @Override
