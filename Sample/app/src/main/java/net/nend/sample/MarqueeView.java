@@ -17,7 +17,7 @@ public class MarqueeView extends HorizontalScrollView {
     }
 
     @Override
-    public boolean onInterceptTouchEvent( MotionEvent ev ) {
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
         return super.onInterceptTouchEvent(ev);
     }
 

@@ -1,9 +1,9 @@
 package net.nend.sample;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,20 +16,22 @@ import android.widget.TextView;
 
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeClient;
-import net.nend.android.NendAdNativeListListener;
 import net.nend.android.NendAdNativeViewBinder;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 public class NativeRecyclerActivity extends AppCompatActivity {
 
     private final int NORMAL = 0;
     private final int AD = 1;
-
-    private Handler mHandler = new Handler();
-    private ArrayList<NendAdNative> mLoadedAd = new ArrayList<>();
+    private final String TAG = getClass().getSimpleName();
+    // 広告を表示したポジションの一覧
+    private List<Integer> mPositionList = new ArrayList<>();
+    // 表示したポジションと広告を紐付けて保持
+    private HashMap<Integer, NendAdNative> mLoadedAd = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,11 @@ public class NativeRecyclerActivity extends AppCompatActivity {
 
         ArrayList<String> list = new ArrayList<>();
         for (int i = 1; i < 100; i++) {
-            list.add("item"+i);
+            list.add("item" + i);
         }
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        assert recyclerView != null;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new NativeRecyclerAdapter(this, list));
     }
@@ -66,39 +69,6 @@ public class NativeRecyclerActivity extends AppCompatActivity {
                     .prId(R.id.ad_pr, NendAdNative.AdvertisingExplicitly.PR)
                     .build();
             mClient = new NendAdNativeClient(context, 485516, "16cb170982088d81712e63087061378c71e8aa5c");
-            mClient.setListener(new NendAdNativeListListener() {
-                @Override
-                public void onReceiveAd(NendAdNative nendAdNative, int i, final View view, NendAdNativeClient.NendError nendError) {
-                    if (nendError == null) {
-                        Log.i(getClass().getSimpleName(), "広告取得成功");
-                        mLoadedAd.add(nendAdNative);
-                    } else {
-                        Log.i(getClass().getSimpleName(), "広告取得失敗 " + nendError.getMessage());
-
-                        // 広告リクエスト制限を越えた場合
-                        if(nendError == NendAdNativeClient.NendError.EXCESSIVE_AD_CALLS){
-                            // すでに取得済みの広告をランダムで表示
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    NendAdNative ad = mLoadedAd.get(new Random().nextInt(mLoadedAd.size()));
-                                    ad.intoView(view, mBinder);
-                                }
-                            });
-                        }
-                    }
-                }
-
-                @Override
-                public void onClick(NendAdNative nendAdNative) {
-                    Log.i(getClass().getSimpleName(), "クリック");
-                }
-
-                @Override
-                public void onDisplayAd(Boolean result, View view) {
-                    Log.i(getClass().getSimpleName(), "広告表示 = " + result);
-                }
-            });
         }
 
         @Override
@@ -108,7 +78,7 @@ public class NativeRecyclerActivity extends AppCompatActivity {
 
         @Override
         public int getItemViewType(int position) {
-            return (position != 0 && position % 5 == 0)? AD : NORMAL;
+            return (position != 0 && position % 5 == 0) ? AD : NORMAL;
         }
 
         @Override
@@ -129,14 +99,45 @@ public class NativeRecyclerActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, int position) {
+        @SuppressLint("RecyclerView")
+        public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
             switch (getItemViewType(position)) {
                 case NORMAL:
                     ((ViewHolder) viewHolder).textView.setText(mList.get(position));
                     ((ViewHolder) viewHolder).imageView.setBackgroundColor(Color.LTGRAY);
                     break;
                 case AD:
-                    mClient.loadAd(viewHolder, position);
+                    if (mLoadedAd.containsKey(position)) {
+                        mLoadedAd.get(position).intoView(viewHolder);
+                        break;
+                    }
+
+                    mClient.loadAd(new NendAdNativeClient.Callback() {
+                        @Override
+                        public void onSuccess(final NendAdNative nendAdNative) {
+                            Log.i(TAG, "広告取得成功");
+                            mLoadedAd.put(position, nendAdNative);
+                            mPositionList.add(position);
+                            viewHolder.setIsRecyclable(false);
+                            mLoadedAd.get(position).intoView(viewHolder);
+                            mLoadedAd.get(position).setOnClickListener(new NendAdNative.OnClickListener() {
+                                @Override
+                                public void onClick(NendAdNative nendAdNative) {
+                                    Log.i(TAG, "クリック" + position);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onFailure(NendAdNativeClient.NendError nendError) {
+                            Log.i(TAG, "広告取得失敗 " + nendError.getMessage());
+                            // すでに取得済みの広告をランダムで表示
+                            if (!mLoadedAd.isEmpty()) {
+                                Collections.shuffle(mPositionList);
+                                mLoadedAd.get(mPositionList.get(0)).intoView(viewHolder);
+                            }
+                        }
+                    });
                     break;
             }
         }

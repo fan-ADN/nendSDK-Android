@@ -6,18 +6,18 @@
     android:paddingBottom="5dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
-    <net.nend.android.NendAdNativeTextView
+    <TextView
         android:id="@+id/ad_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="2"/>
-    <net.nend.android.NendAdNativeTextView
+    <TextView
         android:id="@+id/ad_promotion_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="10sp"
         android:layout_below="@+id/ad_title"/>
-    <net.nend.android.NendAdNativeTextView
+    <TextView
         android:id="@+id/ad_pr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

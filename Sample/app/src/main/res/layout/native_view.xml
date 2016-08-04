@@ -4,12 +4,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="10dp">
-    <net.nend.android.NendAdNativeImageView
+    <ImageView
         android:id="@+id/logo_image"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginRight="10dp"/>
-    <net.nend.android.NendAdNativeTextView
+    <TextView
         android:id="@+id/ad_promotion_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,14 +17,14 @@
         android:textStyle="bold"
         android:textColor="#3b5998"
         android:layout_toRightOf="@+id/logo_image"/>
-    <net.nend.android.NendAdNativeTextView
+    <TextView
         android:id="@+id/ad_pr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/logo_image"
         android:textColor="@android:color/black"
         android:layout_below="@+id/ad_promotion_name"/>
-    <net.nend.android.NendAdNativeTextView
+    <TextView
         android:id="@+id/ad_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         android:paddingBottom="10dp"
         android:orientation="vertical"
         android:layout_below="@+id/ad_content">
-        <net.nend.android.NendAdNativeImageView
+        <ImageView
             android:id="@+id/ad_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,14 +49,14 @@
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             android:layout_marginBottom="10dp"/>
-        <net.nend.android.NendAdNativeTextView
+        <TextView
             android:id="@+id/ad_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
             android:layout_marginLeft="10dp"
             android:layout_below="@+id/ad_image"/>
-        <net.nend.android.NendAdNativeTextView
+        <TextView
             android:id="@+id/ad_promotion_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
             android:layout_marginLeft="10dp"
             android:textSize="12sp"
             android:layout_below="@+id/ad_title"/>
-        <net.nend.android.NendAdNativeTextView
+        <TextView
             android:id="@+id/ad_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -7,7 +7,6 @@ import android.widget.RelativeLayout;
 
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeClient;
-import net.nend.android.NendAdNativeListener;
 import net.nend.android.NendAdNativeViewBinder;
 
 public class NativeLayoutActivity extends AppCompatActivity {
@@ -22,11 +21,11 @@ public class NativeLayoutActivity extends AppCompatActivity {
         int type = 0;
 
         Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
+        if (bundle != null) {
             type = bundle.getInt("type");
         }
 
-        switch (type){
+        switch (type) {
             default:
                 layout = R.layout.native_small_square;
                 spotId = 485516;
@@ -51,7 +50,9 @@ public class NativeLayoutActivity extends AppCompatActivity {
 
         setContentView(layout);
 
-        NendAdNativeViewBinder binder = new NendAdNativeViewBinder.Builder()
+        final String TAG = getClass().getSimpleName();
+
+        final NendAdNativeViewBinder binder = new NendAdNativeViewBinder.Builder()
                 .adImageId(R.id.ad_image)
                 .logoImageId(R.id.logo_image)
                 .titleId(R.id.ad_title)
@@ -62,27 +63,25 @@ public class NativeLayoutActivity extends AppCompatActivity {
                 .actionId(R.id.ad_action)
                 .build();
 
-        RelativeLayout adLayout = (RelativeLayout)findViewById(R.id.ad);
+        final RelativeLayout adLayout = (RelativeLayout) findViewById(R.id.ad);
         NendAdNativeClient client = new NendAdNativeClient(this, spotId, apiKey);
-        client.loadAd(adLayout, binder);
-        client.setListener(new NendAdNativeListener() {
+
+        client.loadAd(new NendAdNativeClient.Callback() {
             @Override
-            public void onReceiveAd(NendAdNative ad, NendAdNativeClient.NendError nendError) {
-                if (nendError == null) {
-                    Log.i(getClass().getSimpleName(), "広告取得成功");
-                } else {
-                    Log.i(getClass().getSimpleName(), "広告取得失敗 " + nendError.getMessage());
-                }
+            public void onSuccess(final NendAdNative nendAdNative) {
+                Log.i(TAG, "広告取得成功");
+                nendAdNative.intoView(adLayout, binder);
+                nendAdNative.setOnClickListener(new NendAdNative.OnClickListener() {
+                    @Override
+                    public void onClick(NendAdNative nendAdNative) {
+                        Log.i(TAG, "クリック");
+                    }
+                });
             }
 
             @Override
-            public void onClick(NendAdNative ad) {
-                Log.i(getClass().getSimpleName(), "クリック");
-            }
-
-            @Override
-            public void onDisplayAd(Boolean result) {
-                Log.i(getClass().getSimpleName(), "広告表示 = " + result);
+            public void onFailure(NendAdNativeClient.NendError nendError) {
+                Log.i(TAG, "広告取得失敗 " + nendError.getMessage());
             }
         });
     }
