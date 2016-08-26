@@ -61,6 +61,9 @@ public class NativeSampleActivity extends ListActivity {
             case 13:
                 cls = NativeAutoReloadActivity.class;
                 break;
+            case 14:
+                cls = NativeV2OnListActivity.class;
+                break;
         }
         if (cls != null) {
             Intent intent = new Intent(getApplicationContext(), cls);

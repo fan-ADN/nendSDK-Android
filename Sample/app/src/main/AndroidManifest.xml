@@ -68,6 +68,7 @@
         <activity android:name=".NativeMarqueeActivity" />
         <activity android:name=".NativeGetAdDataActivity" />
         <activity android:name=".NativeAutoReloadActivity" />
+        <activity android:name=".NativeV2OnListActivity" />
         <meta-data
             android:name="NendDebuggable"
             android:value="true" />

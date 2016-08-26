@@ -66,6 +66,7 @@
         <item>Marquee</item>
         <item>Get Ad data</item>
         <item>AutoReload</item>
+        <item>Native V2 on ListView</item>
     </string-array>
 
     <item name="pager" type="id"/>
