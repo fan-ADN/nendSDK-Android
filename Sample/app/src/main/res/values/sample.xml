@@ -11,6 +11,7 @@
         <item>interstitial sample</item>
         <item>adjust size sample</item>
         <item>native ad sample</item>
+        <item>full board ad sample</item>
     </string-array>
     <string-array name="xml_type">
         <item>xml layout</item>

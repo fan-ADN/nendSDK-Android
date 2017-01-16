@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_full_board"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.nend.sample.FullBoardActivity">
+
+    <Button
+        android:text="Load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_show"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickLoad"
+        android:id="@+id/button_load" />
+
+    <Button
+        android:text="Show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:onClick="onClickShow"
+        android:id="@+id/button_show" />
+
+    <Button
+        android:text="Pager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_show"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickPager"
+        android:id="@+id/button_pager" />
+</RelativeLayout>

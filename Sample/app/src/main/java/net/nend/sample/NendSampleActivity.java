@@ -20,35 +20,38 @@ public class NendSampleActivity extends ListActivity {
 
         Class<?> cls = null;
         switch (position) {
-        case 0:
-            cls = XmlSampleActivity.class;
-            break;
-        case 1:
-            cls = JavaCallActivity.class;
-            break;
-        case 2:
-            cls = LayoutSampleActivity.class;
-            break;
-        case 3:
-            cls = DialogActivity.class;
-            break;
-        case 4:
-            cls = SizeSampleActivity.class;
-            break;
-        case 5:
-            cls = IconSampleActivity.class;
-            break;
-        case 6:
-            cls = InterstitialActivity.class;
-            break;
-        case 7:
-            cls = AdjustSizeActivity.class;
-            break;
-        case 8:
-            cls = NativeSampleActivity.class;
-            break;
+            case 0:
+                cls = XmlSampleActivity.class;
+                break;
+            case 1:
+                cls = JavaCallActivity.class;
+                break;
+            case 2:
+                cls = LayoutSampleActivity.class;
+                break;
+            case 3:
+                cls = DialogActivity.class;
+                break;
+            case 4:
+                cls = SizeSampleActivity.class;
+                break;
+            case 5:
+                cls = IconSampleActivity.class;
+                break;
+            case 6:
+                cls = InterstitialActivity.class;
+                break;
+            case 7:
+                cls = AdjustSizeActivity.class;
+                break;
+            case 8:
+                cls = NativeSampleActivity.class;
+                break;
+            case 9:
+                cls = FullBoardActivity.class;
+                break;
         }
-        if(cls != null){
+        if (cls != null) {
             startActivity(new Intent(getApplicationContext(), cls));
         }
     }
