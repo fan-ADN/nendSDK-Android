@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="net.nend.sample">
@@ -6,25 +7,26 @@
 
     <application
         android:allowBackup="false"
-        tools:replace="android:allowBackup"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <activity
             android:name=".NendSampleActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".XmlSampleActivity" />
-        <activity android:name=".XmlLayoutActivity"/>
-        <activity android:name=".XmlResourceActivity"/>
+        <activity android:name=".XmlLayoutActivity" />
+        <activity android:name=".XmlResourceActivity" />
         <activity android:name=".JavaCallActivity" />
         <activity android:name=".LayoutSampleActivity" />
         <activity android:name=".SizeSampleActivity" />
@@ -46,17 +48,18 @@
             android:configChanges="orientation|screenSize" />
         <activity android:name=".IconSampleActivity" />
         <activity android:name=".IconLayoutActivity" />
-        <activity android:name=".IconResourceActivity"/>
+        <activity android:name=".IconResourceActivity" />
         <activity android:name=".IconActivity" />
         <activity android:name=".IconJavaCallActivity" />
         <activity android:name=".IconDialogActivity" />
         <activity android:name=".IconAttachAndDettachActivity" />
         <activity android:name=".IconSpaceActivity" />
-        <activity android:name=".InterstitialActivity" android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".InterstitialActivity"
+            android:configChanges="orientation|screenSize" />
         <activity android:name=".AdjustSizeActivity" />
         <activity android:name=".AdjustSizeJavaCallActivity" />
         <activity android:name=".AdjustSizeXmlLayoutActivity" />
-
         <activity android:name=".NativeSampleActivity" />
         <activity android:name=".NativeLayoutActivity" />
         <activity android:name=".NativeListActivity" />
@@ -69,6 +72,9 @@
         <activity android:name=".NativeGetAdDataActivity" />
         <activity android:name=".NativeAutoReloadActivity" />
         <activity android:name=".NativeV2OnListActivity" />
+        <activity android:name=".FullBoardActivity" />
+        <activity android:name=".FullBoardPagerActivity" android:configChanges="screenSize|orientation" />
+
         <meta-data
             android:name="NendDebuggable"
             android:value="true" />
