@@ -5,7 +5,8 @@ nendSDK-Android Sample Project
 Overview
 ---------------------------------
 Android版nendSDKのサンプルプロジェクトです。  
-基本的な実装方法および動作の確認が行えます。
+基本的な実装方法および動作の確認が行えます。  
+nendSDKの導入方法については [Wiki](https://github.com/fan-ADN/nendSDK-Android/wiki) をご覧ください。
 
 Requirement
 ---------------------------------
@@ -13,5 +14,4 @@ AndroidOS 2.3以上
 
 Usage
 ---------------------------------
-AndroidStudioにプロジェクトをインポートしてください。  
-nendSDKの導入方法については [Wiki](https://github.com/fan-ADN/nendSDK-Android/wiki) をご覧ください
+AndroidStudioにプロジェクトをインポートしてください。
