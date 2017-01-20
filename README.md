@@ -13,6 +13,5 @@ AndroidOS 2.3以上
 
 Usage
 ---------------------------------
-AndroidStudioにプロジェクトをインポートしてください。    
-
+AndroidStudioにプロジェクトをインポートしてください。  
 nendSDKの導入方法については [Wiki](https://github.com/fan-ADN/nendSDK-Android/wiki) をご覧ください
