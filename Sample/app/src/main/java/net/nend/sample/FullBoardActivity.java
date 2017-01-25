@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import net.nend.android.NendAdFullBoard;
 import net.nend.android.NendAdFullBoardLoader;
@@ -25,6 +26,7 @@ public class FullBoardActivity extends AppCompatActivity {
         mLoader.loadAd(new NendAdFullBoardLoader.Callback() {
             @Override
             public void onSuccess(NendAdFullBoard nendAdFullBoard) {
+                Toast.makeText(FullBoardActivity.this, "Loaded", Toast.LENGTH_SHORT).show();
                 mAd = nendAdFullBoard;
             }
 
@@ -43,5 +45,9 @@ public class FullBoardActivity extends AppCompatActivity {
 
     public void onClickPager(View view) {
         startActivity(new Intent(this, FullBoardPagerActivity.class));
+    }
+
+    public void onClickWebView(View view) {
+        startActivity(new Intent(this, FullBoardWebViewActivity.class));
     }
 }

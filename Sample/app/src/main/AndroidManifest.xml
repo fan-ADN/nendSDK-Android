@@ -73,11 +73,20 @@
         <activity android:name=".NativeAutoReloadActivity" />
         <activity android:name=".NativeV2OnListActivity" />
         <activity android:name=".FullBoardActivity" />
-        <activity android:name=".FullBoardPagerActivity" android:configChanges="screenSize|orientation" />
+        <activity android:name=".FullBoardWebViewActivity" />
+        <activity
+            android:name=".FullBoardPagerActivity"
+            android:configChanges="screenSize|orientation" />
 
         <meta-data
             android:name="NendDebuggable"
             android:value="true" />
+
+        <!-- Optional: Customize transition style -->
+        <activity
+            android:name="net.nend.android.NendAdFullBoardActivity"
+            android:theme="@style/FullBoardCustomTheme"
+            tools:replace="android:theme" />
 
     </application>
 
