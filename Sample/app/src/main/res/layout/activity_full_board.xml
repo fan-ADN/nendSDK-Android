@@ -31,4 +31,13 @@
         android:layout_centerHorizontal="true"
         android:onClick="onClickPager"
         android:id="@+id/button_pager" />
+
+    <Button
+        android:text="ScrollEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_pager"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickWebView" />
+
 </RelativeLayout>
