@@ -1,19 +1,20 @@
 package net.nend.sample;
 
-import net.nend.android.NendAdInterstitial;
-import net.nend.android.NendAdInterstitial.NendAdInterstitialClickType;
-import net.nend.android.NendAdInterstitial.NendAdInterstitialShowResult;
-import net.nend.android.NendAdInterstitial.NendAdInterstitialStatusCode;
-import net.nend.android.NendAdInterstitial.OnCompletionListener;
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class InterstitialActivity extends Activity 
+import net.nend.android.NendAdInterstitial;
+import net.nend.android.NendAdInterstitial.NendAdInterstitialClickType;
+import net.nend.android.NendAdInterstitial.NendAdInterstitialShowResult;
+import net.nend.android.NendAdInterstitial.NendAdInterstitialStatusCode;
+import net.nend.android.NendAdInterstitial.OnCompletionListener;
+
+public class InterstitialActivity extends AppCompatActivity
         implements NendAdInterstitial.OnClickListener, OnCompletionListener{
     
     private String TAG = InterstitialActivity.this.getClass().getSimpleName();

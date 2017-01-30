@@ -1,11 +1,12 @@
 package net.nend.sample;
 
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
 import net.nend.android.NendAdIconLoader;
 import net.nend.android.NendAdIconView;
-import android.app.Activity;
-import android.os.Bundle;
 
-public class IconSpaceActivity extends Activity {
+public class IconSpaceActivity extends AppCompatActivity {
 	
 	NendAdIconLoader mIconLoader;
 

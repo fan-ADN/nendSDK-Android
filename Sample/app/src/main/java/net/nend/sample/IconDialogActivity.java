@@ -1,15 +1,16 @@
 package net.nend.sample;
 
-import net.nend.android.NendAdIconLoader;
-import net.nend.android.NendAdIconView;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 
-public class IconDialogActivity extends Activity implements SampleConstants {
+import net.nend.android.NendAdIconLoader;
+import net.nend.android.NendAdIconView;
+
+public class IconDialogActivity extends AppCompatActivity implements SampleConstants {
 
     NendDialog mDialog;
 

@@ -1,13 +1,14 @@
 package net.nend.sample;
 
-import net.nend.android.NendAdView;
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.RelativeLayout;
 
-public class AdjustSizeJavaCallActivity extends Activity {
+import net.nend.android.NendAdView;
+
+public class AdjustSizeJavaCallActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

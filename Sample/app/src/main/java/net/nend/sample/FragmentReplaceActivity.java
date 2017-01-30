@@ -2,8 +2,8 @@ package net.nend.sample;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -11,7 +11,7 @@ import android.widget.Button;
 /**
  * Fragment切り替えサンプル
  */
-public class FragmentReplaceActivity extends FragmentActivity implements OnClickListener{
+public class FragmentReplaceActivity extends AppCompatActivity implements OnClickListener{
     
     int count = 0;
     

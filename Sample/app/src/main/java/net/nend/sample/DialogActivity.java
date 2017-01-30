@@ -1,14 +1,15 @@
 package net.nend.sample;
 
-import net.nend.android.NendAdView;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 
-public class DialogActivity extends Activity {
+import net.nend.android.NendAdView;
+
+public class DialogActivity extends AppCompatActivity {
 
     NendDialog mDialog;
 

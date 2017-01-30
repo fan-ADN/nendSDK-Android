@@ -1,6 +1,7 @@
 package net.nend.sample;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -11,6 +12,7 @@ public class FullBoardWebViewActivity extends AppCompatActivity implements NendA
 
     private NendAdFullBoardLoader mLoader;
     private NendAdFullBoard mAd;
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +25,12 @@ public class FullBoardWebViewActivity extends AppCompatActivity implements NendA
             @Override
             public void onScrollEnd() {
                 if (mAd != null) {
-                    mAd.show(FullBoardWebViewActivity.this);
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mAd.show(FullBoardWebViewActivity.this);
+                        }
+                    }, 500L);
                 }
             }
         });

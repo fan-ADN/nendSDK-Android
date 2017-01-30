@@ -1,12 +1,13 @@
 package net.nend.sample;
 
-import java.util.ArrayList;
-
-import net.nend.android.NendAdView;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import net.nend.android.NendAdView;
+
+import java.util.ArrayList;
 
 /**
  * ListViewに表示するサンプル

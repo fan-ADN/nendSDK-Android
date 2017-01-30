@@ -4,7 +4,7 @@
     android:id="@+id/activity_full_board"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.nend.sample.FullBoardActivity">
+    tools:context="net.nend.sample.FullBoardDefaultActivity">
 
     <Button
         android:text="Load"
@@ -23,21 +23,5 @@
         android:onClick="onClickShow"
         android:id="@+id/button_show" />
 
-    <Button
-        android:text="Pager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button_show"
-        android:layout_centerHorizontal="true"
-        android:onClick="onClickPager"
-        android:id="@+id/button_pager" />
-
-    <Button
-        android:text="ScrollEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button_pager"
-        android:layout_centerHorizontal="true"
-        android:onClick="onClickWebView" />
 
 </RelativeLayout>

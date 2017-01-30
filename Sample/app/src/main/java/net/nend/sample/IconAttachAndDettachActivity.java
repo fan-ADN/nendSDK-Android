@@ -1,15 +1,16 @@
 package net.nend.sample;
 
-import java.util.Random;
-
-import net.nend.android.NendAdIconLoader;
-import net.nend.android.NendAdIconView;
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 
-public class IconAttachAndDettachActivity extends Activity implements SampleConstants {
+import net.nend.android.NendAdIconLoader;
+import net.nend.android.NendAdIconView;
+
+import java.util.Random;
+
+public class IconAttachAndDettachActivity extends AppCompatActivity implements SampleConstants {
 
 	private NendAdIconLoader mIconLoader;
 	private LinearLayout mIconContainer;

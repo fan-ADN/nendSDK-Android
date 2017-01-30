@@ -1,15 +1,16 @@
 package net.nend.sample;
 
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Toast;
+
 import net.nend.android.NendAdIconLoader;
 import net.nend.android.NendAdIconView;
 import net.nend.android.NendAdView.NendError;
 import net.nend.android.NendIconError;
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
-public class IconActivity extends Activity implements SampleConstants {
+public class IconActivity extends AppCompatActivity implements SampleConstants {
 
     private NendAdIconLoader mIconLoader;
     private NendAdIconView view1;
