@@ -1,15 +1,16 @@
 package net.nend.sample;
 
-import net.nend.android.NendAdView;
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.RelativeLayout;
+
+import net.nend.android.NendAdView;
 
 /**
  * NendAdViewを削除し、再表示するサンプル
  */
-public class AttachAndDettachActivity extends Activity {
+public class AttachAndDettachActivity extends AppCompatActivity {
     
     private RelativeLayout mLayout;
     private NendAdView mNendAdView;

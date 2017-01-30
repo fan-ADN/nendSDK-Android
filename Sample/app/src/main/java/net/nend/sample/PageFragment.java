@@ -1,8 +1,5 @@
 package net.nend.sample;
 
-import java.util.ArrayList;
-
-import net.nend.android.NendAdView;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import net.nend.android.NendAdView;
+
+import java.util.ArrayList;
 
 public class PageFragment extends Fragment {
 

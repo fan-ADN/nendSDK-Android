@@ -1,21 +1,21 @@
 package net.nend.sample;
 
-import java.util.ArrayList;
-
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * ViewPager内に表示するサンプル
  */
-public class ViewPagerActivity extends Activity {
+public class ViewPagerActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
 

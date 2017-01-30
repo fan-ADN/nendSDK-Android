@@ -1,13 +1,14 @@
 package net.nend.sample;
 
-import net.nend.android.NendAdView;
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 
-public class JavaCallLinearActivity extends Activity {
+import net.nend.android.NendAdView;
+
+public class JavaCallLinearActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

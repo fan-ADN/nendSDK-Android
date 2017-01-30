@@ -48,7 +48,7 @@ public class NendSampleActivity extends ListActivity {
                 cls = NativeSampleActivity.class;
                 break;
             case 9:
-                cls = FullBoardActivity.class;
+                cls = FullBoardMenuActivity.class;
                 break;
         }
         if (cls != null) {

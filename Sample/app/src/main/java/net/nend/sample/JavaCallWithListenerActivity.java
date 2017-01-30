@@ -1,14 +1,15 @@
 package net.nend.sample;
 
-import net.nend.android.NendAdListener;
-import net.nend.android.NendAdView;
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class JavaCallWithListenerActivity extends Activity implements NendAdListener { // 1) implements
+import net.nend.android.NendAdListener;
+import net.nend.android.NendAdView;
+
+public class JavaCallWithListenerActivity extends AppCompatActivity implements NendAdListener { // 1) implements
 
 
     @Override

@@ -1,9 +1,9 @@
 package net.nend.sample;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-public class AdjustSizeXmlLayoutActivity extends Activity {
+public class AdjustSizeXmlLayoutActivity extends AppCompatActivity {
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {

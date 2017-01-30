@@ -27,5 +27,6 @@ repositories {
 }
 dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:design:25.1.0'
     compile 'net.nend.android:nend-sdk:3.3.0'
 }

@@ -1,9 +1,9 @@
 package net.nend.sample;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-public class IconLayoutActivity extends Activity {
+public class IconLayoutActivity extends AppCompatActivity {
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
