@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,11 +59,11 @@ public class NativeV2OnListActivity extends ListActivity {
 
     }
 
-    class NativeListAdapter extends ArrayAdapter<Object> {
+    private class NativeListAdapter extends ArrayAdapter<Object> {
         private LayoutInflater mInflater;
         private List<Object> mObjects;
 
-        public NativeListAdapter(Context context, int resource, List<Object> objects) {
+        NativeListAdapter(Context context, int resource, List<Object> objects) {
             super(context, resource, objects);
             mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             mObjects = objects;
@@ -78,8 +79,9 @@ public class NativeV2OnListActivity extends ListActivity {
             return ((NativeFeed) mObjects.get(position)).getType();
         }
 
+        @NonNull
         @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
             final ViewHolder holder;
 
             if (convertView == null) {
@@ -98,6 +100,7 @@ public class NativeV2OnListActivity extends ListActivity {
 
                 case NORMAL:
                     NativeFeed feed = (NativeFeed) getItem(position);
+                    assert feed != null;
                     holder.contentText.setText(feed.getContent());
                     holder.smallText.setText(feed.getDate());
                     holder.title.setText(feed.getMediaName());
@@ -107,7 +110,7 @@ public class NativeV2OnListActivity extends ListActivity {
                     final View adRoot = convertView;
                     final NativeFeed adFeed = (NativeFeed) getItem(position);
 
-                    if (adFeed.getNendAdNative() != null && adFeed.getAdimage() == null) {
+                    if (adFeed != null && adFeed.getNendAdNative() != null && adFeed.getAdimage() == null) {
                         adFeed.getNendAdNative().downloadAdImage(new NendAdNative.Callback() {
                             @Override
                             public void onSuccess(final Bitmap bitmap) {
@@ -137,11 +140,12 @@ public class NativeV2OnListActivity extends ListActivity {
                             }
                         });
                     }
-                    holder.title.setText(adFeed.getNendAdNative().getTitleText());
-                    holder.contentText.setText(adFeed.getNendAdNative().getContentText());
-                    holder.smallText.setText(NendAdNative.AdvertisingExplicitly.PROMOTION.getText());
-                    holder.thumbnail.setImageBitmap(adFeed.getAdimage());
-
+                    if (adFeed != null && adFeed.getNendAdNative() != null) {
+                        holder.title.setText(adFeed.getNendAdNative().getTitleText());
+                        holder.contentText.setText(adFeed.getNendAdNative().getContentText());
+                        holder.smallText.setText(NendAdNative.AdvertisingExplicitly.AD.getText());
+                        holder.thumbnail.setImageBitmap(adFeed.getAdimage());
+                    }
                     break;
             }
 
@@ -158,7 +162,7 @@ public class NativeV2OnListActivity extends ListActivity {
     }
 
 
-    class NativeFeed {
+    private class NativeFeed {
 
         private int type;
         private String content;
@@ -167,11 +171,11 @@ public class NativeV2OnListActivity extends ListActivity {
         private Bitmap adimage;
         private NendAdNative nendAdNative;
 
-        public int getType() {
+        int getType() {
             return type;
         }
 
-        public void setType(int type) {
+        void setType(int type) {
             this.type = type;
         }
 
@@ -183,27 +187,27 @@ public class NativeV2OnListActivity extends ListActivity {
             this.content = content;
         }
 
-        public String getDate() {
+        String getDate() {
             return date;
         }
 
-        public void setDate(String date) {
+        void setDate(String date) {
             this.date = date;
         }
 
-        public String getMediaName() {
+        String getMediaName() {
             return mediaName;
         }
 
-        public void setMediaName(String mediaName) {
+        void setMediaName(String mediaName) {
             this.mediaName = mediaName;
         }
 
-        public Bitmap getAdimage() {
+        Bitmap getAdimage() {
             return adimage;
         }
 
-        public void setAdimage(Bitmap adimage) {
+        void setAdimage(Bitmap adimage) {
             this.adimage = adimage;
         }
 
