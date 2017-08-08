@@ -50,6 +50,9 @@ public class NendSampleActivity extends ListActivity {
             case 9:
                 cls = FullBoardMenuActivity.class;
                 break;
+            case 10:
+                cls = VideoActivity.class;
+                break;
         }
         if (cls != null) {
             startActivity(new Intent(getApplicationContext(), cls));
