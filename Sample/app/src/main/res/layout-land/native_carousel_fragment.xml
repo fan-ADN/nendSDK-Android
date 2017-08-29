@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="150dp"
             android:layout_margin="10dp">
-            <net.nend.android.NendAdNativeImageView
+            <ImageView
                 android:id="@+id/ad_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
                 android:textColor="@android:color/black"
                 android:scaleType="fitStart"
                 android:adjustViewBounds="true" />
-            <net.nend.android.NendAdNativeTextView
+            <TextView
                 android:id="@+id/ad_pr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
                 android:padding="5dp"
                 android:background="#027e00"
                 android:layout_marginBottom="10dp" />
-            <net.nend.android.NendAdNativeTextView
+            <TextView
                 android:id="@+id/ad_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                 android:layout_below="@+id/ad_pr"
                 android:layout_toRightOf="@+id/ad_image"
                 android:layout_marginBottom="10dp" />
-            <net.nend.android.NendAdNativeTextView
+            <TextView
                 android:id="@+id/ad_action"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
