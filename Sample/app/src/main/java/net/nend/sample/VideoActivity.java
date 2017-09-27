@@ -27,10 +27,10 @@ import net.nend.android.NendAdVideoListener;
 public class VideoActivity extends AppCompatActivity {
 
     private static final String TAG = "NEND_VIDEO";
-    private static final int YOUR_SPOT_ID_REWARDED = 12345;
-    private static final int YOUR_SPOT_ID_INTERSTITIAL = 12345;
-    private static final String YOUR_API_KEY_REWARDED = "YOUR_API_KEY_REWARDED";
-    private static final String YOUR_API_KEY_INTERSTITIAL = "YOUR_API_KEY_INTERSTITIAL";
+    private static final int REWARDED_VIDEO_SPOT_ID = 802558;
+    private static final int INTERSTITIAL_VIDEO_SPOT_ID = 802559;
+    private static final String REWARDED_VIDEO_API_KEY = "a6eb8828d64c70630fd6737bd266756c5c7d48aa";
+    private static final String INTERSTITIAL_VIDEO_API_KEY = "e9527a2ac8d1f39a667dfe0f7c169513b090ad44";
     private static final String USER_ID = "DUMMY_USER_ID";
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private ProgressDialog mProgressDialog;
@@ -70,7 +70,7 @@ public class VideoActivity extends AppCompatActivity {
         Log.d(TAG, "Click load reward button.");
 
         if (null == mNendAdRewardedVideo) {
-            mNendAdRewardedVideo = new NendAdRewardedVideo(this, YOUR_SPOT_ID_REWARDED, YOUR_API_KEY_REWARDED);
+            mNendAdRewardedVideo = new NendAdRewardedVideo(this, REWARDED_VIDEO_SPOT_ID, REWARDED_VIDEO_API_KEY);
             mNendAdRewardedVideo.setUserId(USER_ID);
             mNendAdRewardedVideo.setAdListener(new NendAdRewardedListener() {
                 @Override
@@ -180,7 +180,7 @@ public class VideoActivity extends AppCompatActivity {
         Log.d(TAG, "Click load interstitial button.");
 
         if (null == mNendAdInterstitialVideo) {
-            mNendAdInterstitialVideo = new NendAdInterstitialVideo(this, YOUR_SPOT_ID_INTERSTITIAL, YOUR_API_KEY_INTERSTITIAL);
+            mNendAdInterstitialVideo = new NendAdInterstitialVideo(this, INTERSTITIAL_VIDEO_SPOT_ID, INTERSTITIAL_VIDEO_API_KEY);
             mNendAdInterstitialVideo.setUserId(USER_ID);
             mNendAdInterstitialVideo.addFallbackFullboard(485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff");
             mNendAdInterstitialVideo.setAdListener(new NendAdVideoListener() {
