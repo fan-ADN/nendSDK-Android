@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ListView;
 
 public class NendSampleActivity extends ListActivity {
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +49,9 @@ public class NendSampleActivity extends ListActivity {
                 break;
             case 9:
                 cls = FullBoardMenuActivity.class;
+                break;
+            case 10:
+                cls = VideoActivity.class;
                 break;
         }
         if (cls != null) {

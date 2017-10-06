@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
 
     defaultConfig {
         applicationId "net.nend.sample"
@@ -25,8 +25,11 @@ repositories {
         url 'http://fan-adn.github.io/nendSDK-Android-lib/library'
     }
 }
+
 dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
-    compile 'net.nend.android:nend-sdk:3.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.google.android.gms:play-services-location:11.0.2'
+    compile 'net.nend.android:nend-sdk:4.0.1'
 }
