@@ -6,7 +6,7 @@
     <ImageView
         android:id="@+id/ad_image"
         android:layout_width="80dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:adjustViewBounds="true"/>
     <TextView
         android:id="@+id/ad_title"

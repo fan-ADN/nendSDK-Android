@@ -55,7 +55,6 @@
     </string-array>
     <string-array name="native_menu">
         <item>SmallSquare</item>
-        <item>SmallWide</item>
         <item>LargeWide</item>
         <item>TextOnly</item>
         <item>ListView</item>

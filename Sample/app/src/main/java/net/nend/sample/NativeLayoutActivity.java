@@ -32,16 +32,11 @@ public class NativeLayoutActivity extends AppCompatActivity {
                 apiKey = "16cb170982088d81712e63087061378c71e8aa5c";
                 break;
             case 1:
-                layout = R.layout.native_small_wide;
-                spotId = 485517;
-                apiKey = "186927de979c5e542ee1ef111cc69c52e37a58f9";
-                break;
-            case 2:
                 layout = R.layout.native_large_wide;
                 spotId = 485520;
                 apiKey = "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff";
                 break;
-            case 3:
+            case 2:
                 layout = R.layout.native_text_only;
                 spotId = 485522;
                 apiKey = "2b2381a116290c90b936e409482127efb7123dbc";
