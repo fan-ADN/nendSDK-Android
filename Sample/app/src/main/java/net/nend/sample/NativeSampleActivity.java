@@ -31,37 +31,34 @@ public class NativeSampleActivity extends ListActivity {
                 cls = NativeLayoutActivity.class;
                 break;
             case 3:
-                cls = NativeLayoutActivity.class;
-                break;
-            case 4:
                 cls = NativeListActivity.class;
                 break;
-            case 5:
+            case 4:
                 cls = NativeMultipleLayoutListActivity.class;
                 break;
-            case 6:
+            case 5:
                 cls = NativeGridActivity.class;
                 break;
-            case 7:
+            case 6:
                 cls = NativeRecyclerActivity.class;
                 break;
-            case 8:
+            case 7:
                 cls = NativeViewPagerActivity.class;
                 break;
+            case 8:
             case 9:
-            case 10:
                 cls = NativeCarouselAdActivity.class;
                 break;
-            case 11:
+            case 10:
                 cls = NativeMarqueeActivity.class;
                 break;
-            case 12:
+            case 11:
                 cls = NativeGetAdDataActivity.class;
                 break;
-            case 13:
+            case 12:
                 cls = NativeAutoReloadActivity.class;
                 break;
-            case 14:
+            case 13:
                 cls = NativeV2OnListActivity.class;
                 break;
         }

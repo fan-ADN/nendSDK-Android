@@ -38,6 +38,7 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
     private int INTERVAL = 3000;
     private Runnable mAutoCarouselRunnable;
     private Handler mHandler;
+    private static final int AUTO_CAROUSEL_MENU_POSITION = 9;  // native ad sample menu position
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +61,14 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
         parentRecyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
             @Override
             public void onChildViewAttachedToWindow(View view) {
-                if ((view.getTag() != null && view.getTag().equals("CAROUSEL")) && mMenuPosition == 10) {
+                if ((view.getTag() != null && view.getTag().equals("CAROUSEL")) && mMenuPosition == AUTO_CAROUSEL_MENU_POSITION) {
                     mHandler.postDelayed(mAutoCarouselRunnable, INTERVAL);
                 }
             }
 
             @Override
             public void onChildViewDetachedFromWindow(View view) {
-                if ((view.getTag() != null && view.getTag().equals("CAROUSEL")) && mMenuPosition == 10) {
+                if ((view.getTag() != null && view.getTag().equals("CAROUSEL")) && mMenuPosition == AUTO_CAROUSEL_MENU_POSITION) {
                     mHandler.removeCallbacks(mAutoCarouselRunnable);
                 }
             }
@@ -92,7 +93,7 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (null != mHandler && mMenuPosition == 10) {
+        if (null != mHandler && mMenuPosition == AUTO_CAROUSEL_MENU_POSITION) {
             if (!hasFocus) {
                 mHandler.removeCallbacks(mAutoCarouselRunnable);
             } else {
@@ -214,7 +215,7 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
                 viewPager.setPageMargin(getResources().getDisplayMetrics().widthPixels / -10);
 
                 // オートカルーセル
-                if (mMenuPosition == 10) {
+                if (mMenuPosition == AUTO_CAROUSEL_MENU_POSITION) {
                     mHandler = new Handler();
                     mAutoCarouselRunnable = new Runnable() {
                         @Override
