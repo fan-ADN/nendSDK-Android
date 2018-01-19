@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NendSample Java</string>
+    <string name="nend_logo_description">Nend</string>
+
+    <string name="replace">replace</string>
+    <string name="show_dialog">show dialog</string>
+    <string name="add_icon">AddIcon</string>
+    <string name="remove_icon">RemoveIcon</string>
+
+    <string name="show_interstitial">show interstitial</string>
+
+    <string name="api_key">c5cb8bc474345961c6e7a9778c947957ed8e1e4f</string>
+    <string name="icon_api_key">0c734134519f25412ae9a9bff94783b81048ffbe</string>
+
+    <string name="carousel_title">あなたにオススメのアプリ</string>
+    <string name="carousel_longtext">Long text for Carousel AD. Long text for Carousel AD. Long text for Carousel AD. Long text for Carousel AD. Long text for Carousel AD.</string>
+</resources>
