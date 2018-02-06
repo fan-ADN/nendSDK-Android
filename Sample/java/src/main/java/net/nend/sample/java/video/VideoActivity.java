@@ -16,6 +16,7 @@ import net.nend.android.NendAdInterstitialVideo;
 import net.nend.android.NendAdRewardItem;
 import net.nend.android.NendAdRewardedListener;
 import net.nend.android.NendAdRewardedVideo;
+import net.nend.android.NendAdUserFeature;
 import net.nend.android.NendAdVideo;
 import net.nend.android.NendAdVideoListener;
 import net.nend.sample.java.R;
@@ -73,6 +74,10 @@ public class VideoActivity extends AppCompatActivity {
         if (null == mNendAdRewardedVideo) {
             mNendAdRewardedVideo = new NendAdRewardedVideo(this, REWARDED_VIDEO_SPOT_ID, REWARDED_VIDEO_API_KEY);
             mNendAdRewardedVideo.setUserId(USER_ID);
+            NendAdUserFeature feature = new NendAdUserFeature.Builder()
+                    .setGender(NendAdUserFeature.Gender.FEMALE)
+                    .build();
+            mNendAdRewardedVideo.setUserFeature(feature);
             mNendAdRewardedVideo.setAdListener(new NendAdRewardedListener() {
                 @Override
                 public void onRewarded(NendAdVideo nendAdVideo, NendAdRewardItem nendAdRewardItem) {
@@ -183,6 +188,16 @@ public class VideoActivity extends AppCompatActivity {
         if (null == mNendAdInterstitialVideo) {
             mNendAdInterstitialVideo = new NendAdInterstitialVideo(this, INTERSTITIAL_VIDEO_SPOT_ID, INTERSTITIAL_VIDEO_API_KEY);
             mNendAdInterstitialVideo.setUserId(USER_ID);
+            NendAdUserFeature feature = new NendAdUserFeature.Builder()
+                    .setGender(NendAdUserFeature.Gender.MALE)
+                    .setBirthday(1985, 1, 1)
+                    .setAge(34)
+                    .addCustomFeature("stringParameter", "test")
+                    .addCustomFeature("booleanParameter", true)
+                    .addCustomFeature("integerParameter", 100)
+                    .addCustomFeature("doubleParameter", 123.45)
+                    .build();
+            mNendAdInterstitialVideo.setUserFeature(feature);
             mNendAdInterstitialVideo.addFallbackFullboard(485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff");
             mNendAdInterstitialVideo.setAdListener(new NendAdVideoListener() {
                 @Override
