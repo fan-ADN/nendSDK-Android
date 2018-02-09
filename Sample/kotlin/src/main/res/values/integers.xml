@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="banner_spot_id">3174</integer>
+    <integer name="icon_spot_id">101282</integer>
+    <integer name="icon_count_three">3</integer>
+</resources>

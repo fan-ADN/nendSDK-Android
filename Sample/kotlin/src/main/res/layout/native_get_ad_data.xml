@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                        android:id="@+id/cardView"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="20dp"
+                                        android:layout_marginRight="20dp"
+                                        android:layout_marginTop="5dp"
+                                        card_view:cardCornerRadius="5dp"
+                                        card_view:cardElevation="5dp">
+
+        <RelativeLayout
+            android:id="@+id/ad_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#7db4ff">
+
+
+            <ImageView
+                android:id="@+id/ad_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ad_image"
+                android:background="#007eff"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/inner_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/pr_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="#006aee"
+                        android:padding="5dp"
+                        android:text="New Text"
+                        android:textColor="#FFF"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/title_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Text"
+                        android:textColor="#FFF"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/inner_container"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="New Text"
+                    android:textColor="#DEF"/>
+
+                <LinearLayout
+                    android:id="@+id/action_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/content_text"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/logo_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/promotion_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="New Text"
+                            android:textColor="#FFF"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/promotion_url"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="New Text"
+                            android:textColor="#DEF"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/action_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/action_container"
+                    android:background="#006aee"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="New Text"
+                    android:textColor="#FFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="広告画像のURL"
+            android:textColor="#111"/>
+
+        <TextView
+            android:id="@+id/ad_image_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ロゴ画像のURL"
+            android:textColor="#111"/>
+
+        <TextView
+            android:id="@+id/logo_image_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+</LinearLayout>
