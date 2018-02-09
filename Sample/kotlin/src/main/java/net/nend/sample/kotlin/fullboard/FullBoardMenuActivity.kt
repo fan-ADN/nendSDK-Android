@@ -59,7 +59,8 @@ class FullBoardMenuActivity : AppCompatActivity(), AdapterView.OnItemClickListen
         const val FULLBOARD_SPOT_ID = 485520
         const val FULLBOARD_API_KEY = "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff"
         const val FULLBOARD_LOG_TAG = "FullBoardAd"
-        private val TITLES = arrayOf("インタースティシャル形式", "スワイプ形式", "スクロールエンド形式", "タブ形式")
+        private val TITLES = arrayOf("Interstitial style", "Swipe style", "Scroll end style",
+                "Tab style")
         private val DETAILS = arrayOf("ポップアップで表示された広告は右上の×ボタンにより閉じることができます。", "マンガや小説などスワイプでページ送りをするアプリにてページとページの間に広告を差し込むことができます。※×ボタンは非表示にできます。", "ニュースや記事まとめ、縦スクロール式のマンガアプリなどで最下部までスクロールした後に画面下部から広告を呼び出します。右上の×ボタンにて閉じることができます。", "ニュースや記事まとめアプリでカテゴリタブの中に\"PR\"タブを作成し、PRタブがタップされた際に広告を表示します。")
     }
 }

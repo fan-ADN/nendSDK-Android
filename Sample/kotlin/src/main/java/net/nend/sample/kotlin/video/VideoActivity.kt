@@ -13,6 +13,8 @@ import android.widget.Toast
 import net.nend.android.*
 import net.nend.sample.kotlin.R
 
+
+
 @Suppress("UNUSED_PARAMETER")
 /*
 　このサンプルは広告配信に位置情報をオプションで利用しています。
@@ -62,6 +64,10 @@ class VideoActivity : AppCompatActivity() {
             nendAdRewardedVideo = NendAdRewardedVideo(this,
                     REWARDED_VIDEO_SPOT_ID, REWARDED_VIDEO_API_KEY).apply {
                 setUserId(USER_ID)
+                val feature = NendAdUserFeature.Builder()
+                        .setGender(NendAdUserFeature.Gender.FEMALE)
+                        .build()
+                setUserFeature(feature)
                 setAdListener(object : NendAdRewardedListener {
                     override fun onRewarded(
                             nendAdVideo: NendAdVideo<*, *>, nendAdRewardItem: NendAdRewardItem) {
@@ -158,6 +164,16 @@ class VideoActivity : AppCompatActivity() {
             nendAdInterstitialVideo = NendAdInterstitialVideo(this,
                     INTERSTITIAL_VIDEO_SPOT_ID, INTERSTITIAL_VIDEO_API_KEY).apply {
                 setUserId(USER_ID)
+                val feature = NendAdUserFeature.Builder()
+                        .setGender(NendAdUserFeature.Gender.MALE) // 性別
+                        .setBirthday(1985, 1, 1) // 生年月日 (e.g. 1985年1月1日)
+                        .setAge(34) // 年齢
+                        .addCustomFeature("stringParameter", "test") // key-value形式のカスタムパラメーター
+                        .addCustomFeature("booleanParameter", true)
+                        .addCustomFeature("integerParameter", 100)
+                        .addCustomFeature("doubleParameter", 123.45)
+                        .build()
+                setUserFeature(feature)
                 addFallbackFullboard(485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff")
                 setAdListener(object : NendAdVideoListener {
                     override fun onLoaded(nendAdVideo: NendAdVideo<*, *>) {

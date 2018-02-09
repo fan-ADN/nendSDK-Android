@@ -18,10 +18,10 @@ import java.util.Map;
 public class FullBoardMenuActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private static final String[] TITLES = new String[]{
-            "インタースティシャル形式",
-            "スワイプ形式",
-            "スクロールエンド形式",
-            "タブ形式"
+            "Interstitial style",
+            "Swipe style",
+            "Scroll end style",
+            "Tab style"
     };
 
     private static final String[] DETAILS = new String[]{
