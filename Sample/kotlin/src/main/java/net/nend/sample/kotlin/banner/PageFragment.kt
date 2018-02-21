@@ -16,8 +16,8 @@ class PageFragment : Fragment() {
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val list = arguments.getStringArrayList("itemList")
-        val position = arguments.getInt("position")
+        val list = arguments?.getStringArrayList("itemList")
+        val position = arguments?.getInt("position")
 
         return (View.inflate(context, R.layout.page_list, null) as RelativeLayout).apply {
             (findViewById(R.id.page_title) as TextView).run {

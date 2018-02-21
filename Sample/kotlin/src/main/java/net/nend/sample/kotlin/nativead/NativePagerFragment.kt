@@ -27,7 +27,7 @@ class NativePagerFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return View.inflate(context, R.layout.native_fragment, null).apply {
             val adLayout = findViewById(R.id.ad) as RelativeLayout
-            callback.onAdRequest(adLayout, arguments.getInt("position"))
+            callback.onAdRequest(adLayout, arguments!!.getInt("position"))
         }
     }
 

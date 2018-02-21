@@ -42,7 +42,7 @@ class FullBoardPagerActivity : AppCompatActivity(),
         super.onConfigurationChanged(newConfig)
         Handler().post {
             // Update the ad orientation.
-            pager.adapter.notifyDataSetChanged()
+            pager.adapter?.notifyDataSetChanged()
         }
     }
 
@@ -138,7 +138,7 @@ class FullBoardPagerActivity : AppCompatActivity(),
             return ads
         }
 
-        override fun deliverResult(data: List<NendAdFullBoard>) {
+        override fun deliverResult(data: List<NendAdFullBoard>?) {
             ads = data
             if (isStarted) {
                 super.deliverResult(data)

@@ -32,7 +32,7 @@ class NativeCarouselPagerFragment : Fragment() {
         return inflater.inflate(R.layout.native_carousel_fragment,
                 container, false).apply {
             val adLayout = findViewById(R.id.ad) as RelativeLayout
-            callback?.onAdRequest(adLayout, arguments.getInt("position"))
+            callback?.onAdRequest(adLayout, arguments!!.getInt("position"))
         }
     }
 
