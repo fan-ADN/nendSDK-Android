@@ -110,7 +110,7 @@ class FullBoardTabLayoutActivity : AppCompatActivity() {
                 1 -> return "Second"
                 2 -> return "PR"
             }
-            return super.getPageTitle(position)
+            return super.getPageTitle(position)!!
         }
     }
 }
