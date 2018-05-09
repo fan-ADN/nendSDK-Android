@@ -122,26 +122,26 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
 
         private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder? {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val view: View
-            var viewHolder: RecyclerView.ViewHolder? = null
+            var viewHolder: RecyclerView.ViewHolder
 
             when (viewType) {
-                ViewType.FEED.id -> {
-                    view = layoutInflater.inflate(R.layout.native_carousel_card_feed, parent, false)
-                    viewHolder = FeedHolder(view)
-                }
                 ViewType.AD.id -> {
                     view = layoutInflater.inflate(R.layout.native_carousel_viewpager, parent, false)
                     view.tag = "CAROUSEL"
                     viewHolder = AdHolder(view)
+                }
+                else -> {
+                    view = layoutInflater.inflate(R.layout.native_carousel_card_feed, parent, false)
+                    viewHolder = FeedHolder(view)
                 }
             }
 
             return viewHolder
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             when (getItemViewType(position)) {
                 ViewType.FEED.id -> {
                     val date = Date()
