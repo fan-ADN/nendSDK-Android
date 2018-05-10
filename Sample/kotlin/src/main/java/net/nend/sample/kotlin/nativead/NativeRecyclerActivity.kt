@@ -62,18 +62,18 @@ class NativeRecyclerActivity : AppCompatActivity() {
                 if (position != 0 && position % 5 == 0) ViewType.AD.id else ViewType.NORMAL.id
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int):
-                RecyclerView.ViewHolder? {
+                RecyclerView.ViewHolder {
             val view: View
-            var viewHolder: RecyclerView.ViewHolder? = null
+            var viewHolder: RecyclerView.ViewHolder
 
             when (viewType) {
-                ViewType.NORMAL.id -> {
-                    view = layoutInflater.inflate(R.layout.native_list_row, viewGroup, false)
-                    viewHolder = ViewHolder(view)
-                }
                 ViewType.AD.id -> {
                     view = layoutInflater.inflate(R.layout.native_ad_left_row, viewGroup, false)
                     viewHolder = binder.createRecyclerViewHolder(view)
+                }
+                else -> {
+                    view = layoutInflater.inflate(R.layout.native_list_row, viewGroup, false)
+                    viewHolder = ViewHolder(view)
                 }
             }
 

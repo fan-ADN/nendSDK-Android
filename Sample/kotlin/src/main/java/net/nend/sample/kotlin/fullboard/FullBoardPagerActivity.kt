@@ -46,7 +46,7 @@ class FullBoardPagerActivity : AppCompatActivity(),
         }
     }
 
-    override fun onCreateLoader(id: Int, args: Bundle): Loader<List<NendAdFullBoard>> {
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<List<NendAdFullBoard>> {
         return AdLoader(applicationContext)
     }
 
