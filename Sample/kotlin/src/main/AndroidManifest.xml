@@ -74,6 +74,13 @@
         <activity android:name=".nativead.NativeGetAdDataActivity"/>
         <activity android:name=".nativead.NativeAutoReloadActivity"/>
         <activity android:name=".nativead.NativeV2OnListActivity"/>
+        <activity android:name=".nativeadvideo.ExamplesActivity" />
+        <activity android:name=".nativeadvideo.SimpleActivity" />
+        <activity android:name=".nativeadvideo.InBannerActivity" />
+        <activity android:name=".nativeadvideo.ListViewInFeedActivity" />
+        <activity android:name=".nativeadvideo.GridViewInFeedActivity" />
+        <activity android:name=".nativeadvideo.RecyclerViewInFeedActivity" />
+        <activity android:name=".nativeadvideo.CarouselActivity" />
         <activity android:name=".fullboard.FullBoardDefaultActivity"/>
         <activity android:name=".fullboard.FullBoardWebViewActivity"/>
         <activity android:name=".fullboard.FullBoardTabLayoutActivity"/>

@@ -3,13 +3,13 @@
     android:id="@+id/ad"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/logo_image"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="16dp"/>
 
     <TextView
         android:id="@+id/ad_promotion_name"
@@ -33,8 +33,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo_image"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:textColor="@android:color/black"/>
 
     <RelativeLayout
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ad_content"
         android:orientation="vertical"
-        android:paddingBottom="10dp"
+        android:paddingBottom="16dp"
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
         android:paddingTop="0dp">
@@ -51,7 +51,7 @@
             android:id="@+id/ad_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="16dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:textColor="@android:color/black"/>
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ad_image"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="16dp"
             android:textColor="@android:color/black"/>
 
         <TextView
@@ -69,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ad_title"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="16dp"
             android:textColor="@android:color/black"
             android:textSize="12sp"/>
 
@@ -79,12 +79,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/ad_image"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="16dp"
             android:background="#3b5998"
-            android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="10dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:paddingTop="16dp"
             android:textColor="@android:color/white"/>
     </RelativeLayout>
 </RelativeLayout>

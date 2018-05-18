@@ -3,7 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:padding="8dp">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:id="@+id/ad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/ad_content"
@@ -31,8 +31,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/ad_content"
                 android:background="#FFC107"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
                 android:textColor="@android:color/white"
                 android:layout_alignParentEnd="true"/>
         </RelativeLayout>

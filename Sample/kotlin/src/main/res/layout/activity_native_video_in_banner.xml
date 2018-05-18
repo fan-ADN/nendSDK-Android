@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".nativeadvideo.InBannerActivity">
+
+    <RelativeLayout
+        android:id="@+id/native_in_banner"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@android:color/holo_orange_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <FrameLayout
+            android:id="@+id/movie_area"
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            >
+        </FrameLayout>
+        <TextView
+            android:id="@+id/title_native_in_banner"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/movie_area"/>
+        <TextView
+            android:id="@+id/description_native_in_banner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/movie_area"
+            android:layout_below="@id/title_native_in_banner"/>
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

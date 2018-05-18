@@ -243,7 +243,7 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
 
         @Override
         public Fragment getItem(int position) {
-            return NativeCarouselPagerFragment.newInstance(position);
+            return NativeCarouselPagerFragment.newInstance(position, R.layout.native_carousel_fragment);
         }
 
         @Override
