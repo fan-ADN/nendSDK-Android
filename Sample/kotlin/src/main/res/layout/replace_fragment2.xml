@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:nendsdk="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
@@ -11,8 +12,8 @@
 
     <net.nend.android.NendAdView
         android:id="@+id/nend"
-        NendApiKey="c5cb8bc474345961c6e7a9778c947957ed8e1e4f"
-        NendSpotId="3174"
+        nendsdk:NendApiKey="c5cb8bc474345961c6e7a9778c947957ed8e1e4f"
+        nendsdk:NendSpotId="3174"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

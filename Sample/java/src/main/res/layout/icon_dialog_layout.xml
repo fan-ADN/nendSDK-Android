@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:nendsdk="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center" >
+    android:gravity="center">
 
     <net.nend.android.NendAdIconView
         android:id="@+id/icon1"
@@ -10,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        NendTitleColor="#FFFFFF" />
+        nendsdk:NendTitleColor="#FFFFFF" />
 
     <net.nend.android.NendAdIconView
         android:id="@+id/icon2"
@@ -18,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/icon1"
         android:layout_toRightOf="@+id/icon1"
-        NendTitleVisible="false" />
+        nendsdk:NendTitleVisible="false" />
 
     <net.nend.android.NendAdIconView
         android:id="@+id/icon3"
@@ -26,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/icon1"
         android:layout_below="@+id/icon1"
-        NendTitleColor="#FF0000" />
+        nendsdk:NendTitleColor="#FF0000" />
 
     <net.nend.android.NendAdIconView
         android:id="@+id/icon4"
@@ -34,6 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/icon3"
         android:layout_toRightOf="@+id/icon3"
-        NendTitleColor="#0000FF" />
+        nendsdk:NendTitleColor="#0000FF" />
 
 </RelativeLayout>

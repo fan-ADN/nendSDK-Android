@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:background="@android:color/darker_gray"
-              android:padding="5dp">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:nendsdk="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/darker_gray"
+    android:padding="8dp">
 
     <net.nend.android.NendAdIconView
         android:id="@+id/icon1"
-        NendTitleColor="#FFFFFF"
+        nendsdk:NendTitleColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <net.nend.android.NendAdIconView
         android:id="@+id/icon2"
-        NendTitleColor="#FFFFFF"
+        nendsdk:NendTitleColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <net.nend.android.NendAdIconView
         android:id="@+id/icon3"
-        NendTitleColor="#FFFFFF"
+        nendsdk:NendTitleColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <net.nend.android.NendAdIconView
         android:id="@+id/icon4"
-        NendTitleColor="#FFFFFF"
+        nendsdk:NendTitleColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>

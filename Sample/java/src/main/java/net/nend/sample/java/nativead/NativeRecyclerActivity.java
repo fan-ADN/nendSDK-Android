@@ -18,6 +18,7 @@ import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeClient;
 import net.nend.android.NendAdNativeViewBinder;
 import net.nend.sample.java.R;
+import net.nend.sample.java.nativeadvideo.utilities.MyNendAdViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -93,7 +94,7 @@ public class NativeRecyclerActivity extends AppCompatActivity {
                     break;
                 case AD:
                     view = mLayoutInflater.inflate(R.layout.native_ad_left_row, viewGroup, false);
-                    viewHolder = mBinder.createRecyclerViewHolder(view);
+                    viewHolder = new MyNendAdViewHolder(view, mBinder);
                     break;
             }
             return viewHolder;
@@ -109,7 +110,8 @@ public class NativeRecyclerActivity extends AppCompatActivity {
                     break;
                 case AD:
                     if (mLoadedAd.containsKey(position)) {
-                        mLoadedAd.get(position).intoView(viewHolder);
+                        MyNendAdViewHolder holder = (MyNendAdViewHolder) viewHolder;
+                        mLoadedAd.get(position).intoView(holder.itemView, holder.normalBinder);
                         break;
                     }
 
@@ -120,7 +122,8 @@ public class NativeRecyclerActivity extends AppCompatActivity {
                             mLoadedAd.put(position, nendAdNative);
                             mPositionList.add(position);
                             viewHolder.setIsRecyclable(false);
-                            mLoadedAd.get(position).intoView(viewHolder);
+                            MyNendAdViewHolder holder = (MyNendAdViewHolder) viewHolder;
+                            mLoadedAd.get(position).intoView(holder.itemView, holder.normalBinder);
                             mLoadedAd.get(position).setOnClickListener(new NendAdNative.OnClickListener() {
                                 @Override
                                 public void onClick(NendAdNative nendAdNative) {
@@ -135,7 +138,8 @@ public class NativeRecyclerActivity extends AppCompatActivity {
                             // すでに取得済みの広告をランダムで表示
                             if (!mLoadedAd.isEmpty()) {
                                 Collections.shuffle(mPositionList);
-                                mLoadedAd.get(mPositionList.get(0)).intoView(viewHolder);
+                                MyNendAdViewHolder holder = (MyNendAdViewHolder) viewHolder;
+                                mLoadedAd.get(mPositionList.get(0)).intoView(holder.itemView, holder.normalBinder);
                             }
                         }
                     });

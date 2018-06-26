@@ -14,7 +14,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import kotlinx.android.synthetic.main.native_carousel.*
 import net.nend.android.NendAdNative
 import net.nend.android.NendAdNativeClient
 import net.nend.android.NendAdNativeViewBinder
@@ -36,7 +35,7 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
     private lateinit var client: NendAdNativeClient
     private val loadedAd = mutableMapOf<Int, NendAdNative>()
 
-    private var menuPosition: Int = 0
+    private var menuPosition = 0
     private var autoCarouselRunnable: Runnable? = null
     private var handler: Handler? = null
 
@@ -48,6 +47,7 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
         val list = (1..19).map { i -> "sample name$i" }
 
         // 親のRecyclerView
+        val carousel_recycler_parent = findViewById<RecyclerView>(R.id.carousel_recycler_parent)
         carousel_recycler_parent.layoutManager = LinearLayoutManager(this)
         carousel_recycler_parent.adapter = CarouselAdapter(this, list)
         // セルのスクロールイン・スクロールアウトでオートカルーセルを操作
@@ -124,7 +124,7 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val view: View
-            var viewHolder: RecyclerView.ViewHolder
+            val viewHolder: RecyclerView.ViewHolder
 
             when (viewType) {
                 ViewType.AD.id -> {
@@ -201,7 +201,7 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
             FragmentPagerAdapter(fragmentManager) {
 
         override fun getItem(position: Int): Fragment =
-                NativeCarouselPagerFragment.newInstance(position)
+                NativeCarouselPagerFragment.newInstance(position, R.layout.native_carousel_fragment)
 
         override fun getCount() = 5
     }

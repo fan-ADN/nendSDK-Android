@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:nendsdk="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -7,8 +8,8 @@
         android:id="@+id/nend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        NendApiKey="1e36d1183d1ab66539998df4170a591c13028416"
-        NendSpotId="71001"
+        nendsdk:NendApiKey="1e36d1183d1ab66539998df4170a591c13028416"
+        nendsdk:NendSpotId="71001"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true" />
 

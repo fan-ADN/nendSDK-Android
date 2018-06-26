@@ -8,6 +8,7 @@
         <item>native ad sample</item>
         <item>full board ad sample</item>
         <item>video ad sample</item>
+        <item>native video ad sample</item>
     </string-array>
     <string-array name="xml_type">
         <item>xml layout</item>
@@ -71,6 +72,14 @@
         <item>Get Ad data</item>
         <item>AutoReload</item>
         <item>Native V2 on ListView</item>
+    </string-array>
+    <string-array name="native_video_menu">
+        <item>Simple</item>
+        <item>In Banner</item>
+        <item>In Feed(ListView)</item>
+        <item>In Feed(GridView)</item>
+        <item>In Feed(RecyclerView)</item>
+        <item>In Feed(Carousel)</item>
     </string-array>
 
     <item name="pager" type="id"/>

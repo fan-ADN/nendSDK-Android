@@ -21,6 +21,7 @@ import net.nend.sample.kotlin.R
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_API_KEY_SMALL_SQUARE
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_LOG_TAG
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_SPOT_ID_SMALL_SQUARE
+import net.nend.sample.kotlin.nativeadvideo.utilities.MyNendAdViewHolder
 
 class NativeRecyclerActivity : AppCompatActivity() {
 
@@ -69,7 +70,7 @@ class NativeRecyclerActivity : AppCompatActivity() {
             when (viewType) {
                 ViewType.AD.id -> {
                     view = layoutInflater.inflate(R.layout.native_ad_left_row, viewGroup, false)
-                    viewHolder = binder.createRecyclerViewHolder(view)
+                    viewHolder = MyNendAdViewHolder(view, binder)
                 }
                 else -> {
                     view = layoutInflater.inflate(R.layout.native_list_row, viewGroup, false)
@@ -89,7 +90,9 @@ class NativeRecyclerActivity : AppCompatActivity() {
                 }
                 ViewType.AD.id -> {
                     if (loadedAd.containsKey(position)) {
-                        loadedAd[position]?.intoView(viewHolder)
+                        if (viewHolder is MyNendAdViewHolder) {
+                            loadedAd[position]?.intoView(viewHolder.myItemView, viewHolder.normalBinder)
+                        }
                     } else {
                         client.loadAd(object : NendAdNativeClient.Callback {
                             override fun onSuccess(nendAdNative: NendAdNative) {
@@ -97,7 +100,9 @@ class NativeRecyclerActivity : AppCompatActivity() {
                                 positionList.add(position)
                                 viewHolder.setIsRecyclable(false)
                                 nendAdNative.run {
-                                    intoView(viewHolder)
+                                    if (viewHolder is MyNendAdViewHolder) {
+                                        intoView(viewHolder.myItemView, viewHolder.normalBinder)
+                                    }
                                     setOnClickListener({
                                         Log.i(NATIVE_LOG_TAG, "クリック$position")
                                     })
@@ -110,7 +115,9 @@ class NativeRecyclerActivity : AppCompatActivity() {
                                 // すでに取得済みの広告をランダムで表示
                                 if (!loadedAd.isEmpty()) {
                                     positionList.shuffle()
-                                    loadedAd[positionList[0]]?.intoView(viewHolder)
+                                    if (viewHolder is MyNendAdViewHolder) {
+                                        loadedAd[positionList[0]]?.intoView(viewHolder.myItemView, viewHolder.normalBinder)
+                                    }
                                 }
                             }
                         })

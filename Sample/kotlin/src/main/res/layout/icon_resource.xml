@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:nendsdk="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
     <net.nend.android.NendAdIconLayout
-        NendApiKey="@string/icon_api_key"
-        NendIconCount="@integer/icon_count_three"
-        NendSpotId="@integer/icon_spot_id"
-        NendTitleColor="@color/icon_title_green"
+        nendsdk:NendApiKey="@string/icon_api_key"
+        nendsdk:NendIconCount="@integer/icon_count_three"
+        nendsdk:NendSpotId="@integer/icon_spot_id"
+        nendsdk:NendTitleColor="@color/icon_title_green"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

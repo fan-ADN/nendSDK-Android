@@ -11,6 +11,7 @@ import net.nend.sample.kotlin.fullboard.FullBoardMenuActivity
 import net.nend.sample.kotlin.icon.IconSampleActivity
 import net.nend.sample.kotlin.interstitial.InterstitialActivity
 import net.nend.sample.kotlin.nativead.NativeSampleActivity
+import net.nend.sample.kotlin.nativeadvideo.ExamplesActivity
 import net.nend.sample.kotlin.video.VideoActivity
 
 class NendSampleActivity : ListActivity() {
@@ -21,7 +22,8 @@ class NendSampleActivity : ListActivity() {
         INTERSTITIAL(2),
         NATIVE(3),
         FULLBOARD(4),
-        VIDEO(5);
+        VIDEO(5),
+        NATIVE_VIDEO(6);
 
         companion object {
             fun getAdType(id: Int) = AdType.values().first { it.id == id }
@@ -41,6 +43,8 @@ class NendSampleActivity : ListActivity() {
                         FullBoardMenuActivity::class.java))
                 VIDEO -> activity.startActivity(Intent(activity,
                         VideoActivity::class.java))
+                NATIVE_VIDEO -> activity.startActivity(Intent(activity,
+                        ExamplesActivity::class.java))
             }
         }
     }
