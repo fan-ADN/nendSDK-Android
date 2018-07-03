@@ -4,6 +4,7 @@
           package="net.nend.sample.kotlin">
 
     <application
+        android:name=".NendSampleApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -93,9 +94,6 @@
             android:theme="@style/FullBoardCustomTheme"
             tools:replace="android:theme"/>
 
-        <meta-data
-            android:name="NendDebuggable"
-            android:value="true"/>
     </application>
 
 </manifest>
