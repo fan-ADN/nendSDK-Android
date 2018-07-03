@@ -19,6 +19,7 @@ import java.util.List;
 
 public class NendSampleActivity extends ListActivity {
 
+
     private static final List<Class> SAMPLE_ACTIVITIES = new ArrayList<Class>() {
         {
             add(BannerSampleActivity.class);
