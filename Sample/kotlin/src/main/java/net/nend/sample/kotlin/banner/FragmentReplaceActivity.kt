@@ -40,7 +40,7 @@ class FragmentReplaceActivity : AppCompatActivity(), OnClickListener {
         count++
 
         supportFragmentManager.beginTransaction().run {
-            replace(R.id.layout, fragment)
+            replace(R.id.layout, fragment!!)
             setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             commit()
         }

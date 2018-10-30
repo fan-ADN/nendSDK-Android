@@ -41,11 +41,11 @@ class RecyclerViewInFeedActivity : AppCompatActivity() {
         findViewById<RecyclerView>(R.id.recycler).run {
             layoutManager = LinearLayoutManager(this@RecyclerViewInFeedActivity)
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
 
                     if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        val manager = recyclerView!!.layoutManager as LinearLayoutManager
+                        val manager = recyclerView.layoutManager as LinearLayoutManager
                         val firstPosition = manager.findFirstVisibleItemPosition()
                         val lastPosition = manager.findLastVisibleItemPosition()
 
