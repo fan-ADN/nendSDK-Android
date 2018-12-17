@@ -174,6 +174,7 @@ class VideoActivity : AppCompatActivity() {
                         .addCustomFeature("doubleParameter", 123.45)
                         .build()
                 setUserFeature(feature)
+                setLocationEnabled(false)
                 addFallbackFullboard(485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff")
                 setAdListener(object : NendAdVideoListener {
                     override fun onLoaded(nendAdVideo: NendAdVideo?) {

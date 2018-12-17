@@ -42,6 +42,7 @@ class SimpleActivity : AppCompatActivity() {
                 ExamplesActivity.NATIVE_VIDEO_API_KEY).apply {
             setFillerImageNativeAd(485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff")
         }
+        videoLoader.setLocationEnabled(false)
         videoLoader.loadAd(object : NendAdNativeVideoLoader.Callback {
             override fun onSuccess(ad: NendAdNativeVideo) {
                 if (ad.hasVideo()) {
