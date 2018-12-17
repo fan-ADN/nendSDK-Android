@@ -175,6 +175,7 @@ class VideoActivity : AppCompatActivity() {
                         .build()
                 setUserFeature(feature)
                 addFallbackFullboard(485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff")
+                isMuteStartPlaying = false
                 setAdListener(object : NendAdVideoListener {
                     override fun onLoaded(nendAdVideo: NendAdVideo?) {
                         progressDialog.cancel()
