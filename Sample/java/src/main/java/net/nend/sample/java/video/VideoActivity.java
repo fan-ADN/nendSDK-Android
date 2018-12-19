@@ -198,6 +198,7 @@ public class VideoActivity extends AppCompatActivity {
                     .addCustomFeature("doubleParameter", 123.45)
                     .build();
             mNendAdInterstitialVideo.setUserFeature(feature);
+            mNendAdInterstitialVideo.setLocationEnabled(false);
             mNendAdInterstitialVideo.addFallbackFullboard(485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff");
             mNendAdInterstitialVideo.setAdListener(new NendAdVideoListener() {
                 @Override
