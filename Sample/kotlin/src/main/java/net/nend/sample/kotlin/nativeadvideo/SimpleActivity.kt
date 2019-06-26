@@ -1,7 +1,7 @@
 package net.nend.sample.kotlin.nativeadvideo
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import net.nend.android.*
 import net.nend.sample.kotlin.R

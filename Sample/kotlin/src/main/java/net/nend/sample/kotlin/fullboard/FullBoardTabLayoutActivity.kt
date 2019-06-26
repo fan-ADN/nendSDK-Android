@@ -1,10 +1,10 @@
 package net.nend.sample.kotlin.fullboard
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,7 +49,7 @@ class FullBoardTabLayoutActivity : AppCompatActivity() {
         tab.setupWithViewPager(pager)
     }
 
-    class ListFragment : android.support.v4.app.ListFragment() {
+    class ListFragment : androidx.fragment.app.ListFragment() {
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
@@ -67,7 +67,7 @@ class FullBoardTabLayoutActivity : AppCompatActivity() {
         }
     }
 
-    class AdFragment : Fragment() {
+    class AdFragment : androidx.fragment.app.Fragment() {
 
         private var fullBoard: NendAdFullBoard? = null
 
@@ -90,11 +90,11 @@ class FullBoardTabLayoutActivity : AppCompatActivity() {
         }
     }
 
-    private inner class Adapter internal constructor(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    private inner class Adapter internal constructor(fm: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentPagerAdapter(fm) {
 
         override fun getCount() = 3
 
-        override fun getItem(position: Int): Fragment {
+        override fun getItem(position: Int): androidx.fragment.app.Fragment {
             return if (position <= 1) {
                 ListFragment()
             } else {

@@ -1,6 +1,6 @@
 package net.nend.sample.kotlin.nativeadvideo.utilities
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -11,7 +11,7 @@ import net.nend.android.NendAdNativeMediaViewListener
 import net.nend.android.NendAdNativeVideo
 import net.nend.android.NendAdNativeViewBinder
 
-class MyNendAdViewHolder : RecyclerView.ViewHolder {
+class MyNendAdViewHolder : androidx.recyclerview.widget.RecyclerView.ViewHolder {
 
     lateinit var myItemView: View
     //Common

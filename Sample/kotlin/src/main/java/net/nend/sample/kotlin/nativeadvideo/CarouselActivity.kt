@@ -3,11 +3,11 @@ package net.nend.sample.kotlin.nativeadvideo
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.util.SparseArray
 import android.view.LayoutInflater
@@ -48,12 +48,12 @@ class CarouselActivity : AppCompatActivity(), NativeCarouselPagerFragment.OnAdLi
         val list = (1..19).map { i -> "sample name$i" }
 
         // 親のRecyclerView
-        val parentRecyclerView = findViewById<RecyclerView>(R.id.carousel_recycler_parent)!!
-        parentRecyclerView.layoutManager = LinearLayoutManager(this)
+        val parentRecyclerView = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.carousel_recycler_parent)!!
+        parentRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         parentRecyclerView.adapter = CarouselAdapter(this, list)
 
         // セルのスクロールイン・スクロールアウトでオートカルーセルを操作
-        parentRecyclerView.addOnChildAttachStateChangeListener(object : RecyclerView.OnChildAttachStateChangeListener {
+        parentRecyclerView.addOnChildAttachStateChangeListener(object : androidx.recyclerview.widget.RecyclerView.OnChildAttachStateChangeListener {
             override fun onChildViewAttachedToWindow(view: View) {
                 if (view.tag == "CAROUSEL" && menuPosition == AUTO_CAROUSEL_MENU_POSITION) {
                     handler.postDelayed(autoCarouselRunnable, INTERVAL.toLong())
@@ -122,12 +122,12 @@ class CarouselActivity : AppCompatActivity(), NativeCarouselPagerFragment.OnAdLi
         }
     }
 
-    internal inner class CarouselAdapter(context: Context, private val list: List<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    internal inner class CarouselAdapter(context: Context, private val list: List<String>) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
         private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
             val view: View
-            val viewHolder: RecyclerView.ViewHolder
+            val viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder
             when (viewType) {
                 ViewType.AD.id -> {
                     view = layoutInflater.inflate(R.layout.native_carousel_viewpager, parent, false).apply {
@@ -143,7 +143,7 @@ class CarouselActivity : AppCompatActivity(), NativeCarouselPagerFragment.OnAdLi
             return viewHolder
         }
 
-        override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
+        override fun onBindViewHolder(viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
             when (getItemViewType(position)) {
                 ViewType.FEED.id -> {
                     val date = Date()
@@ -164,14 +164,14 @@ class CarouselActivity : AppCompatActivity(), NativeCarouselPagerFragment.OnAdLi
 
         override fun getItemCount() = list.size
 
-        internal inner class FeedHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        internal inner class FeedHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
             var textName: TextView = itemView.findViewById(R.id.carousel_feed_name)
             var textDate: TextView = itemView.findViewById(R.id.carousel_feed_date)
             var textComment: TextView = itemView.findViewById(R.id.carousel_feed_comment)
         }
 
         // 広告用ホルダー
-        internal inner class AdHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        internal inner class AdHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
             var viewPager: NativeCarouselViewPager = itemView.findViewById(R.id.carousel_pager)
 
             init {
@@ -198,7 +198,7 @@ class CarouselActivity : AppCompatActivity(), NativeCarouselPagerFragment.OnAdLi
     }
 
     // カルーセル部分ViewPager用Adapter
-    inner class CustomPagerAdapter internal constructor(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
+    inner class CustomPagerAdapter internal constructor(fragmentManager: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentPagerAdapter(fragmentManager) {
 
         override fun getItem(position: Int) =
                 NativeCarouselPagerFragment.newInstance(position, R.layout.native_video_carousel_fragment)

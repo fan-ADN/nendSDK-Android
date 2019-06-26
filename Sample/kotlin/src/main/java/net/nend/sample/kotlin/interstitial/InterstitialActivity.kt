@@ -2,7 +2,7 @@ package net.nend.sample.kotlin.interstitial
 
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.widget.Button
 import net.nend.android.NendAdInterstitial
@@ -29,7 +29,7 @@ class InterstitialActivity : AppCompatActivity(),
                 }
                 NendAdInterstitial.NendAdInterstitialShowResult.AD_SHOW_ALREADY -> {
                 }
-                NendAdInterstitial.NendAdInterstitialShowResult.AD_FREQUENCY_NOT_RECHABLE -> {
+                NendAdInterstitial.NendAdInterstitialShowResult.AD_FREQUENCY_NOT_REACHABLE -> {
                 }
                 NendAdInterstitial.NendAdInterstitialShowResult.AD_REQUEST_INCOMPLETE -> {
                 }

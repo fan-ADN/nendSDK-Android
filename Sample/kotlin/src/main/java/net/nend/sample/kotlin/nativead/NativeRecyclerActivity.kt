@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -40,12 +40,12 @@ class NativeRecyclerActivity : AppCompatActivity() {
         setContentView(R.layout.native_recycler)
 
         val list = (1..99).map { i -> "item$i" }
-        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         recycler.adapter = NativeRecyclerAdapter(this, list)
     }
 
     internal inner class NativeRecyclerAdapter(context: Context, private val list: List<String>) :
-            RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+            androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
         private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
         private val client: NendAdNativeClient = NendAdNativeClient(context,
@@ -63,9 +63,9 @@ class NativeRecyclerActivity : AppCompatActivity() {
                 if (position != 0 && position % 5 == 0) ViewType.AD.id else ViewType.NORMAL.id
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int):
-                RecyclerView.ViewHolder {
+                androidx.recyclerview.widget.RecyclerView.ViewHolder {
             val view: View
-            var viewHolder: RecyclerView.ViewHolder
+            var viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder
 
             when (viewType) {
                 ViewType.AD.id -> {
@@ -82,7 +82,7 @@ class NativeRecyclerActivity : AppCompatActivity() {
         }
 
         @SuppressLint("RecyclerView")
-        override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
+        override fun onBindViewHolder(viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
             when (getItemViewType(position)) {
                 ViewType.NORMAL.id -> {
                     (viewHolder as ViewHolder).textView.text = list[position]
@@ -126,7 +126,7 @@ class NativeRecyclerActivity : AppCompatActivity() {
             }
         }
 
-        internal inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+        internal inner class ViewHolder(v: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v) {
             var textView: TextView = v.findViewById(R.id.title) as TextView
             var imageView: ImageView = v.findViewById(R.id.thumbnail) as ImageView
         }

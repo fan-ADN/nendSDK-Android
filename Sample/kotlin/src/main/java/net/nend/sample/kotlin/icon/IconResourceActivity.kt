@@ -1,7 +1,7 @@
 package net.nend.sample.kotlin.icon
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import net.nend.sample.kotlin.R
 
 class IconResourceActivity : AppCompatActivity() {
