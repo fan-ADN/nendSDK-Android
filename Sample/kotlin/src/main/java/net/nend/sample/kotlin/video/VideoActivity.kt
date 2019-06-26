@@ -70,7 +70,7 @@ class VideoActivity : AppCompatActivity() {
                 setUserFeature(feature)
                 setAdListener(object : NendAdRewardedListener {
                     override fun onRewarded(
-                            nendAdVideo: NendAdVideo?, nendAdRewardItem: NendAdRewardItem) {
+                            nendAdVideo: NendAdVideo, nendAdRewardItem: NendAdRewardItem) {
                         val name = nendAdRewardItem.currencyName
                         val amount = nendAdRewardItem.currencyAmount
                         Log.d(TAG, "onRewarded")
@@ -79,55 +79,55 @@ class VideoActivity : AppCompatActivity() {
                         toast("onRewarded, Name : $name Amount : $amount", Toast.LENGTH_LONG)
                     }
 
-                    override fun onLoaded(nendAdVideo: NendAdVideo?) {
+                    override fun onLoaded(nendAdVideo: NendAdVideo) {
                         progressDialog.cancel()
                         Log.d(TAG, "onLoaded reward")
                         toast("onLoaded reward", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onFailedToLoad(nendAdVideo: NendAdVideo?, errorCode: Int) {
+                    override fun onFailedToLoad(nendAdVideo: NendAdVideo, errorCode: Int) {
                         progressDialog.cancel()
                         Log.w(TAG, "onFailedToLoad reward")
                         Log.w(TAG, "VideoAdError code : $errorCode")
                         toast("onFailedToLoad, code : $errorCode", Toast.LENGTH_LONG)
                     }
 
-                    override fun onFailedToPlay(nendAdVideo: NendAdVideo?) {
+                    override fun onFailedToPlay(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onFailedToPlay reward")
                         toast("onFailedToPlay reward", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onShown(nendAdVideo: NendAdVideo?) {
+                    override fun onShown(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onShown reward")
                         toast("onShown reward", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onClosed(nendAdVideo: NendAdVideo?) {
+                    override fun onClosed(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onClosed reward")
                         toast("onClosed reward", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onStarted(nendAdVideo: NendAdVideo?) {
+                    override fun onStarted(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onStarted reward")
                         toast("onStarted reward", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onStopped(nendAdVideo: NendAdVideo?) {
+                    override fun onStopped(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onStopped reward")
                         toast("onStopped reward", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onCompleted(nendAdVideo: NendAdVideo?) {
+                    override fun onCompleted(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onCompleted reward")
                         toast("onCompleted reward", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onAdClicked(nendAdVideo: NendAdVideo?) {
+                    override fun onAdClicked(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onAdClicked reward")
                         toast("onAdClicked reward", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onInformationClicked(nendAdVideo: NendAdVideo?) {
+                    override fun onInformationClicked(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onInformationClicked reward")
                         toast("onInformationClicked reward", Toast.LENGTH_SHORT)
                     }
@@ -178,55 +178,55 @@ class VideoActivity : AppCompatActivity() {
                 addFallbackFullboard(485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff")
                 isMuteStartPlaying = false
                 setAdListener(object : NendAdVideoListener {
-                    override fun onLoaded(nendAdVideo: NendAdVideo?) {
+                    override fun onLoaded(nendAdVideo: NendAdVideo) {
                         progressDialog.cancel()
                         Log.d(TAG, "onLoaded interstitial")
                         toast("onLoaded interstitial", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onFailedToLoad(nendAdVideo: NendAdVideo?, errorCode: Int) {
+                    override fun onFailedToLoad(nendAdVideo: NendAdVideo, errorCode: Int) {
                         progressDialog.cancel()
                         Log.w(TAG, "onFailedToLoad interstitial")
                         Log.w(TAG, "VideoAdError code : $errorCode")
                         toast("onFailedToLoad interstitial, code : $errorCode", Toast.LENGTH_LONG)
                     }
 
-                    override fun onFailedToPlay(nendAdVideo: NendAdVideo?) {
+                    override fun onFailedToPlay(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onFailedToPlay interstitial")
                         toast("onFailedToPlay interstitial", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onShown(nendAdVideo: NendAdVideo?) {
+                    override fun onShown(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onShown interstitial")
                         toast("onShown interstitial", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onClosed(nendAdVideo: NendAdVideo?) {
+                    override fun onClosed(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onClosed interstitial")
                         toast("onClosed interstitial", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onStarted(nendAdVideo: NendAdVideo?) {
+                    override fun onStarted(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onStarted interstitial")
                         toast("onStarted interstitial", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onStopped(nendAdVideo: NendAdVideo?) {
+                    override fun onStopped(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onStopped interstitial")
                         toast("onStopped interstitial", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onCompleted(nendAdVideo: NendAdVideo?) {
+                    override fun onCompleted(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onCompleted interstitial")
                         toast("onCompleted interstitial", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onAdClicked(nendAdVideo: NendAdVideo?) {
+                    override fun onAdClicked(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onAdClicked interstitial")
                         toast("onAdClicked interstitial", Toast.LENGTH_SHORT)
                     }
 
-                    override fun onInformationClicked(nendAdVideo: NendAdVideo?) {
+                    override fun onInformationClicked(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onInformationClicked interstitial")
                         toast("onInformationClicked interstitial", Toast.LENGTH_SHORT)
                     }
