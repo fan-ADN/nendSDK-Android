@@ -47,7 +47,7 @@ class SimpleActivity : AppCompatActivity() {
             override fun onSuccess(ad: NendAdNativeVideo) {
                 if (ad.hasVideo()) {
                     val holder = MyNendAdViewHolder(itemView, videoBinder)
-                    videoBinder.renderView(holder, ad, object : NendAdNativeMediaViewListener {
+                    videoBinder.renderView(holder, ad, object : NendAdNativeMediaStateListener {
                         override fun onStartPlay(nendAdNativeMediaView: NendAdNativeMediaView) {
 
                         }
@@ -65,6 +65,14 @@ class SimpleActivity : AppCompatActivity() {
                         }
 
                         override fun onCloseFullScreen(nendAdNativeMediaView: NendAdNativeMediaView) {
+
+                        }
+
+                        override fun onStartFullScreenPlay(nendAdNativeMediaView: NendAdNativeMediaView) {
+
+                        }
+
+                        override fun onStopFullScreenPlay(nendAdNativeMediaView: NendAdNativeMediaView) {
 
                         }
 

@@ -7,7 +7,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 
 import net.nend.android.NendAdNativeMediaView
-import net.nend.android.NendAdNativeMediaViewListener
+import net.nend.android.NendAdNativeMediaStateListener
 import net.nend.android.NendAdNativeVideo
 import net.nend.android.NendAdNativeViewBinder
 
@@ -84,7 +84,7 @@ class MyNendAdViewHolder : androidx.recyclerview.widget.RecyclerView.ViewHolder 
 
     }
 
-    fun renderView(ad: NendAdNativeVideo, listener: NendAdNativeMediaViewListener?) {
+    fun renderView(ad: NendAdNativeVideo, listener: NendAdNativeMediaStateListener?) {
         videoBinder?.renderView(this, ad, listener)
     }
 }

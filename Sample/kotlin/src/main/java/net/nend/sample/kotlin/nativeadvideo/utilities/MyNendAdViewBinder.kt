@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import net.nend.android.NendAdNativeMediaViewListener
+import net.nend.android.NendAdNativeMediaStateListener
 import net.nend.android.NendAdNativeVideo
 import net.nend.sample.kotlin.R
 import java.text.NumberFormat
@@ -23,7 +23,7 @@ class MyNendAdViewBinder internal constructor(builder: Builder) {
     val ratingId = builder.ratingId
     val ratingCountId = builder.ratingCountId
 
-    fun renderView(viewHolder: MyNendAdViewHolder, ad: NendAdNativeVideo, listener: NendAdNativeMediaViewListener?) {
+    fun renderView(viewHolder: MyNendAdViewHolder, ad: NendAdNativeVideo, listener: NendAdNativeMediaStateListener?) {
         val list = ArrayList<View>()
 
         viewHolder.titleTextView?.let {
@@ -53,7 +53,7 @@ class MyNendAdViewBinder internal constructor(builder: Builder) {
         viewHolder.adNativeMediaView?.apply {
             visibility = View.VISIBLE
             listener?.let {
-                setMediaViewListener(it)
+                setMediaStateListener(it)
             }
             setMedia(ad)
         }
