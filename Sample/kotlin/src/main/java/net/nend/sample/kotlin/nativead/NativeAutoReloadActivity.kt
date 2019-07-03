@@ -3,7 +3,7 @@ package net.nend.sample.kotlin.nativead
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import kotlinx.android.synthetic.main.native_auto_reload.*
 import net.nend.android.NendAdNative

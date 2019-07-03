@@ -1,11 +1,11 @@
 package net.nend.sample.kotlin.nativead
 
 import android.content.Context
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import android.util.AttributeSet
 import android.view.View
 
-class NativeCarouselViewPager : ViewPager {
+class NativeCarouselViewPager : androidx.viewpager.widget.ViewPager {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)

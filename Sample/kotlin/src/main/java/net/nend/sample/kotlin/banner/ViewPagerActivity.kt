@@ -1,9 +1,9 @@
 package net.nend.sample.kotlin.banner
 
 import android.os.Bundle
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
@@ -15,19 +15,19 @@ import net.nend.sample.kotlin.R
  */
 class ViewPagerActivity : AppCompatActivity() {
 
-    private lateinit var viewPager: ViewPager
+    private lateinit var viewPager: androidx.viewpager.widget.ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewPager = ViewPager(this)
+        viewPager = androidx.viewpager.widget.ViewPager(this)
         setContentView(viewPager)
 
         val list = (1..10).map { i -> "page$i" }
         viewPager.adapter = CustomPagerAdapter(list)
     }
 
-    inner class CustomPagerAdapter(private val list: List<String>) : PagerAdapter() {
+    inner class CustomPagerAdapter(private val list: List<String>) : androidx.viewpager.widget.PagerAdapter() {
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
             val item = list[position]

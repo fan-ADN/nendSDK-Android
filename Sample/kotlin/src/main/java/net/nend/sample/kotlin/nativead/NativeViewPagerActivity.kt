@@ -1,11 +1,11 @@
 package net.nend.sample.kotlin.nativead
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import net.nend.android.NendAdNative
@@ -28,7 +28,7 @@ class NativeViewPagerActivity : AppCompatActivity(), NativePagerFragment.OnAdLis
         super.onCreate(savedInstanceState)
         setContentView(R.layout.native_viewpager)
 
-        val viewPager = findViewById(R.id.pager) as ViewPager
+        val viewPager = findViewById(R.id.pager) as androidx.viewpager.widget.ViewPager
         viewPager.adapter = CustomPagerAdapter(supportFragmentManager)
 
         binder = NendAdNativeViewBinder.Builder()
@@ -71,8 +71,8 @@ class NativeViewPagerActivity : AppCompatActivity(), NativePagerFragment.OnAdLis
         }
     }
 
-    inner class CustomPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
-        override fun getItem(position: Int): Fragment {
+    inner class CustomPagerAdapter(fm: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentPagerAdapter(fm) {
+        override fun getItem(position: Int): androidx.fragment.app.Fragment {
             return NativePagerFragment().apply {
                 arguments = Bundle().apply {
                     putInt("position", position)

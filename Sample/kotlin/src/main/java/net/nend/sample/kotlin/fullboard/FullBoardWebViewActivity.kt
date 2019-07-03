@@ -2,7 +2,7 @@ package net.nend.sample.kotlin.fullboard
 
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_full_board_web.*
 import net.nend.android.NendAdFullBoard

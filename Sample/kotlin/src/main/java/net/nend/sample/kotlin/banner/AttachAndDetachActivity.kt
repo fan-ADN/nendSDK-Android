@@ -2,7 +2,7 @@ package net.nend.sample.kotlin.banner
 
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.attach_dettach.*
 import net.nend.sample.kotlin.R
 

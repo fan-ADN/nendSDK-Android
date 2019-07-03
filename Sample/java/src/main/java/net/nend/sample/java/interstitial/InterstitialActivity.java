@@ -2,7 +2,7 @@ package net.nend.sample.java.interstitial;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,7 +44,7 @@ public class InterstitialActivity extends AppCompatActivity
                     break;
                 case AD_SHOW_ALREADY:
                     break;
-                case AD_FREQUENCY_NOT_RECHABLE:
+                case AD_FREQUENCY_NOT_REACHABLE:
                     break;
                 case AD_REQUEST_INCOMPLETE:
                     break;

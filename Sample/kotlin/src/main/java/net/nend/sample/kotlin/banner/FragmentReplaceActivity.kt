@@ -2,9 +2,9 @@ package net.nend.sample.kotlin.banner
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.View.OnClickListener
 import kotlinx.android.synthetic.main.fragment.*
@@ -32,7 +32,7 @@ class FragmentReplaceActivity : AppCompatActivity(), OnClickListener {
 
     @SuppressLint("CommitTransaction")
     override fun onClick(v: View) {
-        var fragment: Fragment? = null
+        var fragment: androidx.fragment.app.Fragment? = null
         when (count % 2) {
             0 -> fragment = SecondFragment()
             1 -> fragment = FirstFragment()
@@ -41,7 +41,7 @@ class FragmentReplaceActivity : AppCompatActivity(), OnClickListener {
 
         supportFragmentManager.beginTransaction().run {
             replace(R.id.layout, fragment!!)
-            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             commit()
         }
     }

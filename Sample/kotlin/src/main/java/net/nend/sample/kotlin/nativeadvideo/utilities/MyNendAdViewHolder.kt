@@ -1,17 +1,17 @@
 package net.nend.sample.kotlin.nativeadvideo.utilities
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 
 import net.nend.android.NendAdNativeMediaView
-import net.nend.android.NendAdNativeMediaViewListener
+import net.nend.android.NendAdNativeMediaStateListener
 import net.nend.android.NendAdNativeVideo
 import net.nend.android.NendAdNativeViewBinder
 
-class MyNendAdViewHolder : RecyclerView.ViewHolder {
+class MyNendAdViewHolder : androidx.recyclerview.widget.RecyclerView.ViewHolder {
 
     lateinit var myItemView: View
     //Common
@@ -84,7 +84,7 @@ class MyNendAdViewHolder : RecyclerView.ViewHolder {
 
     }
 
-    fun renderView(ad: NendAdNativeVideo, listener: NendAdNativeMediaViewListener?) {
+    fun renderView(ad: NendAdNativeVideo, listener: NendAdNativeMediaStateListener?) {
         videoBinder?.renderView(this, ad, listener)
     }
 }

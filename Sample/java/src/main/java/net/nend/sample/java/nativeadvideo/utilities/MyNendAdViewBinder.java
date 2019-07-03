@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.nend.android.NendAdNativeMediaViewListener;
+import net.nend.android.NendAdNativeMediaStateListener;
 import net.nend.android.NendAdNativeVideo;
 import net.nend.sample.java.R;
 
@@ -69,7 +69,7 @@ public class MyNendAdViewBinder {
         return ctaId;
     }
 
-    public void renderView(MyNendAdViewHolder viewHolder, NendAdNativeVideo ad, NendAdNativeMediaViewListener listener) {
+    public void renderView(MyNendAdViewHolder viewHolder, NendAdNativeVideo ad, NendAdNativeMediaStateListener listener) {
         if (ad == null) {
             return;
         }
@@ -89,7 +89,7 @@ public class MyNendAdViewBinder {
 
         viewHolder.adNativeMediaView.setVisibility(View.VISIBLE);
         if (listener != null) {
-            viewHolder.adNativeMediaView.setMediaViewListener(listener);
+            viewHolder.adNativeMediaView.setMediaStateListener(listener);
         }
 
         viewHolder.adNativeMediaView.setMedia(ad);

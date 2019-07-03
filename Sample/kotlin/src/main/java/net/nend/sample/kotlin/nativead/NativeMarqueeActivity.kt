@@ -1,7 +1,7 @@
 package net.nend.sample.kotlin.nativead
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.text.Layout
 import android.util.Log
 import android.view.View

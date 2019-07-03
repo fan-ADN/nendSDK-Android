@@ -1,11 +1,11 @@
 package net.nend.sample.kotlin.banner
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
 import net.nend.sample.kotlin.R
 
 /**
@@ -13,12 +13,12 @@ import net.nend.sample.kotlin.R
  */
 class PagerAndListActivity : AppCompatActivity() {
 
-    private lateinit var viewPager: ViewPager
+    private lateinit var viewPager: androidx.viewpager.widget.ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewPager = ViewPager(this)
+        viewPager = androidx.viewpager.widget.ViewPager(this)
         viewPager.id = R.id.pager
         setContentView(viewPager)
 
@@ -28,16 +28,16 @@ class PagerAndListActivity : AppCompatActivity() {
     }
 
     inner class CustomPagerAdapter(
-            fragmentManager: FragmentManager,
+            fragmentManager: androidx.fragment.app.FragmentManager,
             private val pageList: List<String>,
-            private val itemList: List<String>) : FragmentPagerAdapter(fragmentManager) {
+            private val itemList: List<String>) : androidx.fragment.app.FragmentPagerAdapter(fragmentManager) {
 
-        override fun getItem(position: Int): Fragment {
+        override fun getItem(position: Int): androidx.fragment.app.Fragment {
             val args = Bundle().apply {
                 putStringArrayList("itemList", ArrayList(itemList))
                 putInt("position", position)
             }
-            return Fragment.instantiate(applicationContext, PageFragment::class.java.name, args)
+            return androidx.fragment.app.Fragment.instantiate(applicationContext, PageFragment::class.java.name, args)
         }
 
         override fun getCount() = pageList.size

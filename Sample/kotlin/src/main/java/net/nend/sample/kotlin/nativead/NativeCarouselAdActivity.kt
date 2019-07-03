@@ -3,12 +3,12 @@ package net.nend.sample.kotlin.nativead
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -47,12 +47,12 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
         val list = (1..19).map { i -> "sample name$i" }
 
         // 親のRecyclerView
-        val carousel_recycler_parent = findViewById<RecyclerView>(R.id.carousel_recycler_parent)
-        carousel_recycler_parent.layoutManager = LinearLayoutManager(this)
+        val carousel_recycler_parent = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.carousel_recycler_parent)
+        carousel_recycler_parent.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         carousel_recycler_parent.adapter = CarouselAdapter(this, list)
         // セルのスクロールイン・スクロールアウトでオートカルーセルを操作
         carousel_recycler_parent.addOnChildAttachStateChangeListener(
-                object : RecyclerView.OnChildAttachStateChangeListener {
+                object : androidx.recyclerview.widget.RecyclerView.OnChildAttachStateChangeListener {
             override fun onChildViewAttachedToWindow(view: View) {
                 if (view.tag != null &&
                         view.tag == "CAROUSEL" && menuPosition == AUTO_CAROUSEL_MENU_POSITION) {
@@ -118,13 +118,13 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
 
     // リスト全体のアダプター
     internal inner class CarouselAdapter(context: Context, private val list: List<String>) :
-            RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+            androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
         private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
             val view: View
-            val viewHolder: RecyclerView.ViewHolder
+            val viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder
 
             when (viewType) {
                 ViewType.AD.id -> {
@@ -141,7 +141,7 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
             return viewHolder
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
             when (getItemViewType(position)) {
                 ViewType.FEED.id -> {
                     val date = Date()
@@ -163,14 +163,14 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
 
         override fun getItemCount() = list.size
 
-        internal inner class FeedHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        internal inner class FeedHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
             var textName: TextView = itemView.findViewById(R.id.carousel_feed_name) as TextView
             var textDate: TextView = itemView.findViewById(R.id.carousel_feed_date) as TextView
             var textComment: TextView = itemView.findViewById(R.id.carousel_feed_comment) as TextView
         }
 
         // 広告用ホルダー
-        internal inner class AdHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        internal inner class AdHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
             var viewPager: NativeCarouselViewPager =
                     itemView.findViewById(R.id.carousel_pager) as NativeCarouselViewPager
@@ -197,10 +197,10 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
     }
 
     // カルーセル部分ViewPager用Adapter
-    inner class CustomPagerAdapter(fragmentManager: FragmentManager) :
-            FragmentPagerAdapter(fragmentManager) {
+    inner class CustomPagerAdapter(fragmentManager: androidx.fragment.app.FragmentManager) :
+            androidx.fragment.app.FragmentPagerAdapter(fragmentManager) {
 
-        override fun getItem(position: Int): Fragment =
+        override fun getItem(position: Int): androidx.fragment.app.Fragment =
                 NativeCarouselPagerFragment.newInstance(position, R.layout.native_carousel_fragment)
 
         override fun getCount() = 5

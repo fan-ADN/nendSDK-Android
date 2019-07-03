@@ -1,12 +1,14 @@
 package net.nend.sample.java.nativeadvideo;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeMediaView;
-import net.nend.android.NendAdNativeMediaViewListener;
+import net.nend.android.NendAdNativeMediaStateListener;
 import net.nend.android.NendAdNativeVideo;
 import net.nend.android.NendAdNativeVideoLoader;
 import net.nend.android.NendAdNativeViewBinder;
@@ -55,30 +57,40 @@ public class SimpleActivity extends AppCompatActivity {
             public void onSuccess(NendAdNativeVideo ad) {
                 if (ad.hasVideo()) {
                     MyNendAdViewHolder holder = new MyNendAdViewHolder(itemView, videoBinder);
-                    videoBinder.renderView(holder, ad, new NendAdNativeMediaViewListener() {
+                    videoBinder.renderView(holder, ad, new NendAdNativeMediaStateListener() {
                         @Override
-                        public void onStartPlay(NendAdNativeMediaView nendAdNativeMediaView) {
+                        public void onStartPlay(@NonNull NendAdNativeMediaView nendAdNativeMediaView) {
 
                         }
 
                         @Override
-                        public void onStopPlay(NendAdNativeMediaView nendAdNativeMediaView) {
+                        public void onStopPlay(@NonNull NendAdNativeMediaView nendAdNativeMediaView) {
 
                         }
 
                         @Override
-                        public void onCompletePlay(NendAdNativeMediaView nendAdNativeMediaView) {
+                        public void onCompletePlay(@NonNull NendAdNativeMediaView nendAdNativeMediaView) {
 
                         }
 
                         @Override
-                        public void onOpenFullScreen(NendAdNativeMediaView nendAdNativeMediaView) {
+                        public void onOpenFullScreen(@NonNull NendAdNativeMediaView nendAdNativeMediaView) {
 
                         }
 
                         @Override
-                        public void onCloseFullScreen(NendAdNativeMediaView nendAdNativeMediaView) {
+                        public void onCloseFullScreen(@NonNull NendAdNativeMediaView nendAdNativeMediaView) {
 
+                        }
+
+                        @Override
+                        public void onStartFullScreenPlay(@NonNull NendAdNativeMediaView nendAdNativeMediaView) {
+
+                        }
+
+                        @Override
+                        public void onStopFullScreenPlay(@NonNull NendAdNativeMediaView nendAdNativeMediaView) {
+                            
                         }
 
                         @Override

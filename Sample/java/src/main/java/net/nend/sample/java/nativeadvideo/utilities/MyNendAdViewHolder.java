@@ -1,13 +1,13 @@
 package net.nend.sample.java.nativeadvideo.utilities;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.nend.android.NendAdNativeMediaView;
-import net.nend.android.NendAdNativeMediaViewListener;
+import net.nend.android.NendAdNativeMediaStateListener;
 import net.nend.android.NendAdNativeVideo;
 import net.nend.android.NendAdNativeViewBinder;
 
@@ -83,7 +83,7 @@ public class MyNendAdViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    public void renderView(NendAdNativeVideo ad, NendAdNativeMediaViewListener listener) {
+    public void renderView(NendAdNativeVideo ad, NendAdNativeMediaStateListener listener) {
         videoBinder.renderView(this, ad, listener);
     }
 }

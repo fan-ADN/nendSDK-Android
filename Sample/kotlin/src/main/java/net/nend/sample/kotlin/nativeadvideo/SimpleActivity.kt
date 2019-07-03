@@ -1,7 +1,7 @@
 package net.nend.sample.kotlin.nativeadvideo
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import net.nend.android.*
 import net.nend.sample.kotlin.R
@@ -47,7 +47,7 @@ class SimpleActivity : AppCompatActivity() {
             override fun onSuccess(ad: NendAdNativeVideo) {
                 if (ad.hasVideo()) {
                     val holder = MyNendAdViewHolder(itemView, videoBinder)
-                    videoBinder.renderView(holder, ad, object : NendAdNativeMediaViewListener {
+                    videoBinder.renderView(holder, ad, object : NendAdNativeMediaStateListener {
                         override fun onStartPlay(nendAdNativeMediaView: NendAdNativeMediaView) {
 
                         }
@@ -65,6 +65,14 @@ class SimpleActivity : AppCompatActivity() {
                         }
 
                         override fun onCloseFullScreen(nendAdNativeMediaView: NendAdNativeMediaView) {
+
+                        }
+
+                        override fun onStartFullScreenPlay(nendAdNativeMediaView: NendAdNativeMediaView) {
+
+                        }
+
+                        override fun onStopFullScreenPlay(nendAdNativeMediaView: NendAdNativeMediaView) {
 
                         }
 

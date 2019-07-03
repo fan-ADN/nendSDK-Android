@@ -3,12 +3,12 @@ package net.nend.sample.kotlin.video
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import android.widget.TextView
 import net.nend.sample.kotlin.R
 
-class ProgressDialogFragment : DialogFragment() {
+class ProgressDialogFragment : androidx.fragment.app.DialogFragment() {
 
     private lateinit var messageTextView: TextView
     private var isShowing: Boolean = false
@@ -28,7 +28,7 @@ class ProgressDialogFragment : DialogFragment() {
         messageTextView.text = dialogMessage
     }
 
-    override fun show(manager: FragmentManager, tag: String) {
+    override fun show(manager: androidx.fragment.app.FragmentManager, tag: String) {
         super.show(manager, tag)
         isShowing = true
     }

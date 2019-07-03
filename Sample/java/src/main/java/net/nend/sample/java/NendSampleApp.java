@@ -1,7 +1,7 @@
 package net.nend.sample.java;
 
 import android.app.Application;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import net.nend.android.NendAdLogger;
