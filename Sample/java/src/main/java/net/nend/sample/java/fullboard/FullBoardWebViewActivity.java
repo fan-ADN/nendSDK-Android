@@ -21,7 +21,7 @@ public class FullBoardWebViewActivity extends AppCompatActivity implements NendA
         setContentView(R.layout.activity_full_board_web);
 
         final ObservableWebView webView = (ObservableWebView) findViewById(R.id.webview);
-        webView.loadUrl("http://www.nend.net");
+        webView.loadUrl("https://board.nend.net");
         webView.setCallback(new ObservableWebView.Callback() {
             @Override
             public void onScrollEnd() {
