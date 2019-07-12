@@ -21,7 +21,7 @@ class FullBoardWebViewActivity : AppCompatActivity(), NendAdFullBoard.FullBoardA
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_full_board_web)
 
-        webview.loadUrl("http://www.nend.net")
+        webview.loadUrl("https://board.nend.net")
         webview.setCallback(object : ObservableWebView.Callback {
             override fun onScrollEnd() {
                 ad?.let {
