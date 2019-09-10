@@ -19,7 +19,7 @@ class NoXmlRelativeActivity : AppCompatActivity() {
             loadAd()
         }
 
-        (findViewById(R.id.root) as RelativeLayout).run {
+        (findViewById<RelativeLayout>(R.id.root)).run {
             // 中央下部表示の場合
             val params = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT).apply {

@@ -20,7 +20,7 @@ class InterstitialActivity : AppCompatActivity(),
         // 必要に応じて広告取得結果通知を受けとる
         NendAdInterstitial.setListener(this)
 
-        (findViewById(R.id.button) as Button).setOnClickListener {
+        (findViewById<Button>(R.id.button)).setOnClickListener {
             // 表示結果が返却される
             val result = NendAdInterstitial.showAd(this)
             // 表示結果に応じて処理を行う

@@ -67,7 +67,7 @@ class FullBoardTabLayoutActivity : AppCompatActivity() {
         }
     }
 
-    class AdFragment : androidx.fragment.app.Fragment() {
+    class AdFragment : Fragment() {
 
         private var fullBoard: NendAdFullBoard? = null
 
@@ -90,11 +90,11 @@ class FullBoardTabLayoutActivity : AppCompatActivity() {
         }
     }
 
-    private inner class Adapter internal constructor(fm: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentPagerAdapter(fm) {
+    private inner class Adapter internal constructor(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         override fun getCount() = 3
 
-        override fun getItem(position: Int): androidx.fragment.app.Fragment {
+        override fun getItem(position: Int): Fragment {
             return if (position <= 1) {
                 ListFragment()
             } else {

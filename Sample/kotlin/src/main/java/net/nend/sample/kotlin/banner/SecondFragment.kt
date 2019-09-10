@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import net.nend.sample.kotlin.R
 
-class SecondFragment : androidx.fragment.app.Fragment() {
+class SecondFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?, savedInstanceState: Bundle?) =
+                              container: ViewGroup?, savedInstanceState: Bundle?): View? =
             View.inflate(context, R.layout.replace_fragment2, null)
 }

@@ -3,6 +3,7 @@ package net.nend.sample.kotlin.fullboard
 import android.content.Context
 import android.util.AttributeSet
 import android.webkit.WebView
+import kotlin.math.floor
 
 class ObservableWebView(context: Context, attrs: AttributeSet) : WebView(context, attrs) {
 
@@ -13,7 +14,7 @@ class ObservableWebView(context: Context, attrs: AttributeSet) : WebView(context
     }
 
     override fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int) {
-        val height = Math.floor(
+        val height = floor(
                 (contentHeight * resources.displayMetrics.density).toDouble()).toInt()
         val webViewHeight = getHeight()
         callback?.let {

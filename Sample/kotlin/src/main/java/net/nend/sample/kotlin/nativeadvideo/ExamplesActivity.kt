@@ -19,7 +19,7 @@ class ExamplesActivity : ListActivity() {
         CAROUSEL(5);
 
         companion object {
-            fun get(id: Int) = Examples.values().first { it.id == id }
+            fun get(id: Int) = values().first { it.id == id }
         }
 
         fun startActivity(activity: Activity) {

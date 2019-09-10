@@ -15,7 +15,7 @@ class AdjustSizeActivity : ListActivity() {
         ADJUST_SIZE_NO_XML(1);
 
         companion object {
-            fun getType(id: Int) = SampleType.values().first { it.id == id }
+            fun getType(id: Int) = values().first { it.id == id }
         }
 
         fun startActivity(activity: Activity) {

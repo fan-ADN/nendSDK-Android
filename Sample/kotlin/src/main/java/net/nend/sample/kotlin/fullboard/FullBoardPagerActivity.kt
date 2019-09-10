@@ -29,7 +29,7 @@ import net.nend.sample.kotlin.fullboard.FullBoardMenuActivity.Companion.FULLBOAR
 import java.util.concurrent.CountDownLatch
 
 class FullBoardPagerActivity : AppCompatActivity(),
-        androidx.loader.app.LoaderManager.LoaderCallbacks<List<NendAdFullBoard>> {
+        LoaderManager.LoaderCallbacks<List<NendAdFullBoard>> {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +46,11 @@ class FullBoardPagerActivity : AppCompatActivity(),
         }
     }
 
-    override fun onCreateLoader(id: Int, args: Bundle?): androidx.loader.content.Loader<List<NendAdFullBoard>> {
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<List<NendAdFullBoard>> {
         return AdLoader(applicationContext)
     }
 
-    override fun onLoadFinished(loader: androidx.loader.content.Loader<List<NendAdFullBoard>>, data: List<NendAdFullBoard>) {
+    override fun onLoadFinished(loader: Loader<List<NendAdFullBoard>>, data: List<NendAdFullBoard>) {
 
         val pages = (0..4).map { ContentPage() }.toMutableList<Page>()
         if (AD_COUNT == data.size) {
@@ -62,13 +62,13 @@ class FullBoardPagerActivity : AppCompatActivity(),
         pager.adapter = Adapter(supportFragmentManager, pages)
     }
 
-    override fun onLoaderReset(loader: androidx.loader.content.Loader<List<NendAdFullBoard>>) {}
+    override fun onLoaderReset(loader: Loader<List<NendAdFullBoard>>) {}
 
     internal interface Page {
-        val fragment: androidx.fragment.app.Fragment
+        val fragment: Fragment
     }
 
-    class ContentFragment : androidx.fragment.app.Fragment() {
+    class ContentFragment : Fragment() {
         override fun onCreateView(
                 inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             return TextView(activity).apply {
@@ -78,7 +78,7 @@ class FullBoardPagerActivity : AppCompatActivity(),
         }
     }
 
-    class AdFragment : androidx.fragment.app.Fragment(), NendAdFullBoardView.FullBoardAdClickListener {
+    class AdFragment : Fragment(), NendAdFullBoardView.FullBoardAdClickListener {
         private var fullBoardAd: NendAdFullBoard? = null
 
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -166,22 +166,22 @@ class FullBoardPagerActivity : AppCompatActivity(),
 
     private inner class ContentPage : Page {
 
-        override val fragment: androidx.fragment.app.Fragment
+        override val fragment: Fragment
             get() = ContentFragment()
     }
 
     private inner class AdPage internal constructor(private val ad: NendAdFullBoard) : Page {
 
-        override val fragment: androidx.fragment.app.Fragment
+        override val fragment: Fragment
             get() = AdFragment().apply { setAd(ad) }
     }
 
     private inner class Adapter internal constructor(
-            fm: androidx.fragment.app.FragmentManager, private val pages: List<Page>) : androidx.fragment.app.FragmentPagerAdapter(fm) {
+            fm: FragmentManager, private val pages: List<Page>) : FragmentPagerAdapter(fm) {
 
         override fun getItemPosition(`object`: Any): Int {
             return if (`object` is AdFragment) {
-                androidx.viewpager.widget.PagerAdapter.POSITION_NONE
+                PagerAdapter.POSITION_NONE
             } else {
                 super.getItemPosition(`object`)
             }

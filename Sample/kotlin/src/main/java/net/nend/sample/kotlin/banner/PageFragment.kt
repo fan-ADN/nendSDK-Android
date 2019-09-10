@@ -12,7 +12,7 @@ import android.widget.TextView
 import net.nend.android.NendAdView
 import net.nend.sample.kotlin.R
 
-class PageFragment : androidx.fragment.app.Fragment() {
+class PageFragment : Fragment() {
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -20,13 +20,13 @@ class PageFragment : androidx.fragment.app.Fragment() {
         val position = arguments?.getInt("position")
 
         return (View.inflate(context, R.layout.page_list, null) as RelativeLayout).apply {
-            (findViewById(R.id.page_title) as TextView).run {
+            (findViewById<TextView>(R.id.page_title)).run {
                 text = buildString {
                     append("PAGE")
                     append(position)
                 }
             }
-            (findViewById(R.id.page_list) as ListView).run {
+            (findViewById<ListView>(R.id.page_list)).run {
                 NendAdView(activity, 3174, "c5cb8bc474345961c6e7a9778c947957ed8e1e4f").run {
                     loadAd()
                     addHeaderView(this)

@@ -37,9 +37,8 @@ class IconActivity : AppCompatActivity() {
                         "Clicked information", Toast.LENGTH_SHORT).show()
             }
             setOnFailedListener { iconError ->
-                val nendError = iconError.nendError
-                when (nendError) {
-                    NendAdView.NendError.INVALID_RESPONSE_TYPE -> nendError.message
+                when (val error = iconError.nendError) {
+                    NendAdView.NendError.INVALID_RESPONSE_TYPE -> error.message
                     else -> {
                     }
                 }

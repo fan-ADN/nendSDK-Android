@@ -28,7 +28,7 @@ class NativeViewPagerActivity : AppCompatActivity(), NativePagerFragment.OnAdLis
         super.onCreate(savedInstanceState)
         setContentView(R.layout.native_viewpager)
 
-        val viewPager = findViewById(R.id.pager) as androidx.viewpager.widget.ViewPager
+        val viewPager = findViewById<ViewPager>(R.id.pager)
         viewPager.adapter = CustomPagerAdapter(supportFragmentManager)
 
         binder = NendAdNativeViewBinder.Builder()
@@ -71,8 +71,8 @@ class NativeViewPagerActivity : AppCompatActivity(), NativePagerFragment.OnAdLis
         }
     }
 
-    inner class CustomPagerAdapter(fm: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentPagerAdapter(fm) {
-        override fun getItem(position: Int): androidx.fragment.app.Fragment {
+    inner class CustomPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+        override fun getItem(position: Int): Fragment {
             return NativePagerFragment().apply {
                 arguments = Bundle().apply {
                     putInt("position", position)

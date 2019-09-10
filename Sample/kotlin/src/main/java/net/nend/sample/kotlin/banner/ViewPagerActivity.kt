@@ -1,7 +1,6 @@
 package net.nend.sample.kotlin.banner
 
 import android.os.Bundle
-import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
@@ -15,12 +14,12 @@ import net.nend.sample.kotlin.R
  */
 class ViewPagerActivity : AppCompatActivity() {
 
-    private lateinit var viewPager: androidx.viewpager.widget.ViewPager
+    private lateinit var viewPager: ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewPager = androidx.viewpager.widget.ViewPager(this)
+        viewPager = ViewPager(this)
         setContentView(viewPager)
 
         val list = (1..10).map { i -> "page$i" }
@@ -32,7 +31,7 @@ class ViewPagerActivity : AppCompatActivity() {
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
             val item = list[position]
             return (View.inflate(applicationContext, R.layout.page, null) as RelativeLayout).apply {
-                (findViewById(R.id.page_title) as TextView).text = item
+                (findViewById<TextView>(R.id.page_title)).text = item
                 container.addView(this)
             }
         }
