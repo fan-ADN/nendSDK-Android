@@ -16,7 +16,7 @@ class PageFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val list = arguments?.getStringArrayList("itemList")
+        val list = arguments?.getStringArrayList("itemList")!!
         val position = arguments?.getInt("position")
 
         return (View.inflate(context, R.layout.page_list, null) as RelativeLayout).apply {
@@ -31,7 +31,7 @@ class PageFragment : androidx.fragment.app.Fragment() {
                     loadAd()
                     addHeaderView(this)
                 }
-                adapter = ArrayAdapter(activity, android.R.layout.simple_list_item_1, list)
+                adapter = ArrayAdapter(activity!!, android.R.layout.simple_list_item_1, list)
             }
         }
     }

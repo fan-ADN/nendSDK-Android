@@ -53,7 +53,7 @@ class FullBoardTabLayoutActivity : AppCompatActivity() {
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
-            listAdapter = ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1, ITEMS)
+            listAdapter = ArrayAdapter<String>(activity!!, android.R.layout.simple_list_item_1, ITEMS)
         }
 
         companion object {
