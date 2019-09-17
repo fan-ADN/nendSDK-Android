@@ -11,7 +11,7 @@ import net.nend.android.NendAdNativeMediaStateListener
 import net.nend.android.NendAdNativeVideo
 import net.nend.android.NendAdNativeViewBinder
 
-class MyNendAdViewHolder : androidx.recyclerview.widget.RecyclerView.ViewHolder {
+class MyNendAdViewHolder : RecyclerView.ViewHolder {
 
     lateinit var myItemView: View
     //Common

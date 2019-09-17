@@ -27,7 +27,7 @@ class NativeSampleActivity : ListActivity() {
         V2_LIST_VIEW_SAMPLE(13);
 
         companion object {
-            fun getType(id: Int) = SampleType.values().first { it.id == id }
+            fun getType(id: Int) = values().first { it.id == id }
         }
 
         fun startActivity(activity: Activity) {

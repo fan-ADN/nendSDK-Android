@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import net.nend.sample.kotlin.R
 
-class NativeCarouselPagerFragment : androidx.fragment.app.Fragment() {
+class NativeCarouselPagerFragment : Fragment() {
 
     private var callback: OnAdListener? = null
     var layoutId = 0
@@ -32,7 +32,7 @@ class NativeCarouselPagerFragment : androidx.fragment.app.Fragment() {
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(layoutId,
                 container, false).apply {
-            val adLayout = findViewById(R.id.ad) as RelativeLayout
+            val adLayout = findViewById<RelativeLayout>(R.id.ad)
             callback?.onAdRequest(adLayout, arguments!!.getInt("position"))
         }
     }

@@ -38,14 +38,14 @@ class RecyclerViewInFeedActivity : AppCompatActivity() {
         val list = (1..99).map { i -> "item$i" }
         nativeRecyclerAdapter = NativeRecyclerAdapter(this, list)
 
-        findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recycler).run {
-            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this@RecyclerViewInFeedActivity)
-            addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: androidx.recyclerview.widget.RecyclerView, newState: Int) {
+        findViewById<RecyclerView>(R.id.recycler).run {
+            layoutManager = LinearLayoutManager(this@RecyclerViewInFeedActivity)
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
 
-                    if (newState == androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE) {
-                        val manager = recyclerView.layoutManager as androidx.recyclerview.widget.LinearLayoutManager
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        val manager = recyclerView.layoutManager as LinearLayoutManager
                         val firstPosition = manager.findFirstVisibleItemPosition()
                         val lastPosition = manager.findLastVisibleItemPosition()
 
@@ -62,7 +62,7 @@ class RecyclerViewInFeedActivity : AppCompatActivity() {
         }
     }
 
-    internal inner class NativeRecyclerAdapter(private val context: Context, private val objects: List<String>) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+    internal inner class NativeRecyclerAdapter(private val context: Context, private val objects: List<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         private val layoutInflater = LayoutInflater.from(context)
         private val loader = NendAdNativeVideoLoader(context,
@@ -79,9 +79,9 @@ class RecyclerViewInFeedActivity : AppCompatActivity() {
         override fun getItemViewType(position: Int) =
                 if (position != 0 && position % 5 == 0) ViewType.AD.id else ViewType.NORMAL.id
 
-        override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+        override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val view: View
-            val viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder
+            val viewHolder: RecyclerView.ViewHolder
             when (viewType) {
                 ViewType.AD.id -> {
                     view = layoutInflater.inflate(R.layout.native_video_ad_row_for_feed, viewGroup, false)
@@ -95,7 +95,7 @@ class RecyclerViewInFeedActivity : AppCompatActivity() {
             return viewHolder
         }
 
-        override fun onBindViewHolder(viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+        override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
             when (getItemViewType(position)) {
                 ViewType.AD.id -> {
                     val loadedAd = loadedAds.get(position)
@@ -134,12 +134,12 @@ class RecyclerViewInFeedActivity : AppCompatActivity() {
             nativeVideo.isMutePlayingFullscreen = true
 
             val parent = holder.myItemView.parent
-            if (parent is androidx.recyclerview.widget.RecyclerView) {
+            if (parent is RecyclerView) {
                 videoBinder.renderView(holder, nativeVideo, null)
             }
         }
 
-        internal inner class ViewHolder(v: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v) {
+        internal inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 
             var textView: TextView = v.findViewById(R.id.title)
             var imageView: ImageView = v.findViewById(R.id.thumbnail)

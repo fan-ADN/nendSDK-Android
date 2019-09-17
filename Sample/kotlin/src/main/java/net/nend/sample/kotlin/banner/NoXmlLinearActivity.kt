@@ -20,7 +20,7 @@ class NoXmlLinearActivity : AppCompatActivity() {
             loadAd()
         }
 
-        (findViewById(R.id.root) as LinearLayout).apply {
+        (findViewById<LinearLayout>(R.id.root)).apply {
             // 中央下部表示の場合
             gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
             // 上部表示の場合

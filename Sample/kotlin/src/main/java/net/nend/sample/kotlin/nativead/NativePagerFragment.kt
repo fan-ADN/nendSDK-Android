@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import net.nend.sample.kotlin.R
 
-class NativePagerFragment : androidx.fragment.app.Fragment() {
+class NativePagerFragment : Fragment() {
 
     internal lateinit var callback: OnAdListener
 

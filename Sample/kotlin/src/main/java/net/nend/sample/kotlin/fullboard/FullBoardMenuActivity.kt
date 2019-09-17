@@ -19,7 +19,7 @@ class FullBoardMenuActivity : AppCompatActivity(), AdapterView.OnItemClickListen
         TAB_LAYOUT_SAMPLE(3);
 
         companion object {
-            fun getType(id: Int) = SampleType.values().first { it.id == id }
+            fun getType(id: Int) = values().first { it.id == id }
         }
 
         fun startActivity(activity: Activity) {
@@ -45,7 +45,7 @@ class FullBoardMenuActivity : AppCompatActivity(), AdapterView.OnItemClickListen
                 this, items, android.R.layout.simple_list_item_2,
                 arrayOf("title", "detail"),
                 intArrayOf(android.R.id.text1, android.R.id.text2))
-        (findViewById(R.id.list) as ListView).also {
+        (findViewById<ListView>(R.id.list)).also {
             it.adapter = adapter
             it.onItemClickListener = this
         }

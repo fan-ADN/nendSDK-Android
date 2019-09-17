@@ -19,7 +19,7 @@ class BannerSampleActivity : ListActivity() {
         ADJUST_SIZE_SAMPLE(5);
 
         companion object {
-            fun getType(id: Int) = SampleType.values().first { it.id == id }
+            fun getType(id: Int) = values().first { it.id == id }
         }
 
         fun startActivity(activity: Activity) {

@@ -24,7 +24,7 @@ class NoXmlWithListenerActivity : AppCompatActivity(), NendAdListener { // 1) im
             it.loadAd()
         }
 
-        (findViewById(R.id.root) as RelativeLayout).run {
+        (findViewById<RelativeLayout>(R.id.root)).run {
             // 中央上部表示の場合
             val params = RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT).apply {

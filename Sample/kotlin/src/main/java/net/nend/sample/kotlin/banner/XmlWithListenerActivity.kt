@@ -13,7 +13,7 @@ class XmlWithListenerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.xml_layout)
 
-        (findViewById(R.id.nend) as NendAdView).apply {
+        (findViewById<NendAdView>(R.id.nend)).apply {
             setListener(object : NendAdInformationListener {
                 override fun onReceiveAd(adView: NendAdView) {
                     Toast.makeText(applicationContext, "広告取得成功!", Toast.LENGTH_SHORT).show()

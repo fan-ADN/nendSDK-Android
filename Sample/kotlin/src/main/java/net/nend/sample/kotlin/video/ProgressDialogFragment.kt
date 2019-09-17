@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager
 import android.widget.TextView
 import net.nend.sample.kotlin.R
 
-class ProgressDialogFragment : androidx.fragment.app.DialogFragment() {
+class ProgressDialogFragment : DialogFragment() {
 
     private lateinit var messageTextView: TextView
     private var isShowing: Boolean = false
@@ -28,7 +28,7 @@ class ProgressDialogFragment : androidx.fragment.app.DialogFragment() {
         messageTextView.text = dialogMessage
     }
 
-    override fun show(manager: androidx.fragment.app.FragmentManager, tag: String) {
+    override fun show(manager: FragmentManager, tag: String) {
         super.show(manager, tag)
         isShowing = true
     }

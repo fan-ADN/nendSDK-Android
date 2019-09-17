@@ -40,12 +40,12 @@ class NativeRecyclerActivity : AppCompatActivity() {
         setContentView(R.layout.native_recycler)
 
         val list = (1..99).map { i -> "item$i" }
-        recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
+        recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = NativeRecyclerAdapter(this, list)
     }
 
     internal inner class NativeRecyclerAdapter(context: Context, private val list: List<String>) :
-            androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+            androidx.recyclerview.widget.RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
         private val client: NendAdNativeClient = NendAdNativeClient(context,
@@ -62,10 +62,9 @@ class NativeRecyclerActivity : AppCompatActivity() {
         override fun getItemViewType(position: Int) =
                 if (position != 0 && position % 5 == 0) ViewType.AD.id else ViewType.NORMAL.id
 
-        override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int):
-                androidx.recyclerview.widget.RecyclerView.ViewHolder {
+        override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val view: View
-            var viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder
+            var viewHolder: RecyclerView.ViewHolder
 
             when (viewType) {
                 ViewType.AD.id -> {
@@ -82,7 +81,7 @@ class NativeRecyclerActivity : AppCompatActivity() {
         }
 
         @SuppressLint("RecyclerView")
-        override fun onBindViewHolder(viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+        override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
             when (getItemViewType(position)) {
                 ViewType.NORMAL.id -> {
                     (viewHolder as ViewHolder).textView.text = list[position]
@@ -126,7 +125,7 @@ class NativeRecyclerActivity : AppCompatActivity() {
             }
         }
 
-        internal inner class ViewHolder(v: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v) {
+        internal inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
             var textView: TextView = v.findViewById(R.id.title) as TextView
             var imageView: ImageView = v.findViewById(R.id.thumbnail) as ImageView
         }

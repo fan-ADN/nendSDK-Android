@@ -13,12 +13,12 @@ import net.nend.sample.kotlin.R
  */
 class PagerAndListActivity : AppCompatActivity() {
 
-    private lateinit var viewPager: androidx.viewpager.widget.ViewPager
+    private lateinit var viewPager: ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewPager = androidx.viewpager.widget.ViewPager(this)
+        viewPager = ViewPager(this)
         viewPager.id = R.id.pager
         setContentView(viewPager)
 
@@ -28,16 +28,16 @@ class PagerAndListActivity : AppCompatActivity() {
     }
 
     inner class CustomPagerAdapter(
-            fragmentManager: androidx.fragment.app.FragmentManager,
+            fragmentManager: FragmentManager,
             private val pageList: List<String>,
-            private val itemList: List<String>) : androidx.fragment.app.FragmentPagerAdapter(fragmentManager) {
+            private val itemList: List<String>) : FragmentPagerAdapter(fragmentManager) {
 
-        override fun getItem(position: Int): androidx.fragment.app.Fragment {
+        override fun getItem(position: Int): Fragment {
             val args = Bundle().apply {
                 putStringArrayList("itemList", ArrayList(itemList))
                 putInt("position", position)
             }
-            return androidx.fragment.app.Fragment.instantiate(applicationContext, PageFragment::class.java.name, args)
+            return Fragment.instantiate(applicationContext, PageFragment::class.java.name, args)
         }
 
         override fun getCount() = pageList.size

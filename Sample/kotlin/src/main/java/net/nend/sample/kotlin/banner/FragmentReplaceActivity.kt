@@ -32,7 +32,7 @@ class FragmentReplaceActivity : AppCompatActivity(), OnClickListener {
 
     @SuppressLint("CommitTransaction")
     override fun onClick(v: View) {
-        var fragment: androidx.fragment.app.Fragment? = null
+        var fragment: Fragment? = null
         when (count % 2) {
             0 -> fragment = SecondFragment()
             1 -> fragment = FirstFragment()
@@ -41,7 +41,7 @@ class FragmentReplaceActivity : AppCompatActivity(), OnClickListener {
 
         supportFragmentManager.beginTransaction().run {
             replace(R.id.layout, fragment!!)
-            setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             commit()
         }
     }
