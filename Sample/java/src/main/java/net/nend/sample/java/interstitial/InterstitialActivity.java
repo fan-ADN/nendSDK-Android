@@ -100,8 +100,6 @@ public class InterstitialActivity extends AppCompatActivity
             break;
         case INVALID_RESPONSE_TYPE:
             break;
-        case FAILED_AD_INCOMPLETE:
-            break;
         case FAILED_AD_REQUEST:
             break;
         default:

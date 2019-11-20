@@ -76,8 +76,6 @@ class InterstitialActivity : AppCompatActivity(),
             }
             NendAdInterstitial.NendAdInterstitialStatusCode.INVALID_RESPONSE_TYPE -> {
             }
-            NendAdInterstitial.NendAdInterstitialStatusCode.FAILED_AD_INCOMPLETE -> {
-            }
             NendAdInterstitial.NendAdInterstitialStatusCode.FAILED_AD_REQUEST -> {
             }
             else -> {
