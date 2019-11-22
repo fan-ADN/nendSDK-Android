@@ -50,7 +50,7 @@ public class FullBoardTabLayoutActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        ViewPager viewPager = findViewById(R.id.pager);
         viewPager.setAdapter(new Adapter(getSupportFragmentManager()));
 
         tabLayout.setupWithViewPager(viewPager);

@@ -86,8 +86,8 @@ public class NativeGridActivity extends AppCompatActivity {
                     if (convertView == null) {
                         convertView = LayoutInflater.from(getContext()).inflate(R.layout.native_grid_row, parent, false);
                         holder = new ViewHolder();
-                        holder.textView = (TextView) convertView.findViewById(R.id.title);
-                        holder.imageView = (ImageView) convertView.findViewById(R.id.thumbnail);
+                        holder.textView = convertView.findViewById(R.id.title);
+                        holder.imageView = convertView.findViewById(R.id.thumbnail);
                         convertView.setTag(holder);
                     } else {
                         holder = (ViewHolder) convertView.getTag();

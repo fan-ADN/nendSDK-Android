@@ -41,7 +41,7 @@ public class FullBoardPagerActivity extends AppCompatActivity implements LoaderM
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_board_pager);
-        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager = findViewById(R.id.pager);
         getSupportLoaderManager().initLoader(0, null, this);
     }
 

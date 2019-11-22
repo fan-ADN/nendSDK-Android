@@ -103,7 +103,7 @@ public class NativeMarqueeActivity extends AppCompatActivity {
         setContentView(R.layout.native_marquee);
 
         mMarqueeView = (MarqueeView) findViewById(R.id.horizontalScrollView);
-        mTextView = (TextView) findViewById(R.id.ad_content);
+        mTextView = findViewById(R.id.ad_content);
         mAdContainer = findViewById(R.id.ad);
 
         final int SPOT_ID = 485516;
@@ -171,7 +171,7 @@ public class NativeMarqueeActivity extends AppCompatActivity {
      * Set portrait to PR text
      */
     private void setPortraitPR() {
-        TextView pr = (TextView) findViewById(R.id.ad_pr);
+        TextView pr = findViewById(R.id.ad_pr);
         assert pr != null;
         float scale = getResources().getDisplayMetrics().density;
         int paddingDp = (int) (10 * scale + 0.5f);

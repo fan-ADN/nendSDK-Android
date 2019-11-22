@@ -33,7 +33,7 @@ public class IconJavaCallActivity extends AppCompatActivity implements SampleCon
         view3 = new NendAdIconView(context);
         view4 = new NendAdIconView(context);
         
-        RelativeLayout rootLayout = (RelativeLayout) findViewById(R.id.root);
+        RelativeLayout rootLayout = findViewById(R.id.root);
         mIconLoader = new NendAdIconLoader(context, ICON_SPOT_ID, ICON_API_KEY);
         mIconLoader.addIconView(view1);
         mIconLoader.addIconView(view2);

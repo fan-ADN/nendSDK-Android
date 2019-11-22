@@ -16,7 +16,7 @@ public class JavaCallLinearActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.javacall_linear);
 
-        LinearLayout rootLayout = (LinearLayout) findViewById(R.id.root);
+        LinearLayout rootLayout = findViewById(R.id.root);
 
         /*
          *

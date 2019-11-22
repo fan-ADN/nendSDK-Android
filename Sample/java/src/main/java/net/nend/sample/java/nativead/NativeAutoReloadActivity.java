@@ -3,6 +3,8 @@ package net.nend.sample.java.nativead;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeClient;
+import net.nend.android.NendAdNativeListener;
 import net.nend.sample.java.R;
 
 /**
@@ -39,10 +42,10 @@ public class NativeAutoReloadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.native_auto_reload);
         mAdContainer = findViewById(R.id.ad_container);
-        mPrTextView = (TextView) findViewById(R.id.pr_text);
-        mTitleTextView = (TextView) findViewById(R.id.title_text);
-        mContentTextView = (TextView) findViewById(R.id.content_text);
-        mAdImageView = (ImageView) findViewById(R.id.ad_image);
+        mPrTextView = findViewById(R.id.pr_text);
+        mTitleTextView = findViewById(R.id.title_text);
+        mContentTextView = findViewById(R.id.content_text);
+        mAdImageView = findViewById(R.id.ad_image);
 
         mClient = new NendAdNativeClient(this, 485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff");
 
@@ -55,7 +58,7 @@ public class NativeAutoReloadActivity extends AppCompatActivity {
                 setAdTexts();
                 getAndSetAdImage();
                 activateAd();
-                setClickListener();
+                setNativeAdListener();
                 setAutoReload();
             }
 
@@ -65,7 +68,7 @@ public class NativeAutoReloadActivity extends AppCompatActivity {
             }
         });
 
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mProgressBar = findViewById(R.id.progressBar);
     }
 
     // 広告オブジェクトから文言を取得
@@ -97,11 +100,21 @@ public class NativeAutoReloadActivity extends AppCompatActivity {
     }
 
     // クリックリスナーの付与
-    private void setClickListener() {
-        mNendAdNative.setOnClickListener(new NendAdNative.OnClickListener() {
+    private void setNativeAdListener() {
+        mNendAdNative.setNendAdNativeListener(new NendAdNativeListener() {
             @Override
-            public void onClick(NendAdNative nendAdNative) {
-                Log.i(TAG, "クリック");
+            public void onImpression(@NonNull NendAdNative nendAdNative) {
+                Log.i(TAG, "onImpression");
+            }
+
+            @Override
+            public void onClickAd(@NonNull NendAdNative nendAdNative) {
+                Log.i(TAG, "onClickAd");
+            }
+
+            @Override
+            public void onClickInformation(@NonNull NendAdNative nendAdNative) {
+                Log.i(TAG, "onClickInformation");
             }
         });
     }
@@ -119,7 +132,7 @@ public class NativeAutoReloadActivity extends AppCompatActivity {
                     setAdTexts();
                     getAndSetAdImage();
                     activateAd();
-                    setClickListener();
+                    setNativeAdListener();
                 }
 
                 @Override

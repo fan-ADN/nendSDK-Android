@@ -15,7 +15,7 @@ public class JavaCallRelativeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.javacall_relative);
 
-        RelativeLayout rootLayout = (RelativeLayout) findViewById(R.id.root);
+        RelativeLayout rootLayout = findViewById(R.id.root);
 
         /*
          *

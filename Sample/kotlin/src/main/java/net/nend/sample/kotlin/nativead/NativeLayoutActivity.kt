@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import net.nend.android.NendAdNative
 import net.nend.android.NendAdNativeClient
+import net.nend.android.NendAdNativeListener
 import net.nend.android.NendAdNativeViewBinder
 import net.nend.sample.kotlin.R
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_API_KEY_LARGE_WIDE
@@ -65,9 +66,19 @@ class NativeLayoutActivity : AppCompatActivity() {
                 override fun onSuccess(nendAdNative: NendAdNative) {
                     Log.i(NativeSampleActivity.NATIVE_LOG_TAG, "広告取得成功")
                     nendAdNative.intoView(findViewById(R.id.ad), binder)
-                    nendAdNative.setOnClickListener {
-                        Log.i(NativeSampleActivity.NATIVE_LOG_TAG, "クリック")
-                    }
+                    nendAdNative.setNendAdNativeListener(object : NendAdNativeListener {
+                        override fun onImpression(nendAdNative: NendAdNative) {
+                            Log.i(NativeSampleActivity.NATIVE_LOG_TAG, "onImpression")
+                        }
+
+                        override fun onClickAd(nendAdNative: NendAdNative) {
+                            Log.i(NativeSampleActivity.NATIVE_LOG_TAG, "onClickAd")
+                        }
+
+                        override fun onClickInformation(nendAdNative: NendAdNative) {
+                            Log.i(NativeSampleActivity.NATIVE_LOG_TAG, "onClickInformation")
+                        }
+                    })
                 }
 
                 override fun onFailure(nendError: NendAdNativeClient.NendError) {

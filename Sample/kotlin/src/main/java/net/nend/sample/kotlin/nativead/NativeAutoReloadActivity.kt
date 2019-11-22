@@ -8,6 +8,7 @@ import android.util.Log
 import kotlinx.android.synthetic.main.native_auto_reload.*
 import net.nend.android.NendAdNative
 import net.nend.android.NendAdNativeClient
+import net.nend.android.NendAdNativeListener
 import net.nend.sample.kotlin.R
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_API_KEY_LARGE_WIDE
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_LOG_TAG
@@ -38,7 +39,7 @@ class NativeAutoReloadActivity : AppCompatActivity() {
                     setAdTexts()
                     getAndSetAdImage()
                     activateAd()
-                    setClickListener()
+                    setNativeAdListener()
                     setAutoReload()
                 }
 
@@ -76,8 +77,20 @@ class NativeAutoReloadActivity : AppCompatActivity() {
     }
 
     // クリックリスナーの付与
-    private fun setClickListener() {
-        nendAd?.setOnClickListener { Log.i(NATIVE_LOG_TAG, "クリック") }
+    private fun setNativeAdListener() {
+        nendAd?.setNendAdNativeListener(object : NendAdNativeListener {
+            override fun onImpression(nendAdNative: NendAdNative) {
+                Log.i(NATIVE_LOG_TAG, "onImpression")
+            }
+
+            override fun onClickAd(nendAdNative: NendAdNative) {
+                Log.i(NATIVE_LOG_TAG, "onClickAd")
+            }
+
+            override fun onClickInformation(nendAdNative: NendAdNative) {
+                Log.i(NATIVE_LOG_TAG, "onClickInformation")
+            }
+        })
     }
 
     // 自動リロードのサンプル
@@ -93,7 +106,7 @@ class NativeAutoReloadActivity : AppCompatActivity() {
                     setAdTexts()
                     getAndSetAdImage()
                     activateAd()
-                    setClickListener()
+                    setNativeAdListener()
                 }
 
                 override fun onFailure(nendError: NendAdNativeClient.NendError) {

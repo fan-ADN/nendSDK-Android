@@ -18,7 +18,7 @@ public class JavaCallWithListenerActivity extends AppCompatActivity implements N
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.javacall_relative);
-        RelativeLayout rootLayout = (RelativeLayout) findViewById(R.id.root);
+        RelativeLayout rootLayout = findViewById(R.id.root);
 
         /*
          * NendAdView(Context context, int [Spotid], String [Apikey])

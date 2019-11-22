@@ -1,12 +1,15 @@
 package net.nend.sample.java.nativead;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.RelativeLayout;
 
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeClient;
+import net.nend.android.NendAdNativeListener;
 import net.nend.android.NendAdNativeViewBinder;
 import net.nend.sample.java.R;
 
@@ -59,7 +62,7 @@ public class NativeLayoutActivity extends AppCompatActivity {
                 .actionId(R.id.ad_action)
                 .build();
 
-        final RelativeLayout adLayout = (RelativeLayout) findViewById(R.id.ad);
+        final RelativeLayout adLayout = findViewById(R.id.ad);
         NendAdNativeClient client = new NendAdNativeClient(this, spotId, apiKey);
 
         client.loadAd(new NendAdNativeClient.Callback() {
@@ -67,12 +70,23 @@ public class NativeLayoutActivity extends AppCompatActivity {
             public void onSuccess(final NendAdNative nendAdNative) {
                 Log.i(TAG, "広告取得成功");
                 nendAdNative.intoView(adLayout, binder);
-                nendAdNative.setOnClickListener(new NendAdNative.OnClickListener() {
+                nendAdNative.setNendAdNativeListener(new NendAdNativeListener() {
                     @Override
-                    public void onClick(NendAdNative nendAdNative) {
-                        Log.i(TAG, "クリック");
+                    public void onImpression(@NonNull NendAdNative nendAdNative) {
+                        Log.i(TAG, "onImpression");
+                    }
+
+                    @Override
+                    public void onClickAd(@NonNull NendAdNative nendAdNative) {
+                        Log.i(TAG, "onClickAd");
+                    }
+
+                    @Override
+                    public void onClickInformation(@NonNull NendAdNative nendAdNative) {
+                        Log.i(TAG, "onClickInformation");
                     }
                 });
+
             }
 
             @Override

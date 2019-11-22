@@ -53,7 +53,7 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
         }
 
         // 親のRecyclerView
-        RecyclerView parentRecyclerView = (RecyclerView) findViewById(R.id.carousel_recycler_parent);
+        RecyclerView parentRecyclerView = findViewById(R.id.carousel_recycler_parent);
         assert parentRecyclerView != null;
         parentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         parentRecyclerView.setAdapter(new CarouselAdapter(this, list));
@@ -197,11 +197,11 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
 
             public FeedHolder(View itemView) {
                 super(itemView);
-                textName = (TextView) itemView.findViewById(R.id.carousel_feed_name);
-                textDate = (TextView) itemView.findViewById(R.id.carousel_feed_date);
-                textComment = (TextView) itemView.findViewById(R.id.carousel_feed_comment);
-                imageIcon = (ImageView) itemView.findViewById(R.id.carousel_feed_icon);
-                imageImage = (ImageView) itemView.findViewById(R.id.carousel_feed_image);
+                textName = itemView.findViewById(R.id.carousel_feed_name);
+                textDate = itemView.findViewById(R.id.carousel_feed_date);
+                textComment = itemView.findViewById(R.id.carousel_feed_comment);
+                imageIcon = itemView.findViewById(R.id.carousel_feed_icon);
+                imageImage = itemView.findViewById(R.id.carousel_feed_image);
             }
         }
 
@@ -211,7 +211,7 @@ public class NativeCarouselAdActivity extends AppCompatActivity implements Nativ
 
             public AdHolder(View itemView) {
                 super(itemView);
-                viewPager = (NativeCarouselViewPager) itemView.findViewById(R.id.carousel_pager);
+                viewPager = itemView.findViewById(R.id.carousel_pager);
                 viewPager.setAdapter(new CustomPagerAdapter(getSupportFragmentManager()));
                 viewPager.setPageMargin(getResources().getDisplayMetrics().widthPixels / -10);
 

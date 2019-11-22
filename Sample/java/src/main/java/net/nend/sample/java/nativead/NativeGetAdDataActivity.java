@@ -37,17 +37,17 @@ public class NativeGetAdDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.native_get_ad_data);
 
-        mAdContainer = (RelativeLayout) findViewById(R.id.ad_container);
-        mAdImage = (ImageView) findViewById(R.id.ad_image);
-        mLogoImage = (ImageView) findViewById(R.id.logo_image);
-        mTitleText = (TextView) findViewById(R.id.title_text);
-        mPrText = (TextView) findViewById(R.id.pr_text);
-        mContentText = (TextView) findViewById(R.id.content_text);
-        mActionButtonText = (TextView) findViewById(R.id.action_button);
-        mPromotionName = (TextView) findViewById(R.id.promotion_name);
-        mPromotionUrl = (TextView) findViewById(R.id.promotion_url);
-        mAdImageUrl = (TextView) findViewById(R.id.ad_image_url);
-        mLogoImageUrl = (TextView) findViewById(R.id.logo_image_url);
+        mAdContainer = findViewById(R.id.ad_container);
+        mAdImage = findViewById(R.id.ad_image);
+        mLogoImage = findViewById(R.id.logo_image);
+        mTitleText = findViewById(R.id.title_text);
+        mPrText = findViewById(R.id.pr_text);
+        mContentText = findViewById(R.id.content_text);
+        mActionButtonText = findViewById(R.id.action_button);
+        mPromotionName = findViewById(R.id.promotion_name);
+        mPromotionUrl = findViewById(R.id.promotion_url);
+        mAdImageUrl = findViewById(R.id.ad_image_url);
+        mLogoImageUrl = findViewById(R.id.logo_image_url);
 
         // NendAdNativeClient インスタンス生成
         NendAdNativeClient client = new NendAdNativeClient(this, 485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff");

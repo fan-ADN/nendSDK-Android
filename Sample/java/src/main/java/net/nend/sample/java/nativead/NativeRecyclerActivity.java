@@ -45,7 +45,7 @@ public class NativeRecyclerActivity extends AppCompatActivity {
             list.add("item" + i);
         }
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        RecyclerView recyclerView = findViewById(R.id.recycler);
         assert recyclerView != null;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new NativeRecyclerAdapter(this, list));

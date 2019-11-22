@@ -35,7 +35,7 @@ public class NativeViewPagerActivity extends AppCompatActivity implements Native
 
         setContentView(R.layout.native_viewpager);
 
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+        ViewPager mViewPager = findViewById(R.id.pager);
         assert mViewPager != null;
         mViewPager.setAdapter(new CustomPagerAdapter(getSupportFragmentManager()));
 

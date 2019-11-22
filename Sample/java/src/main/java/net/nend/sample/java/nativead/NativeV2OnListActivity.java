@@ -88,10 +88,10 @@ public class NativeV2OnListActivity extends ListActivity {
             if (convertView == null) {
                 convertView = mInflater.inflate(R.layout.native_v2_list_row, null);
                 holder = new ViewHolder();
-                holder.title = (TextView) convertView.findViewById(R.id.title);
-                holder.contentText = (TextView) convertView.findViewById(R.id.content);
-                holder.smallText = (TextView) convertView.findViewById(R.id.small_text);
-                holder.thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail);
+                holder.title = convertView.findViewById(R.id.title);
+                holder.contentText = convertView.findViewById(R.id.content);
+                holder.smallText = convertView.findViewById(R.id.small_text);
+                holder.thumbnail = convertView.findViewById(R.id.thumbnail);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();

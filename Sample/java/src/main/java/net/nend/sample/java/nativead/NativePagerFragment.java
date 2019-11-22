@@ -31,7 +31,7 @@ public class NativePagerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.native_fragment, container, false);
-        RelativeLayout adLayout = (RelativeLayout) view.findViewById(R.id.ad);
+        RelativeLayout adLayout = view.findViewById(R.id.ad);
 
         int position = getArguments().getInt("position");
         mCallback.onAdRequest(adLayout, position);
