@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build Samples with Java
+      run: |
+        cd Sample
+        ./gradlew :java:assembleDebug
+
+    - name: Build Samples with Kotlin
+      run: |
+        cd Sample
+        ./gradlew :kotlin:assembleDebug
