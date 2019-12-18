@@ -12,6 +12,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+
     - name: Build Samples with Java
       run: |
         cd Sample
@@ -21,3 +22,14 @@ jobs:
       run: |
         cd Sample
         ./gradlew :kotlin:assembleDebug
+
+    - name: Uplolad apk to releases
+      run: |
+        mkdir apks
+        mv Sample/java/build/outputs/apk/debug/java-debug.apk apks/
+        mv Sample/kotlin/build/outputs/apk/debug/kotlin-debug.apk apks/
+        zip -r apks.zip apks/
+
+        .github/workflows/upload_releases.sh `echo ${GITHUB_SHA##*/}`
+      env:
+        TOKEN: ${{ secrets.UPLOAD_TOKEN }}
