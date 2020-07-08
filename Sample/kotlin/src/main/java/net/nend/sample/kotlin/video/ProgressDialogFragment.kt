@@ -16,19 +16,19 @@ class ProgressDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
-        val inflater = activity!!.layoutInflater
+        val inflater = requireActivity().layoutInflater
         builder.setView(inflater.inflate(R.layout.progress_dialog, null, false))
         return builder.create()
     }
 
     override fun onStart() {
         super.onStart()
-        dialog.setCancelable(false)
-        messageTextView = dialog.findViewById(R.id.progress_message) as TextView
+        dialog?.setCancelable(false)
+        messageTextView = dialog?.findViewById(R.id.progress_message) as TextView
         messageTextView.text = dialogMessage
     }
 
-    override fun show(manager: FragmentManager, tag: String) {
+    override fun show(manager: FragmentManager, tag: String?) {
         super.show(manager, tag)
         isShowing = true
     }

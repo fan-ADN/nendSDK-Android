@@ -4,12 +4,12 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.core.app.ActivityCompat
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import com.google.android.material.snackbar.Snackbar
 import net.nend.android.*
 import net.nend.sample.kotlin.R
 
@@ -68,7 +68,7 @@ class VideoActivity : AppCompatActivity() {
                         .setGender(NendAdUserFeature.Gender.FEMALE)
                         .build()
                 setUserFeature(feature)
-                setAdListener(object : NendAdRewardedListener {
+                setActionListener(object : NendAdRewardedActionListener {
                     override fun onRewarded(
                             nendAdVideo: NendAdVideo, nendAdRewardItem: NendAdRewardItem) {
                         val name = nendAdRewardItem.currencyName
@@ -77,6 +77,31 @@ class VideoActivity : AppCompatActivity() {
                         Log.d(TAG, "currencyName : $name")
                         Log.d(TAG, "currencyAmount : $amount")
                         toast("onRewarded, Name : $name Amount : $amount", Toast.LENGTH_LONG)
+
+                        when (nendAdVideo.type) {
+                            NendAdVideoType.PLAYABLE -> Log.d(TAG, "Playable ad is not provide playing state listener")
+                            NendAdVideoType.NORMAL -> {
+                                nendAdRewardedVideo?.playingState()?.let {
+                                    it.playingStateListener = object : NendAdVideoPlayingStateListener {
+                                        override fun onStarted(nendAdVideo: NendAdVideo) {
+                                            Log.d(TAG, "onStarted reward")
+                                            toast("onStarted reward", Toast.LENGTH_SHORT)
+                                        }
+
+                                        override fun onStopped(nendAdVideo: NendAdVideo) {
+                                            Log.d(TAG, "onStopped reward")
+                                            toast("onStopped reward", Toast.LENGTH_SHORT)
+                                        }
+
+                                        override fun onCompleted(nendAdVideo: NendAdVideo) {
+                                            Log.d(TAG, "onCompleted reward")
+                                            toast("onCompleted reward", Toast.LENGTH_SHORT)
+                                        }
+                                    }
+                                }
+                            }
+                            else -> Log.d(TAG, nendAdVideo.type.toString())
+                        }
                     }
 
                     override fun onLoaded(nendAdVideo: NendAdVideo) {
@@ -105,21 +130,6 @@ class VideoActivity : AppCompatActivity() {
                     override fun onClosed(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onClosed reward")
                         toast("onClosed reward", Toast.LENGTH_SHORT)
-                    }
-
-                    override fun onStarted(nendAdVideo: NendAdVideo) {
-                        Log.d(TAG, "onStarted reward")
-                        toast("onStarted reward", Toast.LENGTH_SHORT)
-                    }
-
-                    override fun onStopped(nendAdVideo: NendAdVideo) {
-                        Log.d(TAG, "onStopped reward")
-                        toast("onStopped reward", Toast.LENGTH_SHORT)
-                    }
-
-                    override fun onCompleted(nendAdVideo: NendAdVideo) {
-                        Log.d(TAG, "onCompleted reward")
-                        toast("onCompleted reward", Toast.LENGTH_SHORT)
                     }
 
                     override fun onAdClicked(nendAdVideo: NendAdVideo) {
@@ -177,11 +187,36 @@ class VideoActivity : AppCompatActivity() {
                 setLocationEnabled(false)
                 addFallbackFullboard(485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff")
                 isMuteStartPlaying = false
-                setAdListener(object : NendAdVideoListener {
+                setActionListener(object : NendAdVideoActionListener {
                     override fun onLoaded(nendAdVideo: NendAdVideo) {
                         progressDialog.cancel()
                         Log.d(TAG, "onLoaded interstitial")
                         toast("onLoaded interstitial", Toast.LENGTH_SHORT)
+
+                        when (nendAdVideo.type) {
+                            NendAdVideoType.PLAYABLE -> Log.d(TAG, "Playable ad is not provide playing state listener")
+                            NendAdVideoType.NORMAL -> {
+                                nendAdInterstitialVideo?.playingState()?.let {
+                                    it.playingStateListener = object : NendAdVideoPlayingStateListener {
+                                        override fun onStarted(nendAdVideo: NendAdVideo) {
+                                            Log.d(TAG, "onStarted interstitial")
+                                            toast("onStarted interstitial", Toast.LENGTH_SHORT)
+                                        }
+
+                                        override fun onStopped(nendAdVideo: NendAdVideo) {
+                                            Log.d(TAG, "onStopped interstitial")
+                                            toast("onStopped interstitial", Toast.LENGTH_SHORT)
+                                        }
+
+                                        override fun onCompleted(nendAdVideo: NendAdVideo) {
+                                            Log.d(TAG, "onCompleted interstitial")
+                                            toast("onCompleted interstitial", Toast.LENGTH_SHORT)
+                                        }
+                                    }
+                                }
+                            }
+                            else -> Log.d(TAG, nendAdVideo.type.toString())
+                        }
                     }
 
                     override fun onFailedToLoad(nendAdVideo: NendAdVideo, errorCode: Int) {
@@ -204,21 +239,6 @@ class VideoActivity : AppCompatActivity() {
                     override fun onClosed(nendAdVideo: NendAdVideo) {
                         Log.d(TAG, "onClosed interstitial")
                         toast("onClosed interstitial", Toast.LENGTH_SHORT)
-                    }
-
-                    override fun onStarted(nendAdVideo: NendAdVideo) {
-                        Log.d(TAG, "onStarted interstitial")
-                        toast("onStarted interstitial", Toast.LENGTH_SHORT)
-                    }
-
-                    override fun onStopped(nendAdVideo: NendAdVideo) {
-                        Log.d(TAG, "onStopped interstitial")
-                        toast("onStopped interstitial", Toast.LENGTH_SHORT)
-                    }
-
-                    override fun onCompleted(nendAdVideo: NendAdVideo) {
-                        Log.d(TAG, "onCompleted interstitial")
-                        toast("onCompleted interstitial", Toast.LENGTH_SHORT)
                     }
 
                     override fun onAdClicked(nendAdVideo: NendAdVideo) {

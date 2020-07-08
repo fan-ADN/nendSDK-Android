@@ -10,7 +10,7 @@ nendSDKの導入方法については [Wiki](https://github.com/fan-ADN/nendSDK-
 
 Requirement
 ---------------------------------
-Android 4.1以上
+Android 4.4以上
 
 Usage
 ---------------------------------
