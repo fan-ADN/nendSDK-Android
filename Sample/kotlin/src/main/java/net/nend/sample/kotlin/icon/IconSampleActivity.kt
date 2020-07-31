@@ -10,24 +10,21 @@ import net.nend.sample.kotlin.R
 
 class IconSampleActivity : ListActivity() {
 
-    private enum class SampleType(val id: Int) {
-        XML_SAMPLE(0),
-        XML_SEPARATE_SAMPLE(1),
-        XML_RESOURCE_FILE_SAMPLE(2),
-        NO_XML_SAMPLE(3),
-        DIALOG_SAMPLE(4),
-        ATTACH_DETACH_SAMPLE(5),
-        SPACE_SAMPLE(6);
+    private enum class SampleType {
+        XML_SAMPLE,
+        XML_RESOURCE_FILE_SAMPLE,
+        NO_XML_SAMPLE,
+        DIALOG_SAMPLE,
+        ATTACH_DETACH_SAMPLE,
+        SPACE_SAMPLE;
 
         companion object {
-            fun getType(id: Int) = values().first { it.id == id }
+            fun getType(id: Int) = values().first { it.ordinal == id }
         }
 
         fun startActivity(activity: Activity) {
             when (this) {
                 XML_SAMPLE -> activity.startActivity(Intent(activity,
-                        IconLayoutActivity::class.java))
-                XML_SEPARATE_SAMPLE -> activity.startActivity(Intent(activity,
                         IconActivity::class.java))
                 XML_RESOURCE_FILE_SAMPLE -> activity.startActivity(Intent(activity,
                         IconResourceActivity::class.java))

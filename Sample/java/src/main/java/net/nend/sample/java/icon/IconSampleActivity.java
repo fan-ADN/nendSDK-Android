@@ -15,7 +15,6 @@ public class IconSampleActivity extends ListActivity {
 
     private static final List<Class> SAMPLE_ACTIVITIES = new ArrayList<Class>() {
         {
-            add(IconLayoutActivity.class);
             add(IconActivity.class);
             add(IconResourceActivity.class);
             add(IconJavaCallActivity.class);

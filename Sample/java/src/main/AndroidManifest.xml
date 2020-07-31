@@ -44,7 +44,6 @@
             android:name=".banner.DialogActivity"
             android:configChanges="orientation|screenSize" />
         <activity android:name=".icon.IconSampleActivity" />
-        <activity android:name=".icon.IconLayoutActivity" />
         <activity android:name=".icon.IconResourceActivity" />
         <activity android:name=".icon.IconActivity" />
         <activity android:name=".icon.IconJavaCallActivity" />
@@ -59,7 +58,6 @@
         <activity android:name=".banner.AdjustSizeXmlLayoutActivity" />
         <activity android:name=".nativead.NativeSampleActivity" />
         <activity android:name=".nativead.NativeLayoutActivity" />
-        <activity android:name=".nativead.NativeListActivity" />
         <activity android:name=".nativead.NativeMultipleLayoutListActivity" />
         <activity android:name=".nativead.NativeGridActivity" />
         <activity android:name=".nativead.NativeRecyclerActivity" />

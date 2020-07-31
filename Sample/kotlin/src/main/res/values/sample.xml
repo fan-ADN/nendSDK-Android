@@ -24,9 +24,8 @@
         <item>adjust size sample</item>
     </string-array>
     <string-array name="icon_menu">
-        <item>xml layout</item>
         <item>xml layout separate</item>
-        <item>xml layout use resource file</item>
+        <item>xml layout (use resource file)</item>
         <item>no xml sample</item>
         <item>dialog sample</item>
         <item>attach and detach</item>
@@ -62,16 +61,14 @@
         <item>LargeWide</item>
         <item>TextOnly</item>
         <item>ListView</item>
-        <item>ListView (multiple layout)</item>
+        <item>ListView (V2)</item>
         <item>GridView</item>
         <item>RecyclerView</item>
         <item>ViewPager</item>
-        <item>Carousel (manual)</item>
-        <item>Carousel (auto)</item>
+        <item>Carousel</item>
         <item>Marquee</item>
         <item>Get Ad data</item>
         <item>AutoReload</item>
-        <item>Native V2 on ListView</item>
     </string-array>
     <string-array name="native_video_menu">
         <item>Simple</item>

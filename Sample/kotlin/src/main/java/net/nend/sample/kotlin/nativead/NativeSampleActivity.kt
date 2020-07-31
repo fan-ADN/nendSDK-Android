@@ -10,34 +10,30 @@ import net.nend.sample.kotlin.R
 
 class NativeSampleActivity : ListActivity() {
 
-    private enum class SampleType(val id: Int) {
-        SMALL_SQUARE_SAMPLE(0),
-        LARGE_WIDE_SAMPLE(1),
-        TEXT_ONLY_SAMPLE(2),
-        LIST_VIEW_SAMPLE(3),
-        LIST_VIEW_MULTI_SAMPLE(4),
-        GRID_VIEW_SAMPLE(5),
-        RECYCLER_VIEW_SAMPLE(6),
-        VIEWPAGER_SAMPLE(7),
-        CAROUSEL_SAMPLE(8),
-        CAROUSEL_AUTO_SAMPLE(9),
-        MARQUEE_SAMPLE(10),
-        GET_AD_SAMPLE(11),
-        AUTO_RELOAD_SAMPLE(12),
-        V2_LIST_VIEW_SAMPLE(13);
+    private enum class SampleType {
+        SMALL_SQUARE_SAMPLE,
+        LARGE_WIDE_SAMPLE,
+        TEXT_ONLY_SAMPLE,
+        LIST_VIEW_SAMPLE,
+        V2_LIST_VIEW_SAMPLE,
+        GRID_VIEW_SAMPLE,
+        RECYCLER_VIEW_SAMPLE,
+        VIEWPAGER_SAMPLE,
+        CAROUSEL_SAMPLE,
+        MARQUEE_SAMPLE,
+        GET_AD_SAMPLE,
+        AUTO_RELOAD_SAMPLE;
 
         companion object {
-            fun getType(id: Int) = values().first { it.id == id }
+            fun getType(id: Int) = values().first { it.ordinal == id }
         }
 
         fun startActivity(activity: Activity) {
             when (this) {
                 SMALL_SQUARE_SAMPLE, LARGE_WIDE_SAMPLE, TEXT_ONLY_SAMPLE ->
                     activity.startActivity(Intent(activity,
-                            NativeLayoutActivity::class.java).putExtra("type", id))
+                            NativeLayoutActivity::class.java).putExtra("type", ordinal))
                 LIST_VIEW_SAMPLE -> activity.startActivity(Intent(activity,
-                        NativeListActivity::class.java))
-                LIST_VIEW_MULTI_SAMPLE -> activity.startActivity(Intent(activity,
                         NativeMultipleLayoutListActivity::class.java))
                 GRID_VIEW_SAMPLE -> activity.startActivity(Intent(activity,
                         NativeGridActivity::class.java))
@@ -45,8 +41,8 @@ class NativeSampleActivity : ListActivity() {
                         NativeRecyclerActivity::class.java))
                 VIEWPAGER_SAMPLE -> activity.startActivity(Intent(activity,
                         NativeViewPagerActivity::class.java))
-                CAROUSEL_SAMPLE, CAROUSEL_AUTO_SAMPLE -> activity.startActivity(Intent(activity,
-                        NativeCarouselAdActivity::class.java).putExtra("type", id))
+                CAROUSEL_SAMPLE -> activity.startActivity(Intent(activity,
+                        NativeCarouselAdActivity::class.java).putExtra("type", ordinal))
                 MARQUEE_SAMPLE -> activity.startActivity(Intent(activity,
                         NativeMarqueeActivity::class.java))
                 GET_AD_SAMPLE -> activity.startActivity(Intent(activity,

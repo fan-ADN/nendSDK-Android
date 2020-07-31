@@ -47,11 +47,11 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
         val list = (1..19).map { i -> "sample name$i" }
 
         // 親のRecyclerView
-        val carousel_recycler_parent = findViewById<RecyclerView>(R.id.carousel_recycler_parent)
-        carousel_recycler_parent.layoutManager = LinearLayoutManager(this)
-        carousel_recycler_parent.adapter = CarouselAdapter(this, list)
+        val recyclerView = findViewById<RecyclerView>(R.id.carousel_recycler_parent)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = CarouselAdapter(this, list)
         // セルのスクロールイン・スクロールアウトでオートカルーセルを操作
-        carousel_recycler_parent.addOnChildAttachStateChangeListener(
+        recyclerView.addOnChildAttachStateChangeListener(
                 object : RecyclerView.OnChildAttachStateChangeListener {
             override fun onChildViewAttachedToWindow(view: View) {
                 if (view.tag != null &&
@@ -80,7 +80,6 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
                 .build()
         client = NendAdNativeClient(this, NATIVE_SPOT_ID_LARGE_WIDE, NATIVE_API_KEY_LARGE_WIDE)
 
-        // オートカルーセル用
         menuPosition = intent.getIntExtra("type", 0)
     }
 

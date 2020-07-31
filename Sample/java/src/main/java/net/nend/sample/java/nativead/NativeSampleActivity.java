@@ -18,17 +18,15 @@ public class NativeSampleActivity extends ListActivity {
             add(NativeLayoutActivity.class);
             add(NativeLayoutActivity.class);
             add(NativeLayoutActivity.class);
-            add(NativeListActivity.class);
             add(NativeMultipleLayoutListActivity.class);
+            add(NativeV2OnListActivity.class);
             add(NativeGridActivity.class);
             add(NativeRecyclerActivity.class);
             add(NativeViewPagerActivity.class);
             add(NativeCarouselAdActivity.class);
-            add(NativeCarouselAdActivity.class);
             add(NativeMarqueeActivity.class);
             add(NativeGetAdDataActivity.class);
             add(NativeAutoReloadActivity.class);
-            add(NativeV2OnListActivity.class);
         }
     };
 
