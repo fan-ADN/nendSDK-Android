@@ -2,11 +2,12 @@ package net.nend.sample.java.fullboard;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.nend.sample.java.R;
 
@@ -31,7 +32,7 @@ public class FullBoardMenuActivity extends AppCompatActivity implements AdapterV
             "ニュースや記事まとめアプリでカテゴリタブの中に\"PR\"タブを作成し、PRタブがタップされた際に広告を表示します。"
     };
 
-    private static final List<Class> SAMPLE_ACTIVITIES = new ArrayList<Class>() {
+    private static final List<Class<?>> SAMPLE_ACTIVITIES = new ArrayList<Class<?>>() {
         {
             add(FullBoardDefaultActivity.class);
             add(FullBoardPagerActivity.class);
@@ -55,7 +56,7 @@ public class FullBoardMenuActivity extends AppCompatActivity implements AdapterV
 
         SimpleAdapter adapter = new SimpleAdapter(this, items, android.R.layout.simple_list_item_2,
                 new String[]{"title", "detail"}, new int[]{android.R.id.text1, android.R.id.text2});
-        ListView listView = (ListView) findViewById(R.id.list);
+        ListView listView = findViewById(R.id.list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
     }

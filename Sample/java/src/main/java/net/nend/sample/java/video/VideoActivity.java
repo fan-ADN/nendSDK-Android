@@ -50,14 +50,6 @@ public class VideoActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        if (!verifyPermissions()) {
-            requestPermissions();
-        }
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
         if (null != mProgressDialog && mProgressDialog.isShowing()) {
@@ -73,6 +65,11 @@ public class VideoActivity extends AppCompatActivity {
     }
 
     public void onClickLoadReward(View view) {
+        if (!verifyPermissions()) {
+            requestPermissions();
+            return;
+        }
+
         Log.d(TAG, "Click load reward button.");
 
         if (null == mNendAdRewardedVideo) {

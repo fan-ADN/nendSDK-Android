@@ -2,11 +2,13 @@ package net.nend.sample.java.interstitial;
 
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.nend.android.NendAdInterstitial;
 import net.nend.android.NendAdInterstitial.NendAdInterstitialClickType;
@@ -19,7 +21,7 @@ public class InterstitialActivity extends AppCompatActivity
         implements NendAdInterstitial.OnClickListener, OnCompletionListener{
     
     private String TAG = InterstitialActivity.this.getClass().getSimpleName();
-    private Handler mHandler = new Handler();
+    private Handler mHandler = new Handler(Looper.getMainLooper());
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,7 @@ public class InterstitialActivity extends AppCompatActivity
         // 必要に応じて広告取得結果通知を受けとる
         NendAdInterstitial.setListener(this);
         
-        Button button = (Button) findViewById(R.id.button);
+        Button button = findViewById(R.id.button);
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,22 +41,22 @@ public class InterstitialActivity extends AppCompatActivity
                 NendAdInterstitialShowResult result = NendAdInterstitial.showAd(InterstitialActivity.this);
                 
                 // 表示結果に応じて処理を行う
-                switch (result) {
-                case AD_SHOW_SUCCESS:
-                    break;
-                case AD_SHOW_ALREADY:
-                    break;
-                case AD_FREQUENCY_NOT_REACHABLE:
-                    break;
-                case AD_REQUEST_INCOMPLETE:
-                    break;
-                case AD_LOAD_INCOMPLETE:
-                    break;
-                case AD_DOWNLOAD_INCOMPLETE:
-                    break;
-                default:
-                    break;
-                }
+                //switch (result) {
+                //case AD_SHOW_SUCCESS:
+                    //break;
+                //case AD_SHOW_ALREADY:
+                    //break;
+                //case AD_FREQUENCY_NOT_REACHABLE:
+                    //break;
+                //case AD_REQUEST_INCOMPLETE:
+                    //break;
+                //case AD_LOAD_INCOMPLETE:
+                    //break;
+                //case AD_DOWNLOAD_INCOMPLETE:
+                    //break;
+                //default:
+                    //break;
+                //}
                 // 広告表示結果をログに出力
                 Log.d(TAG, result.name());
                 
@@ -75,14 +77,14 @@ public class InterstitialActivity extends AppCompatActivity
     @Override
     public void onClick(NendAdInterstitialClickType clickType) {
         // クリックに応じて処理行う
-        switch (clickType) {
-        case CLOSE:
-            break;
-        case DOWNLOAD:
-            break;
-        default :
-            break;
-        }
+        //switch (clickType) {
+        //case CLOSE:
+            //break;
+        //case DOWNLOAD:
+            //break;
+        //default :
+            //break;
+        //}
         // 広告クリックをログに出力
         Log.d(TAG, clickType.name());
     }
@@ -93,18 +95,18 @@ public class InterstitialActivity extends AppCompatActivity
     @Override
     public void onCompletion(NendAdInterstitialStatusCode statusCode) {
         // 受信結果に応じて処理を行う
-        switch (statusCode) {
-        case SUCCESS:
-            break;
-        case FAILED_AD_DOWNLOAD:
-            break;
-        case INVALID_RESPONSE_TYPE:
-            break;
-        case FAILED_AD_REQUEST:
-            break;
-        default:
-            break;
-        }
+        //switch (statusCode) {
+        //case SUCCESS:
+            //break;
+        //case FAILED_AD_DOWNLOAD:
+            //break;
+        //case INVALID_RESPONSE_TYPE:
+            //break;
+        //case FAILED_AD_REQUEST:
+            //break;
+        //default:
+            //break;
+        //}
         // 広告受信結果をログに出力
         Log.d(TAG, statusCode.name());
     }

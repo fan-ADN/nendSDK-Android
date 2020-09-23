@@ -1,10 +1,6 @@
 package net.nend.sample.java;
 
-import android.app.ListActivity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ListView;
 
 import net.nend.sample.java.banner.BannerSampleActivity;
 import net.nend.sample.java.fullboard.FullBoardMenuActivity;
@@ -17,10 +13,9 @@ import net.nend.sample.java.video.VideoActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NendSampleActivity extends ListActivity {
+public class NendSampleActivity extends SimpleListActivity {
 
-
-    private static final List<Class> SAMPLE_ACTIVITIES = new ArrayList<Class>() {
+    private static final List<Class<?>> SAMPLE_ACTIVITIES = new ArrayList<Class<?>>() {
         {
             add(BannerSampleActivity.class);
             add(IconSampleActivity.class);
@@ -35,12 +30,7 @@ public class NendSampleActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        instantiateMenuListFragment(R.layout.top_example_menus, SAMPLE_ACTIVITIES);
     }
 
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-        startActivity(new Intent(this, SAMPLE_ACTIVITIES.get(position)));
-    }
 }

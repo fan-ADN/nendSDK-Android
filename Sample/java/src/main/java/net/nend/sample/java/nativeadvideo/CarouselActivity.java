@@ -3,13 +3,7 @@ package net.nend.sample.java.nativeadvideo;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.os.Looper;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -18,12 +12,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import net.nend.android.NendAdNativeVideo;
 import net.nend.android.NendAdNativeVideoListener;
 import net.nend.android.NendAdNativeVideoLoader;
 import net.nend.sample.java.R;
-import net.nend.sample.java.nativead.NativeCarouselPagerFragment;
-import net.nend.sample.java.nativead.NativeCarouselViewPager;
+import net.nend.sample.java.nativead.customviews.NativeCarouselPagerFragment;
+import net.nend.sample.java.nativead.customviews.NativeCarouselViewPager;
 import net.nend.sample.java.nativeadvideo.utilities.MyNendAdViewBinder;
 import net.nend.sample.java.nativeadvideo.utilities.MyNendAdViewHolder;
 
@@ -65,14 +67,14 @@ public class CarouselActivity extends AppCompatActivity implements NativeCarouse
         // セルのスクロールイン・スクロールアウトでオートカルーセルを操作
         parentRecyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
             @Override
-            public void onChildViewAttachedToWindow(View view) {
+            public void onChildViewAttachedToWindow(@NonNull View view) {
                 if ((view.getTag() != null && view.getTag().equals("CAROUSEL")) && menuPosition == AUTO_CAROUSEL_MENU_POSITION) {
                     handler.postDelayed(autoCarouselRunnable, INTERVAL);
                 }
             }
 
             @Override
-            public void onChildViewDetachedFromWindow(View view) {
+            public void onChildViewDetachedFromWindow(@NonNull View view) {
                 if ((view.getTag() != null && view.getTag().equals("CAROUSEL")) && menuPosition == AUTO_CAROUSEL_MENU_POSITION) {
                     handler.removeCallbacks(autoCarouselRunnable);
                 }
@@ -119,16 +121,16 @@ public class CarouselActivity extends AppCompatActivity implements NativeCarouse
                     loadedAds.put(position, ad);
                     ad.setListener(new NendAdNativeVideoListener() {
                         @Override
-                        public void onImpression(NendAdNativeVideo nendAdNativeVideo) {
+                        public void onImpression(@NonNull NendAdNativeVideo nendAdNativeVideo) {
                         }
 
                         @Override
-                        public void onClickAd(NendAdNativeVideo nendAdNativeVideo) {
+                        public void onClickAd(@NonNull NendAdNativeVideo nendAdNativeVideo) {
                             Log.i(TAG, "クリック");
                         }
 
                         @Override
-                        public void onClickInformation(NendAdNativeVideo nendAdNativeVideo) {
+                        public void onClickInformation(@NonNull NendAdNativeVideo nendAdNativeVideo) {
                         }
                     });
                     holder.renderView(ad, null);
@@ -142,7 +144,7 @@ public class CarouselActivity extends AppCompatActivity implements NativeCarouse
         }
     }
 
-    class CarouselAdapter extends RecyclerView.Adapter {
+    class CarouselAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private final int FEED = 0;
         private final int AD = 1;
         private List<String> list;
@@ -176,16 +178,14 @@ public class CarouselActivity extends AppCompatActivity implements NativeCarouse
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-            switch (getItemViewType(position)) {
-                case FEED:
-                    Date date = new Date();
-                    // 表示形式を設定
-                    SimpleDateFormat currentDate = new SimpleDateFormat("yyyy'年'MM'月'dd'日'　kk'時'mm'分'ss'秒'", Locale.JAPAN);
-                    String longText = getResources().getString(R.string.carousel_longtext);
-                    ((FeedHolder) viewHolder).textName.setText(list.get(position));
-                    ((FeedHolder) viewHolder).textDate.setText(currentDate.format(date));
-                    ((FeedHolder) viewHolder).textComment.setText(longText);
-                    break;
+            if (getItemViewType(position) == FEED) {
+                Date date = new Date();
+                // 表示形式を設定
+                SimpleDateFormat currentDate = new SimpleDateFormat("yyyy'年'MM'月'dd'日'　kk'時'mm'分'ss'秒'", Locale.JAPAN);
+                String longText = getResources().getString(R.string.carousel_longtext);
+                ((FeedHolder) viewHolder).textName.setText(list.get(position));
+                ((FeedHolder) viewHolder).textDate.setText(currentDate.format(date));
+                ((FeedHolder) viewHolder).textComment.setText(longText);
             }
         }
 
@@ -229,7 +229,7 @@ public class CarouselActivity extends AppCompatActivity implements NativeCarouse
 
                 // オートカルーセル
                 if (menuPosition == AUTO_CAROUSEL_MENU_POSITION) {
-                    handler = new Handler();
+                    handler = new Handler(Looper.getMainLooper());
                     autoCarouselRunnable = new Runnable() {
                         @Override
                         public void run() {
@@ -247,12 +247,13 @@ public class CarouselActivity extends AppCompatActivity implements NativeCarouse
     }
 
     // カルーセル部分ViewPager用Adapter
-    public class CustomPagerAdapter extends FragmentPagerAdapter {
+    public static class CustomPagerAdapter extends FragmentPagerAdapter {
 
         CustomPagerAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager);
+            super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             return NativeCarouselPagerFragment.newInstance(position, R.layout.native_video_carousel_fragment);

@@ -8,7 +8,7 @@
     android:layout_height="wrap_content"
     android:text="@string/carousel_title"
     android:paddingLeft="24dp" />
-    <net.nend.sample.java.nativead.NativeCarouselViewPager
+    <net.nend.sample.java.nativead.customviews.NativeCarouselViewPager
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/carousel_pager" />

@@ -4,9 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +11,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeClient;
+import net.nend.android.NendAdNativeListener;
 import net.nend.android.NendAdNativeViewBinder;
 import net.nend.sample.java.R;
 import net.nend.sample.java.nativeadvideo.utilities.MyNendAdViewHolder;
@@ -24,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class NativeRecyclerActivity extends AppCompatActivity {
 
@@ -51,7 +55,7 @@ public class NativeRecyclerActivity extends AppCompatActivity {
         recyclerView.setAdapter(new NativeRecyclerAdapter(this, list));
     }
 
-    class NativeRecyclerAdapter extends RecyclerView.Adapter {
+    class NativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private LayoutInflater mLayoutInflater;
         private List<String> mList;
@@ -83,8 +87,9 @@ public class NativeRecyclerActivity extends AppCompatActivity {
             return (position != 0 && position % 5 == 0) ? AD : NORMAL;
         }
 
+        @NonNull
         @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
             View view;
             RecyclerView.ViewHolder viewHolder = null;
             switch (viewType) {
@@ -97,12 +102,13 @@ public class NativeRecyclerActivity extends AppCompatActivity {
                     viewHolder = new MyNendAdViewHolder(view, mBinder);
                     break;
             }
+            assert viewHolder != null;
             return viewHolder;
         }
 
         @Override
         @SuppressLint("RecyclerView")
-        public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
+        public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int position) {
             switch (getItemViewType(position)) {
                 case NORMAL:
                     ((ViewHolder) viewHolder).textView.setText(mList.get(position));
@@ -111,7 +117,7 @@ public class NativeRecyclerActivity extends AppCompatActivity {
                 case AD:
                     if (mLoadedAd.containsKey(position)) {
                         MyNendAdViewHolder holder = (MyNendAdViewHolder) viewHolder;
-                        mLoadedAd.get(position).intoView(holder.itemView, holder.normalBinder);
+                        Objects.requireNonNull(mLoadedAd.get(position)).intoView(holder.itemView, holder.normalBinder);
                         break;
                     }
 
@@ -123,13 +129,26 @@ public class NativeRecyclerActivity extends AppCompatActivity {
                             mPositionList.add(position);
                             viewHolder.setIsRecyclable(false);
                             MyNendAdViewHolder holder = (MyNendAdViewHolder) viewHolder;
-                            mLoadedAd.get(position).intoView(holder.itemView, holder.normalBinder);
-                            mLoadedAd.get(position).setOnClickListener(new NendAdNative.OnClickListener() {
-                                @Override
-                                public void onClick(NendAdNative nendAdNative) {
-                                    Log.i(TAG, "クリック" + position);
-                                }
-                            });
+                            final NendAdNative adNative = mLoadedAd.get(position);
+                            if (adNative != null) {
+                                adNative.intoView(holder.itemView, mBinder);
+                                adNative.setNendAdNativeListener(new NendAdNativeListener() {
+                                    @Override
+                                    public void onImpression(@NonNull NendAdNative nendAdNative) {
+                                        Log.i(TAG, "onImpression");
+                                    }
+
+                                    @Override
+                                    public void onClickAd(@NonNull NendAdNative nendAdNative) {
+                                        Log.i(TAG, "onClickAd");
+                                    }
+
+                                    @Override
+                                    public void onClickInformation(@NonNull NendAdNative nendAdNative) {
+                                        Log.i(TAG, "onClickInformation");
+                                    }
+                                });
+                            }
                         }
 
                         @Override
@@ -139,7 +158,7 @@ public class NativeRecyclerActivity extends AppCompatActivity {
                             if (!mLoadedAd.isEmpty()) {
                                 Collections.shuffle(mPositionList);
                                 MyNendAdViewHolder holder = (MyNendAdViewHolder) viewHolder;
-                                mLoadedAd.get(mPositionList.get(0)).intoView(holder.itemView, holder.normalBinder);
+                                Objects.requireNonNull(mLoadedAd.get(mPositionList.get(0))).intoView(holder.itemView, holder.normalBinder);
                             }
                         }
                     });
@@ -154,8 +173,8 @@ public class NativeRecyclerActivity extends AppCompatActivity {
 
             public ViewHolder(View v) {
                 super(v);
-                textView = (TextView) v.findViewById(R.id.title);
-                imageView = (ImageView) v.findViewById(R.id.thumbnail);
+                textView = v.findViewById(R.id.title);
+                imageView = v.findViewById(R.id.thumbnail);
             }
         }
     }

@@ -1,9 +1,10 @@
 package net.nend.sample.java.icon;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.nend.android.NendAdIconLoader;
 import net.nend.android.NendAdIconView;
@@ -22,7 +23,7 @@ public class IconAttachAndDetachActivity extends AppCompatActivity implements Sa
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.icon_attach_detach);
 		
-		mIconContainer = (LinearLayout)findViewById(R.id.icon_container);
+		mIconContainer = findViewById(R.id.icon_container);
 		
         NendAdIconView view1 = new NendAdIconView(getApplicationContext());
         NendAdIconView view2 = new NendAdIconView(getApplicationContext());

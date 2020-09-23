@@ -1,6 +1,5 @@
 package net.nend.sample.java.nativead;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,18 +11,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeClient;
 import net.nend.android.NendAdNativeViewBinder;
 import net.nend.android.NendAdNativeViewHolder;
 import net.nend.sample.java.R;
+import net.nend.sample.java.SimpleListActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
-public class NativeMultipleLayoutListActivity extends ListActivity {
+public class NativeMultipleLayoutListActivity extends SimpleListActivity {
 
     private final int NORMAL = 0;
     private final int AD1 = 1;
@@ -44,7 +47,7 @@ public class NativeMultipleLayoutListActivity extends ListActivity {
         }
 
         NativeListAdapter adapter = new NativeListAdapter(this, 0, list);
-        setListAdapter(adapter);
+        instantiateListAdapter(adapter);
     }
 
     class NativeListAdapter extends ArrayAdapter<String> {
@@ -71,14 +74,15 @@ public class NativeMultipleLayoutListActivity extends ListActivity {
 
         @Override
         public int getItemViewType(int position) {
-            if (position != 0 && position % 5 == 0) {
+            if (position != 0 && position % 3 == 0) {
                 return (position % 10 == 0) ? AD2 : AD1;
             }
             return NORMAL;
         }
 
+        @NonNull
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             final ViewHolder holder;
             final NendAdNativeViewHolder adHolder;
             switch (getItemViewType(position)) {
@@ -98,7 +102,7 @@ public class NativeMultipleLayoutListActivity extends ListActivity {
                 case AD1:
                     if (mLoadedAd.containsKey(position)) {
                         adHolder = (NendAdNativeViewHolder) convertView.getTag();
-                        mLoadedAd.get(position).intoView(adHolder);
+                        Objects.requireNonNull(mLoadedAd.get(position)).intoView(adHolder);
                         break;
                     } else {
                         convertView = LayoutInflater.from(getContext()).inflate(R.layout.native_ad_left_row, parent, false);
@@ -108,7 +112,7 @@ public class NativeMultipleLayoutListActivity extends ListActivity {
                 case AD2:
                     if (mLoadedAd.containsKey(position)) {
                         adHolder = (NendAdNativeViewHolder) convertView.getTag();
-                        mLoadedAd.get(position).intoView(adHolder);
+                        Objects.requireNonNull(mLoadedAd.get(position)).intoView(adHolder);
                         break;
                     } else {
                         convertView = LayoutInflater.from(getContext()).inflate(R.layout.native_ad_right_row, parent, false);
@@ -130,7 +134,7 @@ public class NativeMultipleLayoutListActivity extends ListActivity {
                     Log.i(TAG, "広告取得成功");
                     mLoadedAd.put(position, nendAdNative);
                     mPositionList.add(position);
-                    mLoadedAd.get(position).intoView(adHolder);
+                    Objects.requireNonNull(mLoadedAd.get(position)).intoView(adHolder);
                 }
 
                 @Override
@@ -139,7 +143,7 @@ public class NativeMultipleLayoutListActivity extends ListActivity {
                     // すでに取得済みの広告があればランダムで表示
                     if (!mLoadedAd.isEmpty()) {
                         Collections.shuffle(mPositionList);
-                        mLoadedAd.get(mPositionList.get(0)).intoView(adHolder);
+                        Objects.requireNonNull(mLoadedAd.get(mPositionList.get(0))).intoView(adHolder);
                     }
                 }
             });

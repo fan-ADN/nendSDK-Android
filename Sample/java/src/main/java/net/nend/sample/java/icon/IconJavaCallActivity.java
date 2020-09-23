@@ -2,9 +2,10 @@ package net.nend.sample.java.icon;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.RelativeLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.nend.android.NendAdIconLoader;
 import net.nend.android.NendAdIconView;
@@ -14,24 +15,18 @@ import net.nend.sample.java.SampleConstants;
 public class IconJavaCallActivity extends AppCompatActivity implements SampleConstants {
     
     private NendAdIconLoader mIconLoader;
-    private NendAdIconView view1;
-    private NendAdIconView view2;
-    private NendAdIconView view3;
-    private NendAdIconView view4;
-    
-    private int WC = LayoutParams.WRAP_CONTENT;
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.javacall_relative);
         
         Context context = getApplicationContext();
-        
-        view1 = new NendAdIconView(context);
-        view2 = new NendAdIconView(context);
-        view3 = new NendAdIconView(context);
-        view4 = new NendAdIconView(context);
+
+        NendAdIconView view1 = new NendAdIconView(context);
+        NendAdIconView view2 = new NendAdIconView(context);
+        NendAdIconView view3 = new NendAdIconView(context);
+        NendAdIconView view4 = new NendAdIconView(context);
         
         RelativeLayout rootLayout = findViewById(R.id.root);
         mIconLoader = new NendAdIconLoader(context, ICON_SPOT_ID, ICON_API_KEY);
@@ -39,7 +34,8 @@ public class IconJavaCallActivity extends AppCompatActivity implements SampleCon
         mIconLoader.addIconView(view2);
         mIconLoader.addIconView(view3);
         mIconLoader.addIconView(view4);
-        
+
+        int WC = LayoutParams.WRAP_CONTENT;
         RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(WC, WC);
         params1.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         params1.addRule(RelativeLayout.ALIGN_PARENT_TOP);

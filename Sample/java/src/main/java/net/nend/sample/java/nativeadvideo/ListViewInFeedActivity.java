@@ -1,11 +1,8 @@
 package net.nend.sample.java.nativeadvideo;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,18 +11,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeVideo;
 import net.nend.android.NendAdNativeVideoLoader;
 import net.nend.android.NendAdNativeViewBinder;
 import net.nend.sample.java.R;
+import net.nend.sample.java.SimpleListActivity;
 import net.nend.sample.java.nativeadvideo.utilities.MyNendAdViewBinder;
 import net.nend.sample.java.nativeadvideo.utilities.MyNendAdViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListViewInFeedActivity extends ListActivity {
+public class ListViewInFeedActivity extends SimpleListActivity {
 
     private final int NORMAL = 0;
     private final int AD = 1;
@@ -41,7 +42,7 @@ public class ListViewInFeedActivity extends ListActivity {
         }
 
         NativeListAdapter adapter = new NativeListAdapter(this, 0, list);
-        setListAdapter(adapter);
+        instantiateListAdapter(adapter);
     }
 
     class NativeListAdapter extends ArrayAdapter<String> {

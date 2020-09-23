@@ -36,7 +36,7 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
     private val loadedAd = mutableMapOf<Int, NendAdNative>()
 
     private var menuPosition = 0
-    private var autoCarouselRunnable: Runnable? = null
+    private lateinit var autoCarouselRunnable: Runnable
     private var handler: Handler? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

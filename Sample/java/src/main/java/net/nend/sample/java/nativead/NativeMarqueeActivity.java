@@ -1,16 +1,18 @@
 package net.nend.sample.java.nativead;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeClient;
 import net.nend.android.NendAdNativeViewBinder;
 import net.nend.sample.java.R;
+import net.nend.sample.java.nativead.customviews.MarqueeView;
 
 /**
  * Sample for like telop
@@ -29,7 +31,7 @@ public class NativeMarqueeActivity extends AppCompatActivity {
     private Thread mThread = null;          // runnable thread
     private int mRepeatCount;               // number of repeat
     private int mCurrentX;                  // current text position
-    private boolean mIsEndlessLoop;         // endless flag
+//    private boolean mIsEndlessLoop;         // endless flag
 
     /**
      * Runnable variable for marquee
@@ -57,10 +59,10 @@ public class NativeMarqueeActivity extends AppCompatActivity {
                         if (!mThreadStopper && !Thread.interrupted()) {
 
                             if (mCurrentX >= endX) {
-                                mRepeatCount++;
-                                if (mIsEndlessLoop) {
-                                    mRepeatCount--;
-                                }
+//                                mRepeatCount++;
+//                                if (mIsEndlessLoop) {
+//                                    mRepeatCount--;
+//                                }
                                 break;
                             }
 
@@ -102,7 +104,7 @@ public class NativeMarqueeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.native_marquee);
 
-        mMarqueeView = (MarqueeView) findViewById(R.id.horizontalScrollView);
+        mMarqueeView = findViewById(R.id.horizontalScrollView);
         mTextView = findViewById(R.id.ad_content);
         mAdContainer = findViewById(R.id.ad);
 
@@ -133,7 +135,7 @@ public class NativeMarqueeActivity extends AppCompatActivity {
                 Log.i(TAG, "広告取得失敗 " + nendError.getMessage());
             }
         });
-        setEndless(true);
+//        setEndless(true);
     }
 
     /**
@@ -180,9 +182,9 @@ public class NativeMarqueeActivity extends AppCompatActivity {
         pr.setWidth(prWidth / 2);
     }
 
-    private void setEndless(boolean isEndless) {
-        mIsEndlessLoop = isEndless;
-    }
+//    private void setEndless(boolean isEndless) {
+//        mIsEndlessLoop = isEndless;
+//    }
 
     /**
      * clear marquee

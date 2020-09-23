@@ -1,9 +1,11 @@
 package net.nend.sample.java.icon;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.nend.android.NendAdIconLoader;
 import net.nend.android.NendAdIconView;
@@ -15,20 +17,16 @@ import net.nend.sample.java.SampleConstants;
 public class IconActivity extends AppCompatActivity implements SampleConstants {
 
     private NendAdIconLoader mIconLoader;
-    private NendAdIconView view1;
-    private NendAdIconView view2;
-    private NendAdIconView view3;
-    private NendAdIconView view4;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.icon);
-        
-        view1 = (NendAdIconView) findViewById(R.id.icon1);
-        view2 = (NendAdIconView) findViewById(R.id.icon2);
-        view3 = (NendAdIconView) findViewById(R.id.icon3);
-        view4 = (NendAdIconView) findViewById(R.id.icon4);
+
+        NendAdIconView view1 = findViewById(R.id.icon1);
+        NendAdIconView view2 = findViewById(R.id.icon2);
+        NendAdIconView view3 = findViewById(R.id.icon3);
+        NendAdIconView view4 = findViewById(R.id.icon4);
         
         mIconLoader = new NendAdIconLoader(getApplicationContext(), ICON_SPOT_ID, ICON_API_KEY);
         mIconLoader.addIconView(view1);
@@ -40,17 +38,22 @@ public class IconActivity extends AppCompatActivity implements SampleConstants {
         mIconLoader.setOnReceiveListener(new NendAdIconLoader.OnReceiveListener() {
             @Override
             public void onReceiveAd(NendAdIconView iconView) {
+                int id = 0;
                 switch (iconView.getId()) {
                 case R.id.icon1:
+                    id = 1;
                     break;
                 case R.id.icon2:
+                    id = 2;
                     break;
                 case R.id.icon3:
+                    id = 3;
                     break;
                 case R.id.icon4:
+                    id = 4;
                     break;
                 }
-                Toast.makeText(getApplicationContext(), "Recieved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Recieved: " + id, Toast.LENGTH_SHORT).show();
             }
         });
         mIconLoader.setOnClickListener(new NendAdIconLoader.OnClickListener() {
@@ -69,13 +72,8 @@ public class IconActivity extends AppCompatActivity implements SampleConstants {
             @Override
             public void onFailedToReceiveAd(NendIconError iconError) {
                 NendError nendError = iconError.getNendError();
-                switch (nendError) {
-                case INVALID_RESPONSE_TYPE:
-                    nendError.getMessage();
-                    break;
-
-                default:
-                    break;
+                if (nendError == NendError.INVALID_RESPONSE_TYPE) {
+                    Log.e("IconActivity", nendError.getMessage());
                 }
                 Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
             }

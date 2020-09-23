@@ -3,7 +3,6 @@ package net.nend.sample.java.nativead;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +12,12 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeClient;
+import net.nend.android.NendAdNativeListener;
 import net.nend.android.NendAdNativeViewBinder;
 import net.nend.android.NendAdNativeViewHolder;
 import net.nend.sample.java.R;
@@ -23,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class NativeGridActivity extends AppCompatActivity {
 
@@ -44,7 +48,7 @@ public class NativeGridActivity extends AppCompatActivity {
             list.add("item" + i);
         }
 
-        GridView gridView = (GridView) findViewById(R.id.grid);
+        GridView gridView = findViewById(R.id.grid);
         NativeGridAdapter adapter = new NativeGridAdapter(this, 0, list);
         assert gridView != null;
         gridView.setAdapter(adapter);
@@ -77,8 +81,9 @@ public class NativeGridActivity extends AppCompatActivity {
             return (position != 0 && position % 5 == 0) ? AD : NORMAL;
         }
 
+        @NonNull
         @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
             final ViewHolder holder;
             final NendAdNativeViewHolder adHolder;
             switch (getItemViewType(position)) {
@@ -98,7 +103,7 @@ public class NativeGridActivity extends AppCompatActivity {
                 case AD:
                     if (mLoadedAd.containsKey(position)) {
                         adHolder = (NendAdNativeViewHolder) convertView.getTag();
-                        mLoadedAd.get(position).intoView(adHolder);
+                        Objects.requireNonNull(mLoadedAd.get(position)).intoView(adHolder);
                         break;
 
                     } else {
@@ -113,13 +118,26 @@ public class NativeGridActivity extends AppCompatActivity {
                             Log.i(TAG, "広告取得成功");
                             mLoadedAd.put(position, nendAdNative);
                             mPositionList.add(position);
-                            mLoadedAd.get(position).intoView(adHolder);
-                            mLoadedAd.get(position).setOnClickListener(new NendAdNative.OnClickListener() {
-                                @Override
-                                public void onClick(NendAdNative nendAdNative) {
-                                    Log.i(TAG, "クリック");
-                                }
-                            });
+                            final NendAdNative ad = mLoadedAd.get(position);
+                            if (ad != null) {
+                                ad.intoView(adHolder);
+                                ad.setNendAdNativeListener(new NendAdNativeListener() {
+                                    @Override
+                                    public void onImpression(@NonNull NendAdNative nendAdNative) {
+                                        Log.i(TAG, "onImpression");
+                                    }
+
+                                    @Override
+                                    public void onClickAd(@NonNull NendAdNative nendAdNative) {
+                                        Log.i(TAG, "onClickAd");
+                                    }
+
+                                    @Override
+                                    public void onClickInformation(@NonNull NendAdNative nendAdNative) {
+                                        Log.i(TAG, "onClickInformation");
+                                    }
+                                });
+                            }
                         }
 
                         @Override
@@ -128,7 +146,7 @@ public class NativeGridActivity extends AppCompatActivity {
                             // すでに取得済みの広告がればランダムで表示
                             if (!mLoadedAd.isEmpty()) {
                                 Collections.shuffle(mPositionList);
-                                mLoadedAd.get(mPositionList.get(0)).intoView(adHolder);
+                                Objects.requireNonNull(mLoadedAd.get(mPositionList.get(0))).intoView(adHolder);
                             }
                         }
                     });

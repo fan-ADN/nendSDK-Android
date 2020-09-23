@@ -37,7 +37,7 @@ class CarouselActivity : AppCompatActivity(), NativeCarouselPagerFragment.OnAdLi
     private val loadedAds = SparseArray<NendAdNativeVideo>()
 
     private var menuPosition = 0
-    private var autoCarouselRunnable: Runnable? = null
+    private lateinit var autoCarouselRunnable: Runnable
     private var handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {

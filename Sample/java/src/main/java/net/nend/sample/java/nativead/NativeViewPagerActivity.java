@@ -1,23 +1,28 @@
 package net.nend.sample.java.nativead;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
 
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeClient;
+import net.nend.android.NendAdNativeListener;
 import net.nend.android.NendAdNativeViewBinder;
 import net.nend.sample.java.R;
+import net.nend.sample.java.nativead.customviews.NativePagerFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class NativeViewPagerActivity extends AppCompatActivity implements NativePagerFragment.OnAdListener {
 
@@ -63,13 +68,26 @@ public class NativeViewPagerActivity extends AppCompatActivity implements Native
                     Log.i(TAG, "広告取得成功");
                     mLoadedAd.put(position, nendAdNative);
                     mPositionList.add(position);
-                    mLoadedAd.get(position).intoView(view, mBinder);
-                    mLoadedAd.get(position).setOnClickListener(new NendAdNative.OnClickListener() {
-                        @Override
-                        public void onClick(NendAdNative nendAdNative) {
-                            Log.i(TAG, "クリック");
-                        }
-                    });
+                    final NendAdNative adNative = mLoadedAd.get(position);
+                    if (adNative != null) {
+                        adNative.intoView(view, mBinder);
+                        adNative.setNendAdNativeListener(new NendAdNativeListener() {
+                            @Override
+                            public void onImpression(@NonNull NendAdNative nendAdNative) {
+                                Log.i(TAG, "onImpression");
+                            }
+
+                            @Override
+                            public void onClickAd(@NonNull NendAdNative nendAdNative) {
+                                Log.i(TAG, "onClickAd");
+                            }
+
+                            @Override
+                            public void onClickInformation(@NonNull NendAdNative nendAdNative) {
+                                Log.i(TAG, "onClickInformation");
+                            }
+                        });
+                    }
                 }
 
                 @Override
@@ -78,19 +96,20 @@ public class NativeViewPagerActivity extends AppCompatActivity implements Native
                     // すでに取得済みの広告があればランダムで表示
                     if (!mLoadedAd.isEmpty()) {
                         Collections.shuffle(mPositionList);
-                        mLoadedAd.get(mPositionList.get(0)).intoView(view, mBinder);
+                        Objects.requireNonNull(mLoadedAd.get(mPositionList.get(0))).intoView(view, mBinder);
                     }
                 }
             });
         }
     }
 
-    public class CustomPagerAdapter extends FragmentPagerAdapter {
+    public static class CustomPagerAdapter extends FragmentPagerAdapter {
 
         public CustomPagerAdapter(FragmentManager fm) {
-            super(fm);
+            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             NativePagerFragment fragment = new NativePagerFragment();

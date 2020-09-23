@@ -1,10 +1,21 @@
 package net.nend.sample.java.fullboard;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -12,13 +23,6 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
 import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import net.nend.android.NendAdFullBoard;
 import net.nend.android.NendAdFullBoardLoader;
@@ -27,6 +31,7 @@ import net.nend.sample.java.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 
 public class FullBoardPagerActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NendAdFullBoard>> {
@@ -35,42 +40,43 @@ public class FullBoardPagerActivity extends AppCompatActivity implements LoaderM
     private static final int AD_COUNT = 2;
 
     private ViewPager mPager;
-    private Handler mHandler = new Handler();
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_board_pager);
         mPager = findViewById(R.id.pager);
-        getSupportLoaderManager().initLoader(0, null, this);
+        LoaderManager.getInstance(this).initLoader(0, null, this);
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mHandler.post(new Runnable() {
             @Override
             public void run() {
                 // Update the ad orientation.
-                mPager.getAdapter().notifyDataSetChanged();
+                Objects.requireNonNull(mPager.getAdapter()).notifyDataSetChanged();
             }
         });
     }
 
+    @NonNull
     @Override
     public Loader<List<NendAdFullBoard>> onCreateLoader(int id, Bundle args) {
         return new AdLoader(getApplicationContext());
     }
 
     @Override
-    public void onLoadFinished(Loader<List<NendAdFullBoard>> loader, List<NendAdFullBoard> data) {
+    public void onLoadFinished(@NonNull Loader<List<NendAdFullBoard>> loader, List<NendAdFullBoard> data) {
         List<Page> pages = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             pages.add(new ContentPage());
         }
         if (AD_COUNT == data.size()) {
-            pages.add(2, new AdPage(data.get(0)));
-            pages.add(4, new AdPage(data.get(1)));
+            pages.add(1, new AdPage(data.get(0)));
+            pages.add(3, new AdPage(data.get(1)));
         } else {
             Log.d(TAG, "Couldn't obtain two ads.");
         }
@@ -78,7 +84,7 @@ public class FullBoardPagerActivity extends AppCompatActivity implements LoaderM
     }
 
     @Override
-    public void onLoaderReset(Loader<List<NendAdFullBoard>> loader) {
+    public void onLoaderReset(@NonNull Loader<List<NendAdFullBoard>> loader) {
     }
 
     interface Page {
@@ -87,9 +93,10 @@ public class FullBoardPagerActivity extends AppCompatActivity implements LoaderM
 
     public static class ContentFragment extends Fragment {
 
+        @SuppressLint("SetTextI18n")
         @Nullable
         @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             TextView textView = new TextView(getActivity());
             textView.setText("Content");
             textView.setGravity(Gravity.CENTER);
@@ -109,9 +116,9 @@ public class FullBoardPagerActivity extends AppCompatActivity implements LoaderM
 
         @Nullable
         @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             if (mAd != null) {
-                return NendAdFullBoardView.Builder.with(getActivity(), mAd)
+                return NendAdFullBoardView.Builder.with(requireActivity(), mAd)
                         .adClickListener(this)
                         .build();
             } else {
@@ -195,7 +202,7 @@ public class FullBoardPagerActivity extends AppCompatActivity implements LoaderM
         }
     }
 
-    private class ContentPage implements Page {
+    private static class ContentPage implements Page {
 
         @Override
         public Fragment getFragment() {
@@ -203,7 +210,7 @@ public class FullBoardPagerActivity extends AppCompatActivity implements LoaderM
         }
     }
 
-    private class AdPage implements Page {
+    private static class AdPage implements Page {
 
         private final NendAdFullBoard mAd;
 
@@ -219,17 +226,17 @@ public class FullBoardPagerActivity extends AppCompatActivity implements LoaderM
         }
     }
 
-    private class Adapter extends FragmentPagerAdapter {
+    private static class Adapter extends FragmentPagerAdapter {
 
         private final List<Page> mPages;
 
         Adapter(FragmentManager fm, List<Page> pages) {
-            super(fm);
+            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
             mPages = pages;
         }
 
         @Override
-        public int getItemPosition(Object object) {
+        public int getItemPosition(@NonNull Object object) {
             if (object instanceof AdFragment) {
                 return POSITION_NONE;
             } else {
@@ -237,6 +244,7 @@ public class FullBoardPagerActivity extends AppCompatActivity implements LoaderM
             }
         }
 
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             return mPages.get(position).getFragment();

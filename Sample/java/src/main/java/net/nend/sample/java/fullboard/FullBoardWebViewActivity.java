@@ -2,8 +2,10 @@ package net.nend.sample.java.fullboard;
 
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Looper;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.nend.android.NendAdFullBoard;
 import net.nend.android.NendAdFullBoardLoader;
@@ -13,14 +15,14 @@ public class FullBoardWebViewActivity extends AppCompatActivity implements NendA
 
     private NendAdFullBoardLoader mLoader;
     private NendAdFullBoard mAd;
-    private Handler mHandler = new Handler();
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_board_web);
 
-        final ObservableWebView webView = (ObservableWebView) findViewById(R.id.webview);
+        final ObservableWebView webView = findViewById(R.id.webview);
         webView.loadUrl("https://board.nend.net");
         webView.setCallback(new ObservableWebView.Callback() {
             @Override

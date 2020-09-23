@@ -1,10 +1,8 @@
 package net.nend.sample.java.nativead;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,17 +11,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeClient;
+import net.nend.android.NendAdNativeListener;
 import net.nend.sample.java.R;
+import net.nend.sample.java.SimpleListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NativeV2OnListActivity extends ListActivity {
+public class NativeV2OnListActivity extends SimpleListActivity {
 
     private final int NORMAL = 0;
     private final int AD = 1;
+    private final String TAG = getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +59,7 @@ public class NativeV2OnListActivity extends ListActivity {
         }
 
         NativeListAdapter adapter = new NativeListAdapter(getApplicationContext(), 0, list);
-        setListAdapter(adapter);
-
+        instantiateListAdapter(adapter);
     }
 
     private class NativeListAdapter extends ArrayAdapter<Object> {
@@ -126,10 +128,20 @@ public class NativeV2OnListActivity extends ListActivity {
                                         holder.thumbnail.setImageBitmap(adFeed.getAdimage());
 
                                         adFeed.getNendAdNative().activate(adRoot, holder.smallText);
-                                        adFeed.getNendAdNative().setOnClickListener(new NendAdNative.OnClickListener() {
+                                        adFeed.getNendAdNative().setNendAdNativeListener(new NendAdNativeListener() {
                                             @Override
-                                            public void onClick(NendAdNative ad) {
-                                                Log.d("onclick", "" + ad);
+                                            public void onImpression(@NonNull NendAdNative nendAdNative) {
+                                                Log.i(TAG, "onImpression");
+                                            }
+
+                                            @Override
+                                            public void onClickAd(@NonNull NendAdNative nendAdNative) {
+                                                Log.i(TAG, "onClickAd");
+                                            }
+
+                                            @Override
+                                            public void onClickInformation(@NonNull NendAdNative nendAdNative) {
+                                                Log.i(TAG, "onClickInformation");
                                             }
                                         });
                                     }
@@ -163,7 +175,7 @@ public class NativeV2OnListActivity extends ListActivity {
     }
 
 
-    private class NativeFeed {
+    private static class NativeFeed {
 
         private int type;
         private String content;

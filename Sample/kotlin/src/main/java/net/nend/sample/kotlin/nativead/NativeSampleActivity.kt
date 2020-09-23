@@ -46,7 +46,7 @@ class NativeSampleActivity : ListActivity() {
                 MARQUEE_SAMPLE -> activity.startActivity(Intent(activity,
                         NativeMarqueeActivity::class.java))
                 GET_AD_SAMPLE -> activity.startActivity(Intent(activity,
-                        NativeGetAdDataActivity::class.java))
+                        NativeAdV2Activity::class.java))
                 AUTO_RELOAD_SAMPLE -> activity.startActivity(Intent(activity,
                         NativeAutoReloadActivity::class.java))
                 V2_LIST_VIEW_SAMPLE -> activity.startActivity(Intent(activity,

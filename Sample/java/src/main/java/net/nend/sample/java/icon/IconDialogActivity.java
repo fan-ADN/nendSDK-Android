@@ -3,14 +3,17 @@ package net.nend.sample.java.icon;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.nend.android.NendAdIconLoader;
 import net.nend.android.NendAdIconView;
 import net.nend.sample.java.R;
 import net.nend.sample.java.SampleConstants;
+
+import java.util.Objects;
 
 public class IconDialogActivity extends AppCompatActivity implements SampleConstants {
 
@@ -41,7 +44,7 @@ public class IconDialogActivity extends AppCompatActivity implements SampleConst
         public NendDialog(Context context) {
             super(context);
             mContext = context;
-            getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+            Objects.requireNonNull(getWindow()).requestFeature(Window.FEATURE_NO_TITLE);
         }
 
         @Override
@@ -50,10 +53,10 @@ public class IconDialogActivity extends AppCompatActivity implements SampleConst
 
             setContentView(R.layout.icon_dialog);
 
-            NendAdIconView view1 = (NendAdIconView) findViewById(R.id.icon1);
-            NendAdIconView view2 = (NendAdIconView) findViewById(R.id.icon2);
-            NendAdIconView view3 = (NendAdIconView) findViewById(R.id.icon3);
-            NendAdIconView view4 = (NendAdIconView) findViewById(R.id.icon4);
+            NendAdIconView view1 = findViewById(R.id.icon1);
+            NendAdIconView view2 = findViewById(R.id.icon2);
+            NendAdIconView view3 = findViewById(R.id.icon3);
+            NendAdIconView view4 = findViewById(R.id.icon4);
             
             mIconLoader = new NendAdIconLoader(getApplicationContext(), ICON_SPOT_ID, ICON_API_KEY);
             mIconLoader.addIconView(view1);

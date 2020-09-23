@@ -26,7 +26,7 @@ class NendSampleActivity : ListActivity() {
         NATIVE_VIDEO(6);
 
         companion object {
-            fun getAdType(id: Int) = AdType.values().first { it.id == id }
+            fun getAdType(id: Int) = values().first { it.id == id }
         }
 
         fun startActivity(activity: Activity) {

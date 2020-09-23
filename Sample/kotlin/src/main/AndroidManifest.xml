@@ -70,7 +70,7 @@
         <activity android:name=".nativead.NativeViewPagerActivity"/>
         <activity android:name=".nativead.NativeCarouselAdActivity"/>
         <activity android:name=".nativead.NativeMarqueeActivity"/>
-        <activity android:name=".nativead.NativeGetAdDataActivity"/>
+        <activity android:name=".nativead.NativeAdV2Activity"/>
         <activity android:name=".nativead.NativeAutoReloadActivity"/>
         <activity android:name=".nativead.NativeV2OnListActivity"/>
         <activity android:name=".nativeadvideo.ExamplesActivity" />

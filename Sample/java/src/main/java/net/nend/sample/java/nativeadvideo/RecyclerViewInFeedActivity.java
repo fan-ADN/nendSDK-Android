@@ -4,10 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +11,11 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.nend.android.NendAdNative;
 import net.nend.android.NendAdNativeVideo;
@@ -43,11 +44,14 @@ public class RecyclerViewInFeedActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     LinearLayoutManager manager = ((LinearLayoutManager) recyclerView.getLayoutManager());
+                    if (manager == null) {
+                        return;
+                    }
                     int firstPosition = manager.findFirstVisibleItemPosition();
                     int lastPosition = manager.findLastVisibleItemPosition();
 
@@ -70,7 +74,7 @@ public class RecyclerViewInFeedActivity extends AppCompatActivity {
 
     }
 
-    class NativeRecyclerAdapter extends RecyclerView.Adapter {
+    class NativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private LayoutInflater layoutInflater;
         private List<String> objects;
@@ -109,15 +113,12 @@ public class RecyclerViewInFeedActivity extends AppCompatActivity {
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
             View view;
             RecyclerView.ViewHolder viewHolder;
-            switch (viewType) {
-                case AD:
-                    view = layoutInflater.inflate(R.layout.native_video_ad_row_for_feed, viewGroup, false);
-                    viewHolder = new MyNendAdViewHolder(view, videoBinder);
-                    break;
-                default:
-                    view = layoutInflater.inflate(R.layout.native_list_row, viewGroup, false);
-                    viewHolder = new ViewHolder(view);
-                    break;
+            if (viewType == AD) {
+                view = layoutInflater.inflate(R.layout.native_video_ad_row_for_feed, viewGroup, false);
+                viewHolder = new MyNendAdViewHolder(view, videoBinder);
+            } else {
+                view = layoutInflater.inflate(R.layout.native_list_row, viewGroup, false);
+                viewHolder = new ViewHolder(view);
             }
             return viewHolder;
         }

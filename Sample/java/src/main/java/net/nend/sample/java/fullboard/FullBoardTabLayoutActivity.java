@@ -1,18 +1,20 @@
 package net.nend.sample.java.fullboard;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.ListFragment;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 
 import net.nend.android.NendAdFullBoard;
 import net.nend.android.NendAdFullBoardLoader;
@@ -45,7 +47,7 @@ public class FullBoardTabLayoutActivity extends AppCompatActivity {
     private void populateTabs(NendAdFullBoard ad) {
         mAd = ad;
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab);
+        TabLayout tabLayout = findViewById(R.id.tab);
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
@@ -67,9 +69,9 @@ public class FullBoardTabLayoutActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
+        public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            setListAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, sItems));
+            setListAdapter(new ArrayAdapter<>(requireActivity(), android.R.layout.simple_list_item_1, sItems));
         }
     }
 
@@ -85,9 +87,9 @@ public class FullBoardTabLayoutActivity extends AppCompatActivity {
 
         @Nullable
         @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             if (mAd != null) {
-                return NendAdFullBoardView.Builder.with(getActivity(), mAd).build();
+                return NendAdFullBoardView.Builder.with(requireActivity(), mAd).build();
             } else {
                 return null;
             }
@@ -101,7 +103,7 @@ public class FullBoardTabLayoutActivity extends AppCompatActivity {
     private class Adapter extends FragmentPagerAdapter {
 
         Adapter(FragmentManager fm) {
-            super(fm);
+            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
@@ -109,6 +111,7 @@ public class FullBoardTabLayoutActivity extends AppCompatActivity {
             return 3;
         }
 
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             if (0 == position || 1 == position) {
