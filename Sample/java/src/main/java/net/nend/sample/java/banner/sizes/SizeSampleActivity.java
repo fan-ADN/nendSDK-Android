@@ -36,7 +36,7 @@ public class SizeSampleActivity extends AppCompatActivity {
         instantiateListFragment();
     }
 
-    protected void instantiateListFragment() {
+    private void instantiateListFragment() {
         int id = new Random().nextInt(0xFFFF);
         FrameLayout container = new FrameLayout(this);
         container.setId(id);

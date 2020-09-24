@@ -2,14 +2,15 @@ package net.nend.sample.kotlin.interstitial
 
 import android.os.Bundle
 import android.os.Handler
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Looper
 import android.util.Log
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import net.nend.android.NendAdInterstitial
 import net.nend.sample.kotlin.R
 
 class InterstitialActivity : AppCompatActivity(),
-        NendAdInterstitial.OnClickListener, NendAdInterstitial.OnCompletionListener {
+        NendAdInterstitial.OnCompletionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +23,19 @@ class InterstitialActivity : AppCompatActivity(),
 
         (findViewById<Button>(R.id.button)).setOnClickListener {
             // 表示結果が返却される
-            val result = NendAdInterstitial.showAd(this)
+            val result = NendAdInterstitial.showAd(this@InterstitialActivity) {
+                when (it) {
+                    NendAdInterstitial.NendAdInterstitialClickType.CLOSE -> {
+                    }
+                    NendAdInterstitial.NendAdInterstitialClickType.DOWNLOAD -> {
+                    }
+                    NendAdInterstitial.NendAdInterstitialClickType.INFORMATION -> {
+                    }
+                    else -> {
+                    }
+                }
+                Log.d(TAG, it.name)
+            }
             // 表示結果に応じて処理を行う
             when (result) {
                 NendAdInterstitial.NendAdInterstitialShowResult.AD_SHOW_SUCCESS -> {
@@ -43,26 +56,10 @@ class InterstitialActivity : AppCompatActivity(),
             // 広告表示結果をログに出力
             Log.d(TAG, result.name)
             // ５秒後に広告を閉じる
-            Handler().postDelayed({ NendAdInterstitial.dismissAd() }, 5000)
+            Handler(Looper.getMainLooper()).postDelayed({ NendAdInterstitial.dismissAd() }, 5000)
         }
     }
 
-    /**
-     * インタースティシャル広告クリック通知
-     */
-    override fun onClick(clickType: NendAdInterstitial.NendAdInterstitialClickType) {
-        // クリックに応じて処理行う
-        when (clickType) {
-            NendAdInterstitial.NendAdInterstitialClickType.CLOSE -> {
-            }
-            NendAdInterstitial.NendAdInterstitialClickType.DOWNLOAD -> {
-            }
-            else -> {
-            }
-        }
-        // 広告クリックをログに出力
-        Log.d(TAG, clickType.name)
-    }
 
     /**
      * 広告受信通知

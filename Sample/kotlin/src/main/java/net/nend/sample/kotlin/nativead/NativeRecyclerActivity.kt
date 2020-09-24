@@ -4,18 +4,19 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.native_recycler.*
 import net.nend.android.NendAdNative
 import net.nend.android.NendAdNativeClient
+import net.nend.android.NendAdNativeListener
 import net.nend.android.NendAdNativeViewBinder
 import net.nend.sample.kotlin.R
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_API_KEY_SMALL_SQUARE
@@ -45,7 +46,7 @@ class NativeRecyclerActivity : AppCompatActivity() {
     }
 
     internal inner class NativeRecyclerAdapter(context: Context, private val list: List<String>) :
-            androidx.recyclerview.widget.RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+            RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
         private val client: NendAdNativeClient = NendAdNativeClient(context,
@@ -64,7 +65,7 @@ class NativeRecyclerActivity : AppCompatActivity() {
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val view: View
-            var viewHolder: RecyclerView.ViewHolder
+            val viewHolder: RecyclerView.ViewHolder
 
             when (viewType) {
                 ViewType.AD.id -> {
@@ -102,8 +103,18 @@ class NativeRecyclerActivity : AppCompatActivity() {
                                     if (viewHolder is MyNendAdViewHolder) {
                                         intoView(viewHolder.myItemView, viewHolder.normalBinder)
                                     }
-                                    setOnClickListener({
-                                        Log.i(NATIVE_LOG_TAG, "クリック$position")
+                                    setNendAdNativeListener(object : NendAdNativeListener {
+                                        override fun onImpression(ad: NendAdNative) {
+                                            Log.i(NATIVE_LOG_TAG, "onImpression")
+                                        }
+
+                                        override fun onClickAd(ad: NendAdNative) {
+                                            Log.i(NATIVE_LOG_TAG, "onClickAd")
+                                        }
+
+                                        override fun onClickInformation(ad: NendAdNative) {
+                                            Log.i(NATIVE_LOG_TAG, "onClickInformation")
+                                        }
                                     })
                                     loadedAd[position] = this
                                 }
@@ -112,7 +123,7 @@ class NativeRecyclerActivity : AppCompatActivity() {
                             override fun onFailure(nendError: NendAdNativeClient.NendError) {
                                 Log.i(NATIVE_LOG_TAG, "広告取得失敗: ${nendError.message} ")
                                 // すでに取得済みの広告をランダムで表示
-                                if (!loadedAd.isEmpty()) {
+                                if (loadedAd.isNotEmpty()) {
                                     positionList.shuffle()
                                     if (viewHolder is MyNendAdViewHolder) {
                                         loadedAd[positionList[0]]?.intoView(viewHolder.myItemView, viewHolder.normalBinder)

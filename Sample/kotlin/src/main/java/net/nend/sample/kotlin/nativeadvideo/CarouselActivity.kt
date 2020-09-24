@@ -3,17 +3,18 @@ package net.nend.sample.kotlin.nativeadvideo
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.os.Looper
 import android.util.Log
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import net.nend.android.NendAdNativeVideo
 import net.nend.android.NendAdNativeVideoListener
 import net.nend.android.NendAdNativeVideoLoader
@@ -38,7 +39,7 @@ class CarouselActivity : AppCompatActivity(), NativeCarouselPagerFragment.OnAdLi
 
     private var menuPosition = 0
     private lateinit var autoCarouselRunnable: Runnable
-    private var handler = Handler()
+    private var handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -198,7 +199,7 @@ class CarouselActivity : AppCompatActivity(), NativeCarouselPagerFragment.OnAdLi
     }
 
     // カルーセル部分ViewPager用Adapter
-    inner class CustomPagerAdapter internal constructor(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
+    inner class CustomPagerAdapter internal constructor(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getItem(position: Int) =
                 NativeCarouselPagerFragment.newInstance(position, R.layout.native_video_carousel_fragment)

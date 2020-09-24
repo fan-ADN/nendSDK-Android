@@ -2,8 +2,9 @@ package net.nend.sample.kotlin.fullboard
 
 import android.os.Bundle
 import android.os.Handler
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Looper
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_full_board_web.*
 import net.nend.android.NendAdFullBoard
 import net.nend.android.NendAdFullBoardLoader
@@ -25,7 +26,7 @@ class FullBoardWebViewActivity : AppCompatActivity(), NendAdFullBoard.FullBoardA
         webview.setCallback(object : ObservableWebView.Callback {
             override fun onScrollEnd() {
                 ad?.let {
-                    Handler().postDelayed({ it.show(this@FullBoardWebViewActivity) }, 500L)
+                    Handler(Looper.getMainLooper()).postDelayed({ it.show(this@FullBoardWebViewActivity) }, 500L)
                 }
             }
         })

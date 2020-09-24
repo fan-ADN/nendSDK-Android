@@ -1,11 +1,11 @@
 package net.nend.sample.kotlin.nativead
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.text.Layout
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.native_marquee.*
 import net.nend.android.NendAdNative
 import net.nend.android.NendAdNativeClient
@@ -33,7 +33,7 @@ class NativeMarqueeActivity : AppCompatActivity() {
     private var endX: Int = 0            // NendNativeTextView width
     private lateinit var thread: Thread          // runnable thread
     private var currentX: Int = 0                  // current text position
-    private var isEndlessLoop: Boolean = false         // endless flag
+//    private var isEndlessLoop: Boolean = false         // endless flag
 
     /**
      * Runnable variable for marquee
@@ -57,9 +57,9 @@ class NativeMarqueeActivity : AppCompatActivity() {
 
                     if (currentX >= endX) {
                         currentX = marqueeStartX
-                        if (!isEndlessLoop) {
-                            break
-                        }
+//                        if (!isEndlessLoop) {
+//                            break
+//                        }
                     }
 
                     currentX += textMoveSpeed
@@ -96,8 +96,8 @@ class NativeMarqueeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.native_marquee)
 
-        marqueeView = findViewById(R.id.horizontalScrollView) as MarqueeView
-        textView = findViewById(R.id.ad_content) as TextView
+        marqueeView = findViewById(R.id.horizontalScrollView)
+        textView = findViewById(R.id.ad_content)
         adContainer = findViewById(R.id.ad)
 
         val binder = NendAdNativeViewBinder.Builder()
@@ -123,8 +123,8 @@ class NativeMarqueeActivity : AppCompatActivity() {
                 }
             })
         }
-
-        setEndless(true)
+//
+//        setEndless(true)
     }
 
     /**
@@ -152,14 +152,14 @@ class NativeMarqueeActivity : AppCompatActivity() {
         ad_pr.width = prWidth / 2
     }
 
-    private fun setEndless(isEndless: Boolean) {
-        isEndlessLoop = isEndless
-    }
+//    private fun setEndless(isEndless: Boolean) {
+//        isEndlessLoop = isEndless
+//    }
 
     /**
      * clear marquee
      */
-    fun clearMarquee() {
+    private fun clearMarquee() {
         currentX = marqueeStartX
         threadStopper = true
     }
@@ -167,7 +167,7 @@ class NativeMarqueeActivity : AppCompatActivity() {
     /**
      * start marquee
      */
-    fun startMarquee() {
+    private fun startMarquee() {
         clearMarquee()
         threadStopper = false
         thread = Thread(runnable).apply {

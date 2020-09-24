@@ -1,14 +1,14 @@
 package net.nend.sample.kotlin.fullboard
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import kotlinx.android.synthetic.main.activity_full_board_tab_layout.*
 import net.nend.android.NendAdFullBoard
 import net.nend.android.NendAdFullBoardLoader
@@ -90,7 +90,7 @@ class FullBoardTabLayoutActivity : AppCompatActivity() {
         }
     }
 
-    private inner class Adapter internal constructor(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    private inner class Adapter internal constructor(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getCount() = 3
 

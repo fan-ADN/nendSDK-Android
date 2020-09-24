@@ -38,13 +38,6 @@ class VideoActivity : AppCompatActivity() {
         progressDialog.dialogMessage = "Now loading..."
     }
 
-    override fun onStart() {
-        super.onStart()
-        if (!verifyPermissions()) {
-            requestPermissions()
-        }
-    }
-
     override fun onPause() {
         super.onPause()
         if (progressDialog.isShowing()) {
@@ -60,6 +53,11 @@ class VideoActivity : AppCompatActivity() {
 
     fun onClickLoadReward(view: View) {
         Log.d(TAG, "Click load reward button.")
+        if (!verifyPermissions()) {
+            requestPermissions()
+            return
+        }
+
         if (nendAdRewardedVideo == null) {
             nendAdRewardedVideo = NendAdRewardedVideo(this,
                     REWARDED_VIDEO_SPOT_ID, REWARDED_VIDEO_API_KEY).apply {
@@ -170,6 +168,10 @@ class VideoActivity : AppCompatActivity() {
 
     fun onClickLoadInterstitial(view: View) {
         Log.d(TAG, "Click load interstitial button.")
+        if (!verifyPermissions()) {
+            requestPermissions()
+            return
+        }
         if (nendAdInterstitialVideo == null) {
             nendAdInterstitialVideo = NendAdInterstitialVideo(this,
                     INTERSTITIAL_VIDEO_SPOT_ID, INTERSTITIAL_VIDEO_API_KEY).apply {
@@ -283,16 +285,16 @@ class VideoActivity : AppCompatActivity() {
 
     private fun verifyPermissions(): Boolean {
         val state = ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
+                Manifest.permission.ACCESS_COARSE_LOCATION)
         return state == PackageManager.PERMISSION_GRANTED
     }
 
     private fun showRequestPermissionDialog() = ActivityCompat.requestPermissions(this,
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_PERMISSIONS_REQUEST_CODE)
+            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_PERMISSIONS_REQUEST_CODE)
 
     private fun requestPermissions() {
         val shouldRequest = ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
+                Manifest.permission.ACCESS_COARSE_LOCATION)
         if (shouldRequest) {
             Snackbar.make(findViewById(R.id.base_layout),
                     "Location permission is needed for get the last Location. It's a demo that uses location data.",

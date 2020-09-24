@@ -3,7 +3,6 @@ package net.nend.sample.kotlin.nativeadvideo
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +11,12 @@ import android.widget.ArrayAdapter
 import android.widget.GridView
 import android.widget.ImageView
 import android.widget.TextView
-
+import androidx.appcompat.app.AppCompatActivity
 import net.nend.android.NendAdNative
 import net.nend.android.NendAdNativeVideo
 import net.nend.android.NendAdNativeVideoLoader
 import net.nend.android.NendAdNativeViewBinder
+import net.nend.sample.kotlin.BuildConfig
 import net.nend.sample.kotlin.R
 import net.nend.sample.kotlin.nativeadvideo.utilities.MyNendAdViewBinder
 import net.nend.sample.kotlin.nativeadvideo.utilities.MyNendAdViewHolder
@@ -38,7 +38,9 @@ class GridViewInFeedActivity : AppCompatActivity() {
 
         val gridView = findViewById<GridView>(R.id.grid)
         val adapter = NativeGridAdapter(this, 0, list)
-        assert(gridView != null)
+        if (BuildConfig.DEBUG && gridView == null) {
+            error("Assertion failed")
+        }
         gridView!!.adapter = adapter
     }
 

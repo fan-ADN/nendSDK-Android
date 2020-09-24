@@ -3,19 +3,20 @@ package net.nend.sample.kotlin.nativead
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import net.nend.android.NendAdNative
 import net.nend.android.NendAdNativeClient
+import net.nend.android.NendAdNativeListener
 import net.nend.android.NendAdNativeViewBinder
 import net.nend.sample.kotlin.R
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_API_KEY_LARGE_WIDE
@@ -53,20 +54,20 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
         // セルのスクロールイン・スクロールアウトでオートカルーセルを操作
         recyclerView.addOnChildAttachStateChangeListener(
                 object : RecyclerView.OnChildAttachStateChangeListener {
-            override fun onChildViewAttachedToWindow(view: View) {
-                if (view.tag != null &&
-                        view.tag == "CAROUSEL" && menuPosition == AUTO_CAROUSEL_MENU_POSITION) {
-                    handler?.postDelayed(autoCarouselRunnable, INTERVAL.toLong())
-                }
-            }
+                    override fun onChildViewAttachedToWindow(view: View) {
+                        if (view.tag != null &&
+                                view.tag == "CAROUSEL" && menuPosition == AUTO_CAROUSEL_MENU_POSITION) {
+                            handler?.postDelayed(autoCarouselRunnable, INTERVAL.toLong())
+                        }
+                    }
 
-            override fun onChildViewDetachedFromWindow(view: View) {
-                if (view.tag != null &&
-                        view.tag == "CAROUSEL" && menuPosition == AUTO_CAROUSEL_MENU_POSITION) {
-                    handler?.removeCallbacks(autoCarouselRunnable)
-                }
-            }
-        })
+                    override fun onChildViewDetachedFromWindow(view: View) {
+                        if (view.tag != null &&
+                                view.tag == "CAROUSEL" && menuPosition == AUTO_CAROUSEL_MENU_POSITION) {
+                            handler?.removeCallbacks(autoCarouselRunnable)
+                        }
+                    }
+                })
 
         binder = NendAdNativeViewBinder.Builder()
                 .adImageId(R.id.ad_image)
@@ -103,7 +104,19 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
                     Log.i(NATIVE_LOG_TAG, "広告取得成功")
                     nendAdNative.run {
                         intoView(view, binder)
-                        setOnClickListener { Log.i(NATIVE_LOG_TAG, "クリック") }
+                        setNendAdNativeListener(object : NendAdNativeListener {
+                            override fun onImpression(ad: NendAdNative) {
+                                Log.i(NATIVE_LOG_TAG, "onImpression")
+                            }
+
+                            override fun onClickAd(ad: NendAdNative) {
+                                Log.i(NATIVE_LOG_TAG, "onClickAd")
+                            }
+
+                            override fun onClickInformation(ad: NendAdNative) {
+                                Log.i(NATIVE_LOG_TAG, "onClickInformation")
+                            }
+                        })
                         loadedAd[position] = this
                     }
                 }
@@ -179,7 +192,7 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
                 viewPager.pageMargin = resources.displayMetrics.widthPixels / -10
                 // オートカルーセル
                 if (menuPosition == AUTO_CAROUSEL_MENU_POSITION) {
-                    handler = Handler()
+                    handler = Handler(Looper.getMainLooper())
                     autoCarouselRunnable = object : Runnable {
                         override fun run() {
                             var nextItem = viewPager.currentItem + 1
@@ -197,7 +210,7 @@ class NativeCarouselAdActivity : AppCompatActivity(), NativeCarouselPagerFragmen
 
     // カルーセル部分ViewPager用Adapter
     inner class CustomPagerAdapter(fragmentManager: FragmentManager) :
-            androidx.fragment.app.FragmentPagerAdapter(fragmentManager) {
+            androidx.fragment.app.FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getItem(position: Int): Fragment =
                 NativeCarouselPagerFragment.newInstance(position, R.layout.native_carousel_fragment)

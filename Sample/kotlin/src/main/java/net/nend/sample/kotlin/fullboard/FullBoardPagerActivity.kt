@@ -1,23 +1,24 @@
 package net.nend.sample.kotlin.fullboard
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.loader.app.LoaderManager
-import androidx.loader.content.AsyncTaskLoader
-import androidx.loader.content.Loader
-import androidx.viewpager.widget.PagerAdapter
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Looper
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.Loader
+import androidx.viewpager.widget.PagerAdapter
 import kotlinx.android.synthetic.main.activity_full_board_pager.*
 import net.nend.android.NendAdFullBoard
 import net.nend.android.NendAdFullBoardLoader
@@ -35,12 +36,12 @@ class FullBoardPagerActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_full_board_pager)
 
-        supportLoaderManager.initLoader(0, Bundle(), this)
+        LoaderManager.getInstance(this).initLoader(0, Bundle(), this)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        Handler().post {
+        Handler(Looper.getMainLooper()).post {
             // Update the ad orientation.
             pager.adapter?.notifyDataSetChanged()
         }
@@ -69,6 +70,7 @@ class FullBoardPagerActivity : AppCompatActivity(),
     }
 
     class ContentFragment : Fragment() {
+        @SuppressLint("SetTextI18n")
         override fun onCreateView(
                 inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             return TextView(activity).apply {
@@ -106,7 +108,7 @@ class FullBoardPagerActivity : AppCompatActivity(),
         }
     }
 
-    private class AdLoader internal constructor(context: Context) :
+    private class AdLoader(context: Context) :
             androidx.loader.content.AsyncTaskLoader<List<NendAdFullBoard>>(context) {
 
         private var ads: List<NendAdFullBoard>? = null
@@ -170,14 +172,14 @@ class FullBoardPagerActivity : AppCompatActivity(),
             get() = ContentFragment()
     }
 
-    private inner class AdPage internal constructor(private val ad: NendAdFullBoard) : Page {
+    private inner class AdPage(private val ad: NendAdFullBoard) : Page {
 
         override val fragment: Fragment
             get() = AdFragment().apply { setAd(ad) }
     }
 
-    private inner class Adapter internal constructor(
-            fm: FragmentManager, private val pages: List<Page>) : FragmentPagerAdapter(fm) {
+    private inner class Adapter(
+            fm: FragmentManager, private val pages: List<Page>) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getItemPosition(`object`: Any): Int {
             return if (`object` is AdFragment) {

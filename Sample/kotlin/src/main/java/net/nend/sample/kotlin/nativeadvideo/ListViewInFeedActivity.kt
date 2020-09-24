@@ -1,6 +1,5 @@
 package net.nend.sample.kotlin.nativeadvideo
 
-import android.app.ListActivity
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
@@ -11,16 +10,16 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
-
 import net.nend.android.NendAdNative
 import net.nend.android.NendAdNativeVideo
 import net.nend.android.NendAdNativeVideoLoader
 import net.nend.android.NendAdNativeViewBinder
 import net.nend.sample.kotlin.R
+import net.nend.sample.kotlin.SimpleListActivity
 import net.nend.sample.kotlin.nativeadvideo.utilities.MyNendAdViewBinder
 import net.nend.sample.kotlin.nativeadvideo.utilities.MyNendAdViewHolder
 
-class ListViewInFeedActivity : ListActivity() {
+class ListViewInFeedActivity : SimpleListActivity() {
     private enum class ViewType(val id: Int) {
         NORMAL(0),
         AD(1)
@@ -33,7 +32,7 @@ class ListViewInFeedActivity : ListActivity() {
 
         val list = (1..99).map { "item$it" }
         val adapter = NativeListAdapter(this, 0, list)
-        listAdapter = adapter
+        instantiateListAdapter(adapter)
     }
 
     internal inner class NativeListAdapter(context: Context, resource: Int, list: List<String>) : ArrayAdapter<String>(context, resource, list) {

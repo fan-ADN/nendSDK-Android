@@ -3,7 +3,6 @@ package net.nend.sample.kotlin.nativead
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +10,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.native_grid.*
-import net.nend.android.NendAdNative
-import net.nend.android.NendAdNativeClient
-import net.nend.android.NendAdNativeViewBinder
-import net.nend.android.NendAdNativeViewHolder
+import net.nend.android.*
 import net.nend.sample.kotlin.R
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_API_KEY_SMALL_SQUARE
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_LOG_TAG
@@ -90,7 +87,19 @@ class NativeGridActivity : AppCompatActivity() {
                     positionList.add(position)
                     nendAdNative.run {
                         intoView(adHolder)
-                        setOnClickListener({ Log.i(NATIVE_LOG_TAG, "クリック") })
+                        setNendAdNativeListener(object : NendAdNativeListener {
+                            override fun onImpression(ad: NendAdNative) {
+                                Log.i(NATIVE_LOG_TAG, "onImpression")
+                            }
+
+                            override fun onClickAd(ad: NendAdNative) {
+                                Log.i(NATIVE_LOG_TAG, "onClickAd")
+                            }
+
+                            override fun onClickInformation(ad: NendAdNative) {
+                                Log.i(NATIVE_LOG_TAG, "onClickInformation")
+                            }
+                        })
                         loadedAd[position] = this
                     }
                 }
@@ -98,7 +107,7 @@ class NativeGridActivity : AppCompatActivity() {
                 override fun onFailure(nendError: NendAdNativeClient.NendError) {
                     Log.i(NATIVE_LOG_TAG, "広告取得失敗: ${nendError.message}")
                     // すでに取得済みの広告がればランダムで表示
-                    if (!loadedAd.isEmpty()) {
+                    if (loadedAd.isNotEmpty()) {
                         positionList.shuffle()
                         loadedAd[positionList[0]]?.intoView(adHolder)
                     }

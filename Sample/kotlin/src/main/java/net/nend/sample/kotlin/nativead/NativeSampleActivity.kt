@@ -1,14 +1,19 @@
 package net.nend.sample.kotlin.nativead
 
 import android.app.Activity
-import android.app.ListActivity
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ListView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.ListFragment
 import net.nend.sample.kotlin.R
+import java.util.*
 
-class NativeSampleActivity : ListActivity() {
+class NativeSampleActivity : AppCompatActivity() {
 
     private enum class SampleType {
         SMALL_SQUARE_SAMPLE,
@@ -57,12 +62,30 @@ class NativeSampleActivity : ListActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_native_sample)
+        instantiateListFragment()
     }
 
-    override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
-        super.onListItemClick(l, v, position, id)
-        SampleType.getType(position).startActivity(this)
+    private fun instantiateListFragment() {
+        val id = Random().nextInt(0xFFFF)
+        val container = FrameLayout(this)
+        container.id = id
+        setContentView(container, ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
+        supportFragmentManager
+                .beginTransaction()
+                .add(id, SampleListFragment(R.layout.activity_native_sample))
+                .commit()
+    }
+
+    class SampleListFragment(private val resId: Int) : ListFragment() {
+        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+            setHasOptionsMenu(true)
+            return inflater.inflate(resId, container, false)
+        }
+
+        override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
+            activity?.let { SampleType.getType(position).startActivity(it) }
+        }
     }
 
     companion object {

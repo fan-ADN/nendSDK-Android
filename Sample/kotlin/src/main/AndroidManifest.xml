@@ -3,6 +3,8 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="net.nend.sample.kotlin">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:name=".NendSampleApp"
         android:allowBackup="true"
@@ -33,26 +35,26 @@
             android:name=".video.VideoActivity"
             android:configChanges="orientation|screenSize">
         </activity>
-        <activity android:name=".banner.XmlSampleActivity"/>
-        <activity android:name=".banner.XmlLayoutActivity"/>
-        <activity android:name=".banner.XmlResourceActivity"/>
-        <activity android:name=".banner.NoXmlLayoutActivity"/>
-        <activity android:name=".banner.LayoutSampleActivity"/>
-        <activity android:name=".banner.SizeSampleActivity"/>
-        <activity android:name=".banner.SizeActivity"/>
-        <activity android:name=".banner.TopActivity"/>
-        <activity android:name=".banner.BottomActivity"/>
-        <activity android:name=".banner.NoXmlLinearActivity"/>
-        <activity android:name=".banner.NoXmlRelativeActivity"/>
-        <activity android:name=".banner.NoXmlWithListenerActivity"/>
-        <activity android:name=".banner.XmlWithListenerActivity"/>
-        <activity android:name=".banner.AttachAndDetachActivity"/>
-        <activity android:name=".banner.ListViewActivity"/>
-        <activity android:name=".banner.ViewPagerActivity"/>
-        <activity android:name=".banner.PagerAndListActivity"/>
-        <activity android:name=".banner.FragmentReplaceActivity"/>
+        <activity android:name=".banner.xmllayout.XmlSampleActivity"/>
+        <activity android:name=".banner.xmllayout.XmlLayoutActivity"/>
+        <activity android:name=".banner.xmllayout.XmlResourceActivity"/>
+        <activity android:name=".banner.noxml.NoXmlLayoutActivity"/>
+        <activity android:name=".banner.layoutpatterns.LayoutSampleActivity"/>
+        <activity android:name=".banner.sizes.SizeSampleActivity"/>
+        <activity android:name=".banner.sizes.SizeActivity"/>
+        <activity android:name=".banner.layoutpatterns.TopActivity"/>
+        <activity android:name=".banner.layoutpatterns.BottomActivity"/>
+        <activity android:name=".banner.noxml.NoXmlLinearActivity"/>
+        <activity android:name=".banner.noxml.NoXmlRelativeActivity"/>
+        <activity android:name=".banner.noxml.NoXmlWithListenerActivity"/>
+        <activity android:name=".banner.xmllayout.XmlWithListenerActivity"/>
+        <activity android:name=".banner.layoutpatterns.AttachAndDetachActivity"/>
+        <activity android:name=".banner.layoutpatterns.ListViewActivity"/>
+        <activity android:name=".banner.layoutpatterns.ViewPagerActivity"/>
+        <activity android:name=".banner.layoutpatterns.PagerAndListActivity"/>
+        <activity android:name=".banner.layoutpatterns.FragmentReplaceActivity"/>
         <activity
-            android:name=".banner.DialogActivity"
+            android:name=".banner.layoutpatterns.DialogActivity"
             android:configChanges="orientation|screenSize"/>
         <activity android:name=".icon.IconResourceActivity"/>
         <activity android:name=".icon.IconActivity"/>
@@ -60,9 +62,9 @@
         <activity android:name=".icon.IconDialogActivity"/>
         <activity android:name=".icon.IconAttachAndDetachActivity"/>
         <activity android:name=".icon.IconSpaceActivity"/>
-        <activity android:name=".banner.AdjustSizeActivity"/>
-        <activity android:name=".banner.AdjustSizeNoXmlActivity"/>
-        <activity android:name=".banner.AdjustSizeXmlLayoutActivity"/>
+        <activity android:name=".banner.adjust.AdjustSizeActivity"/>
+        <activity android:name=".banner.adjust.AdjustSizeNoXmlActivity"/>
+        <activity android:name=".banner.adjust.AdjustSizeXmlLayoutActivity"/>
         <activity android:name=".nativead.NativeLayoutActivity"/>
         <activity android:name=".nativead.NativeMultipleLayoutListActivity"/>
         <activity android:name=".nativead.NativeGridActivity"/>

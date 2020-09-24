@@ -1,4 +1,4 @@
-package net.nend.sample.kotlin.banner
+package net.nend.sample.kotlin.banner.xmllayout
 
 import android.app.Activity
 import android.app.ListActivity
@@ -8,11 +8,12 @@ import android.view.View
 import android.widget.ListView
 import net.nend.sample.kotlin.R
 
-class AdjustSizeActivity : ListActivity() {
+class XmlSampleActivity : ListActivity() {
 
     private enum class SampleType(val id: Int) {
-        ADJUST_SIZE_XML(0),
-        ADJUST_SIZE_NO_XML(1);
+        XML_SAMPLE(0),
+        XML_RESOURCE_SAMPLE(1),
+        LISTENER_SAMPLE(2);
 
         companion object {
             fun getType(id: Int) = values().first { it.id == id }
@@ -20,17 +21,19 @@ class AdjustSizeActivity : ListActivity() {
 
         fun startActivity(activity: Activity) {
             when (this) {
-                ADJUST_SIZE_XML -> activity.startActivity(Intent(activity,
-                        AdjustSizeXmlLayoutActivity::class.java))
-                ADJUST_SIZE_NO_XML -> activity.startActivity(Intent(activity,
-                        AdjustSizeNoXmlActivity::class.java))
+                XML_SAMPLE -> activity.startActivity(Intent(activity,
+                        XmlLayoutActivity::class.java))
+                XML_RESOURCE_SAMPLE -> activity.startActivity(Intent(activity,
+                        XmlResourceActivity::class.java))
+                LISTENER_SAMPLE -> activity.startActivity(Intent(activity,
+                        XmlWithListenerActivity::class.java))
             }
         }
     }
 
-    public override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.adjust_size_sample)
+        setContentView(R.layout.xml_sample)
     }
 
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {

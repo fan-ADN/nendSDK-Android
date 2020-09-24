@@ -7,6 +7,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ListView
 import net.nend.sample.kotlin.R
+import net.nend.sample.kotlin.banner.adjust.AdjustSizeActivity
+import net.nend.sample.kotlin.banner.layoutpatterns.DialogActivity
+import net.nend.sample.kotlin.banner.layoutpatterns.LayoutSampleActivity
+import net.nend.sample.kotlin.banner.noxml.NoXmlLayoutActivity
+import net.nend.sample.kotlin.banner.sizes.SizeSampleActivity
+import net.nend.sample.kotlin.banner.xmllayout.XmlSampleActivity
 
 class BannerSampleActivity : ListActivity() {
 

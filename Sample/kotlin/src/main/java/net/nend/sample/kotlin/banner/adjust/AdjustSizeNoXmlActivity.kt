@@ -1,4 +1,4 @@
-package net.nend.sample.kotlin.banner
+package net.nend.sample.kotlin.banner.adjust
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

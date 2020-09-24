@@ -1,6 +1,5 @@
 package net.nend.sample.kotlin.nativead
 
-import android.app.ListActivity
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -13,11 +12,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import net.nend.android.NendAdNative
 import net.nend.android.NendAdNativeClient
+import net.nend.android.NendAdNativeListener
 import net.nend.sample.kotlin.R
+import net.nend.sample.kotlin.SimpleListActivity
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_API_KEY_SMALL_SQUARE
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_SPOT_ID_SMALL_SQUARE
 
-class NativeV2OnListActivity : ListActivity() {
+class NativeV2OnListActivity : SimpleListActivity() {
 
     private enum class ViewType(val id: Int) {
         NORMAL(0),
@@ -44,17 +45,17 @@ class NativeV2OnListActivity : ListActivity() {
             } else {
                 feed.type = ViewType.NORMAL.id
                 feed.content = "【" + i + "行目】インフィード広告記事部分長いテキスト　インフィード広告記事部分長いテキスト　インフィード広告記事部分長いテキスト"
-                feed.mediaName = "メディア名" + i
+                feed.mediaName = "メディア名$i"
                 feed.date = "1970/01/01"
             }
             list.add(feed)
         }
 
         val adapter = NativeListAdapter(applicationContext, 0, list)
-        listAdapter = adapter
+        instantiateListAdapter(adapter)
     }
 
-    private inner class NativeListAdapter internal constructor(
+    private inner class NativeListAdapter(
             context: Context, resource: Int, private val objects: List<Any>) :
             ArrayAdapter<Any>(context, resource, objects) {
 
@@ -98,9 +99,19 @@ class NativeV2OnListActivity : ListActivity() {
                                                 AdvertisingExplicitly.AD.text
                                         holder.thumbnail?.setImageBitmap(it.adImage)
                                         it.nendAdNative?.activate(view, holder.smallText)
-                                        it.nendAdNative?.setOnClickListener {
-                                            ad -> Log.d("onclick", "$ad")
-                                        }
+                                        it.nendAdNative?.setNendAdNativeListener(object : NendAdNativeListener {
+                                            override fun onImpression(ad: NendAdNative) {
+                                                Log.i(TAG, "onImpression")
+                                            }
+
+                                            override fun onClickAd(ad: NendAdNative) {
+                                                Log.i(TAG, "onClickAd")
+                                            }
+
+                                            override fun onClickInformation(ad: NendAdNative) {
+                                                Log.i(TAG, "onClickInformation")
+                                            }
+                                        })
                                     }
                                 }
 
@@ -128,7 +139,7 @@ class NativeV2OnListActivity : ListActivity() {
             return view
         }
 
-        internal inner class ViewHolder {
+        inner class ViewHolder {
             var title: TextView? = null
             var contentText: TextView? = null
             var smallText: TextView? = null
@@ -137,11 +148,17 @@ class NativeV2OnListActivity : ListActivity() {
     }
 
     private inner class NativeFeed {
-        internal var type: Int = 0
+        var type: Int = 0
         var content: String? = null
-        internal var date: String? = null
-        internal var mediaName: String? = null
-        internal var adImage: Bitmap? = null
+        var date: String? = null
+        var mediaName: String? = null
+        var adImage: Bitmap? = null
         var nendAdNative: NendAdNative? = null
     }
+
+
+    companion object {
+        private val TAG = NativeV2OnListActivity::class.java.simpleName
+    }
+
 }

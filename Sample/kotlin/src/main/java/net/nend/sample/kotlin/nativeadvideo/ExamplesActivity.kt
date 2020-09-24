@@ -1,54 +1,26 @@
 package net.nend.sample.kotlin.nativeadvideo
 
-import android.app.Activity
-import android.app.ListActivity
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.ListView
 import net.nend.sample.kotlin.R
+import net.nend.sample.kotlin.SimpleListActivity
+import java.util.*
 
-class ExamplesActivity : ListActivity() {
+class ExamplesActivity : SimpleListActivity() {
 
-    private enum class Examples(val id: Int) {
-        SIMPLE(0),
-        IN_BANNER(1),
-        LIST_VIEW(2),
-        GRID_VIEW(3),
-        RECYCLER_VIEW(4),
-        CAROUSEL(5);
-
-        companion object {
-            fun get(id: Int) = values().first { it.id == id }
-        }
-
-        fun startActivity(activity: Activity) {
-            when (this) {
-                SIMPLE -> activity.startActivity(Intent(activity,
-                        SimpleActivity::class.java))
-                IN_BANNER -> activity.startActivity(Intent(activity,
-                        InBannerActivity::class.java))
-                LIST_VIEW -> activity.startActivity(Intent(activity,
-                        ListViewInFeedActivity::class.java))
-                GRID_VIEW -> activity.startActivity(Intent(activity,
-                        GridViewInFeedActivity::class.java))
-                RECYCLER_VIEW -> activity.startActivity(Intent(activity,
-                        RecyclerViewInFeedActivity::class.java))
-                CAROUSEL -> activity.startActivity(Intent(activity,
-                        CarouselActivity::class.java))
-            }
+    private val list: ArrayList<Class<*>?> = object : ArrayList<Class<*>?>() {
+        init {
+            add(SimpleActivity::class.java)
+            add(InBannerActivity::class.java)
+            add(ListViewInFeedActivity::class.java)
+            add(GridViewInFeedActivity::class.java)
+            add(RecyclerViewInFeedActivity::class.java)
+            add(CarouselActivity::class.java)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_native_video_examples)
-    }
-
-    override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
-        super.onListItemClick(l, v, position, id)
-
-        Examples.get(position).startActivity(this)
+        instantiateMenuListFragment(R.layout.activity_native_video_examples, list)
     }
 
     companion object {

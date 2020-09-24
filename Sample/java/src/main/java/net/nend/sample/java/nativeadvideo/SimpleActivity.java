@@ -94,7 +94,7 @@ public class SimpleActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onError(int i, String s) {
+                        public void onError(int errorCode, @NonNull String message) {
 
                         }
                     });

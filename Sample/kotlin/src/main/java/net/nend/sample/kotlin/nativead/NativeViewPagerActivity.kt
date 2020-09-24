@@ -1,15 +1,16 @@
 package net.nend.sample.kotlin.nativead
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
-import android.view.View
 import net.nend.android.NendAdNative
 import net.nend.android.NendAdNativeClient
+import net.nend.android.NendAdNativeListener
 import net.nend.android.NendAdNativeViewBinder
 import net.nend.sample.kotlin.R
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_API_KEY_LARGE_WIDE
@@ -54,7 +55,19 @@ class NativeViewPagerActivity : AppCompatActivity(), NativePagerFragment.OnAdLis
                     positionList.add(position)
                     nendAdNative.run {
                         intoView(view, binder)
-                        setOnClickListener({ Log.i(TAG, "クリック") })
+                        setNendAdNativeListener(object : NendAdNativeListener {
+                            override fun onImpression(ad: NendAdNative) {
+                                Log.i(TAG, "onImpression")
+                            }
+
+                            override fun onClickAd(ad: NendAdNative) {
+                                Log.i(TAG, "onClickAd")
+                            }
+
+                            override fun onClickInformation(ad: NendAdNative) {
+                                Log.i(TAG, "onClickInformation")
+                            }
+                        })
                         loadedAd[position] = this
                     }
                 }
@@ -62,7 +75,7 @@ class NativeViewPagerActivity : AppCompatActivity(), NativePagerFragment.OnAdLis
                 override fun onFailure(nendError: NendAdNativeClient.NendError) {
                     Log.i(TAG, "広告取得失敗: ${nendError.message} ")
                     // すでに取得済みの広告があればランダムで表示
-                    if (!loadedAd.isEmpty()) {
+                    if (loadedAd.isNotEmpty()) {
                         positionList.shuffle()
                         loadedAd[positionList[0]]?.intoView(view, binder)
                     }
@@ -71,7 +84,7 @@ class NativeViewPagerActivity : AppCompatActivity(), NativePagerFragment.OnAdLis
         }
     }
 
-    inner class CustomPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    inner class CustomPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         override fun getItem(position: Int): Fragment {
             return NativePagerFragment().apply {
                 arguments = Bundle().apply {

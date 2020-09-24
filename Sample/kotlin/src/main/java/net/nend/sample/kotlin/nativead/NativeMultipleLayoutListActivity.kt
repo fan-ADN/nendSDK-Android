@@ -1,6 +1,5 @@
 package net.nend.sample.kotlin.nativead
 
-import android.app.ListActivity
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
@@ -16,11 +15,12 @@ import net.nend.android.NendAdNativeClient
 import net.nend.android.NendAdNativeViewBinder
 import net.nend.android.NendAdNativeViewHolder
 import net.nend.sample.kotlin.R
+import net.nend.sample.kotlin.SimpleListActivity
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_API_KEY_SMALL_SQUARE
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_LOG_TAG
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_SPOT_ID_SMALL_SQUARE
 
-class NativeMultipleLayoutListActivity : ListActivity() {
+class NativeMultipleLayoutListActivity : SimpleListActivity() {
 
     private enum class ViewType(val id: Int) {
         NORMAL(0),
@@ -37,7 +37,7 @@ class NativeMultipleLayoutListActivity : ListActivity() {
         super.onCreate(savedInstanceState)
 
         val list = (1..99).map { i -> "item$i" }
-        listAdapter = NativeListAdapter(this, 0, list)
+        instantiateListAdapter(NativeListAdapter(this, 0, list))
     }
 
     internal inner class NativeListAdapter(context: Context, resource: Int, list: List<String>) :
@@ -126,7 +126,7 @@ class NativeMultipleLayoutListActivity : ListActivity() {
                 override fun onFailure(nendError: NendAdNativeClient.NendError) {
                     Log.i(NATIVE_LOG_TAG, "広告取得失敗: ${nendError.message}")
                     // すでに取得済みの広告があればランダムで表示
-                    if (!loadedAd.isEmpty()) {
+                    if (loadedAd.isNotEmpty()) {
                         positionList.shuffle()
                         loadedAd[positionList[0]]?.intoView(adHolder)
                     }
