@@ -21,14 +21,12 @@ public class FullBoardMenuActivity extends AppCompatActivity implements AdapterV
     private static final String[] TITLES = new String[]{
             "Interstitial style",
             "Swipe style",
-            "Scroll end style",
             "Tab style"
     };
 
     private static final String[] DETAILS = new String[]{
             "ポップアップで表示された広告は右上の×ボタンにより閉じることができます。",
             "マンガや小説などスワイプでページ送りをするアプリにてページとページの間に広告を差し込むことができます。※×ボタンは非表示にできます。",
-            "ニュースや記事まとめ、縦スクロール式のマンガアプリなどで最下部までスクロールした後に画面下部から広告を呼び出します。右上の×ボタンにて閉じることができます。",
             "ニュースや記事まとめアプリでカテゴリタブの中に\"PR\"タブを作成し、PRタブがタップされた際に広告を表示します。"
     };
 
@@ -36,7 +34,6 @@ public class FullBoardMenuActivity extends AppCompatActivity implements AdapterV
         {
             add(FullBoardDefaultActivity.class);
             add(FullBoardPagerActivity.class);
-            add(FullBoardWebViewActivity.class);
             add(FullBoardTabLayoutActivity.class);
         }
     };

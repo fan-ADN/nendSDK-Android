@@ -51,7 +51,6 @@
         <activity android:name=".banner.layoutpatterns.AttachAndDetachActivity"/>
         <activity android:name=".banner.layoutpatterns.ListViewActivity"/>
         <activity android:name=".banner.layoutpatterns.ViewPagerActivity"/>
-        <activity android:name=".banner.layoutpatterns.PagerAndListActivity"/>
         <activity android:name=".banner.layoutpatterns.FragmentReplaceActivity"/>
         <activity
             android:name=".banner.layoutpatterns.DialogActivity"
@@ -59,7 +58,6 @@
         <activity android:name=".icon.IconResourceActivity"/>
         <activity android:name=".icon.IconActivity"/>
         <activity android:name=".icon.IconNoXmlActivity"/>
-        <activity android:name=".icon.IconDialogActivity"/>
         <activity android:name=".icon.IconAttachAndDetachActivity"/>
         <activity android:name=".icon.IconSpaceActivity"/>
         <activity android:name=".banner.adjust.AdjustSizeActivity"/>
@@ -73,7 +71,6 @@
         <activity android:name=".nativead.NativeCarouselAdActivity"/>
         <activity android:name=".nativead.NativeMarqueeActivity"/>
         <activity android:name=".nativead.NativeAdV2Activity"/>
-        <activity android:name=".nativead.NativeAutoReloadActivity"/>
         <activity android:name=".nativead.NativeV2OnListActivity"/>
         <activity android:name=".nativeadvideo.ExamplesActivity" />
         <activity android:name=".nativeadvideo.SimpleActivity" />
@@ -83,7 +80,6 @@
         <activity android:name=".nativeadvideo.RecyclerViewInFeedActivity" />
         <activity android:name=".nativeadvideo.CarouselActivity" />
         <activity android:name=".fullboard.FullBoardDefaultActivity"/>
-        <activity android:name=".fullboard.FullBoardWebViewActivity"/>
         <activity android:name=".fullboard.FullBoardTabLayoutActivity"/>
         <activity
             android:name=".fullboard.FullBoardPagerActivity"

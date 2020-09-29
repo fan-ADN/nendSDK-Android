@@ -2,11 +2,13 @@ package net.nend.sample.kotlin.banner.layoutpatterns
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment.*
 import net.nend.sample.kotlin.R
 
@@ -44,5 +46,19 @@ class FragmentReplaceActivity : AppCompatActivity(), OnClickListener {
             setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             commit()
         }
+    }
+
+    class FirstFragment : Fragment() {
+
+        override fun onCreateView(inflater: LayoutInflater,
+                                  container: ViewGroup?, savedInstanceState: Bundle?): View? =
+                View.inflate(context, R.layout.replace_fragment1, null)
+    }
+
+    class SecondFragment : Fragment() {
+
+        override fun onCreateView(inflater: LayoutInflater,
+                                  container: ViewGroup?, savedInstanceState: Bundle?): View? =
+                View.inflate(context, R.layout.replace_fragment2, null)
     }
 }

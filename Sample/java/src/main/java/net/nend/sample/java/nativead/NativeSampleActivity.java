@@ -33,7 +33,6 @@ public class NativeSampleActivity extends AppCompatActivity {
             add(NativeCarouselAdActivity.class);
             add(NativeMarqueeActivity.class);
             add(NativeAdV2Activity.class);
-            add(NativeAutoReloadActivity.class);
         }
     };
 

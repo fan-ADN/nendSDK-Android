@@ -12,7 +12,6 @@ class IconSampleActivity : SimpleListActivity() {
             add(IconActivity::class.java)
             add(IconResourceActivity::class.java)
             add(IconNoXmlActivity::class.java)
-            add(IconDialogActivity::class.java)
             add(IconAttachAndDetachActivity::class.java)
             add(IconSpaceActivity::class.java)
         }

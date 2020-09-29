@@ -1,8 +1,10 @@
 package net.nend.sample.java.banner.layoutpatterns;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,5 +48,25 @@ public class FragmentReplaceActivity extends AppCompatActivity implements OnClic
         transaction.replace(R.id.layout, fragment);
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         transaction.commit();
+    }
+
+    public static class FirstFragment extends Fragment {
+
+        @Override
+        public View onCreateView(LayoutInflater inflater,
+                                 ViewGroup container, Bundle savedInstanceState) {
+
+            return View.inflate(inflater.getContext(), R.layout.replace_fragment1, null);
+        }
+    }
+
+    public static class SecondFragment extends Fragment {
+
+        @Override
+        public View onCreateView(LayoutInflater inflater,
+                ViewGroup container, Bundle savedInstanceState) {
+
+            return View.inflate(inflater.getContext(), R.layout.replace_fragment2, null);
+        }
     }
 }

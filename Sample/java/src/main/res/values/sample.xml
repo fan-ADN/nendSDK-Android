@@ -27,7 +27,6 @@
         <item>xml layout (separate)</item>
         <item>xml layout (use resource file)</item>
         <item>Java call</item>
-        <item>dialog sample</item>
         <item>attach and detach</item>
         <item>space example</item>
     </string-array>
@@ -42,7 +41,6 @@
         <item>attach and detach</item>
         <item>ListView</item>
         <item>ViewPager</item>
-        <item>ViewPager and ListView</item>
         <item>Fragment replace</item>
     </string-array>
     <string-array name="size_type">
@@ -68,7 +66,6 @@
         <item>Carousel</item>
         <item>Marquee</item>
         <item>Get Ad data</item>
-        <item>AutoReload</item>
     </string-array>
     <string-array name="native_video_menu">
         <item>Simple</item>

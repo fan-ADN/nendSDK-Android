@@ -26,8 +26,7 @@ class NativeSampleActivity : AppCompatActivity() {
         VIEWPAGER_SAMPLE,
         CAROUSEL_SAMPLE,
         MARQUEE_SAMPLE,
-        GET_AD_SAMPLE,
-        AUTO_RELOAD_SAMPLE;
+        GET_AD_SAMPLE;
 
         companion object {
             fun getType(id: Int) = values().first { it.ordinal == id }
@@ -52,8 +51,6 @@ class NativeSampleActivity : AppCompatActivity() {
                         NativeMarqueeActivity::class.java))
                 GET_AD_SAMPLE -> activity.startActivity(Intent(activity,
                         NativeAdV2Activity::class.java))
-                AUTO_RELOAD_SAMPLE -> activity.startActivity(Intent(activity,
-                        NativeAutoReloadActivity::class.java))
                 V2_LIST_VIEW_SAMPLE -> activity.startActivity(Intent(activity,
                         NativeV2OnListActivity::class.java))
             }

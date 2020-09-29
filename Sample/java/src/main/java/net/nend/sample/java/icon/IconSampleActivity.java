@@ -15,7 +15,6 @@ public class IconSampleActivity extends SimpleListActivity {
             add(IconActivity.class);
             add(IconResourceActivity.class);
             add(IconJavaCallActivity.class);
-            add(IconDialogActivity.class);
             add(IconAttachAndDetachActivity.class);
             add(IconSpaceActivity.class);
         }

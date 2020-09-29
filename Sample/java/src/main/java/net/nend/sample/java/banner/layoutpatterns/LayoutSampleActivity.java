@@ -17,7 +17,6 @@ public class LayoutSampleActivity extends SimpleListActivity {
             add(AttachAndDetachActivity.class);
             add(ListViewActivity.class);
             add(ViewPagerActivity.class);
-            add(PagerAndListActivity.class);
             add(FragmentReplaceActivity.class);
         }
     };

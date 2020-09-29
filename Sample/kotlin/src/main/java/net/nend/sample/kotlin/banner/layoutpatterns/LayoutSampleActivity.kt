@@ -14,7 +14,6 @@ class LayoutSampleActivity : SimpleListActivity() {
             add(AttachAndDetachActivity::class.java)
             add(ListViewActivity::class.java)
             add(ViewPagerActivity::class.java)
-            add(PagerAndListActivity::class.java)
             add(FragmentReplaceActivity::class.java)
         }
     }
