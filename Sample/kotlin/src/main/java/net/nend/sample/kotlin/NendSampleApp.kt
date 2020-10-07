@@ -1,7 +1,9 @@
 package net.nend.sample.kotlin
 
 import android.app.Application
+import android.content.Intent
 import android.util.Log
+import com.google.android.gms.security.ProviderInstaller
 import net.nend.android.NendAdLogger
 import net.nend.android.NendAdLogging
 
@@ -20,6 +22,16 @@ class NendSampleApp: Application() {
                 }
             }
         }
+
+        ProviderInstaller.installIfNeededAsync(this, object : ProviderInstaller.ProviderInstallListener {
+            override fun onProviderInstalled() {
+                Log.d(TAG, "onProviderInstalled")
+            }
+
+            override fun onProviderInstallFailed(errorCode: Int, intent: Intent?) {
+                Log.e(TAG, "onProviderInstallFailed, errorCode: $errorCode")
+            }
+        })
     }
 
     companion object {
