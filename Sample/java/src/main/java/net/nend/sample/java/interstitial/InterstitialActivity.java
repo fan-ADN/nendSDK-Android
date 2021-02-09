@@ -18,7 +18,7 @@ import net.nend.android.NendAdInterstitial.OnCompletionListener;
 import net.nend.sample.java.R;
 
 public class InterstitialActivity extends AppCompatActivity
-        implements NendAdInterstitial.OnClickListener, OnCompletionListener{
+        implements OnCompletionListener{
     
     private String TAG = InterstitialActivity.this.getClass().getSimpleName();
     private Handler mHandler = new Handler(Looper.getMainLooper());
@@ -38,7 +38,29 @@ public class InterstitialActivity extends AppCompatActivity
             public void onClick(View v) {
                 
                 // 表示結果が返却される
-                NendAdInterstitialShowResult result = NendAdInterstitial.showAd(InterstitialActivity.this);
+                NendAdInterstitialShowResult result = NendAdInterstitial.showAd(InterstitialActivity.this, new NendAdInterstitial.OnClickListener() {
+                    /**
+                     * インタースティシャル広告クリック通知
+                     */
+                    @Override
+                    public void onClick(NendAdInterstitialClickType clickType) {
+                        switch (clickType) {
+                            case CLOSE:
+                                // ×ボタンまたは範囲外タップ
+                                break;
+                            case DOWNLOAD:
+                                // ダウンロードボタン
+                                break;
+                            case INFORMATION:
+                                // インフォメーションボタン
+                                break;
+                            default:
+                                break;
+                        }
+                        // 広告クリックをログに出力
+                        Log.d(TAG, clickType.name());
+                    }
+                });
                 
                 // 表示結果に応じて処理を行う
                 //switch (result) {
@@ -70,25 +92,7 @@ public class InterstitialActivity extends AppCompatActivity
             }
         });
     }
-    
-    /**
-     * インタースティシャル広告クリック通知
-     */
-    @Override
-    public void onClick(NendAdInterstitialClickType clickType) {
-        // クリックに応じて処理行う
-        //switch (clickType) {
-        //case CLOSE:
-            //break;
-        //case DOWNLOAD:
-            //break;
-        //default :
-            //break;
-        //}
-        // 広告クリックをログに出力
-        Log.d(TAG, clickType.name());
-    }
-    
+
     /**
      * 広告受信通知
      */
