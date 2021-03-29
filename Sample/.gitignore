@@ -27,6 +27,7 @@ local.properties
 .idea/vcs.xml
 .idea/caches/
 .idea/codeStyles/
+.idea/jarRepositories.xml
 *.iml
 
 # OS-specific files
