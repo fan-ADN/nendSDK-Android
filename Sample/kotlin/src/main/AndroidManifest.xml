@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="net.nend.sample.kotlin">
-
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    xmlns:tools="http://schemas.android.com/tools"
+    package="net.nend.sample.kotlin">
 
     <application
         android:name=".NendSampleApp"
@@ -12,66 +10,62 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NendSampleActivity">
+        <activity
+            android:name=".NendSampleActivity"
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".banner.BannerSampleActivity">
-        </activity>
-        <activity android:name=".icon.IconSampleActivity">
-        </activity>
+        <activity android:name=".banner.BannerSampleActivity"></activity>
+        <activity android:name=".icon.IconSampleActivity"></activity>
         <activity
             android:name=".interstitial.InterstitialActivity"
-            android:configChanges="orientation|screenSize">
-        </activity>
-        <activity android:name=".nativead.NativeSampleActivity">
-        </activity>
-        <activity android:name=".fullboard.FullBoardMenuActivity">
-        </activity>
+            android:configChanges="orientation|screenSize"></activity>
+        <activity android:name=".nativead.NativeSampleActivity"></activity>
+        <activity android:name=".fullboard.FullBoardMenuActivity"></activity>
         <activity
             android:name=".video.VideoActivity"
-            android:configChanges="orientation|screenSize">
-        </activity>
-        <activity android:name=".banner.xmllayout.XmlSampleActivity"/>
-        <activity android:name=".banner.xmllayout.XmlLayoutActivity"/>
-        <activity android:name=".banner.xmllayout.XmlResourceActivity"/>
-        <activity android:name=".banner.noxml.NoXmlLayoutActivity"/>
-        <activity android:name=".banner.layoutpatterns.LayoutSampleActivity"/>
-        <activity android:name=".banner.sizes.SizeSampleActivity"/>
-        <activity android:name=".banner.sizes.SizeActivity"/>
-        <activity android:name=".banner.layoutpatterns.TopActivity"/>
-        <activity android:name=".banner.layoutpatterns.BottomActivity"/>
-        <activity android:name=".banner.noxml.NoXmlLinearActivity"/>
-        <activity android:name=".banner.noxml.NoXmlRelativeActivity"/>
-        <activity android:name=".banner.noxml.NoXmlWithListenerActivity"/>
-        <activity android:name=".banner.xmllayout.XmlWithListenerActivity"/>
-        <activity android:name=".banner.layoutpatterns.AttachAndDetachActivity"/>
-        <activity android:name=".banner.layoutpatterns.ListViewActivity"/>
-        <activity android:name=".banner.layoutpatterns.ViewPagerActivity"/>
-        <activity android:name=".banner.layoutpatterns.FragmentReplaceActivity"/>
+            android:configChanges="orientation|screenSize"></activity>
+        <activity android:name=".banner.xmllayout.XmlSampleActivity" />
+        <activity android:name=".banner.xmllayout.XmlLayoutActivity" />
+        <activity android:name=".banner.xmllayout.XmlResourceActivity" />
+        <activity android:name=".banner.noxml.NoXmlLayoutActivity" />
+        <activity android:name=".banner.layoutpatterns.LayoutSampleActivity" />
+        <activity android:name=".banner.sizes.SizeSampleActivity" />
+        <activity android:name=".banner.sizes.SizeActivity" />
+        <activity android:name=".banner.layoutpatterns.TopActivity" />
+        <activity android:name=".banner.layoutpatterns.BottomActivity" />
+        <activity android:name=".banner.noxml.NoXmlLinearActivity" />
+        <activity android:name=".banner.noxml.NoXmlRelativeActivity" />
+        <activity android:name=".banner.noxml.NoXmlWithListenerActivity" />
+        <activity android:name=".banner.xmllayout.XmlWithListenerActivity" />
+        <activity android:name=".banner.layoutpatterns.AttachAndDetachActivity" />
+        <activity android:name=".banner.layoutpatterns.ListViewActivity" />
+        <activity android:name=".banner.layoutpatterns.ViewPagerActivity" />
+        <activity android:name=".banner.layoutpatterns.FragmentReplaceActivity" />
         <activity
             android:name=".banner.layoutpatterns.DialogActivity"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name=".icon.IconResourceActivity"/>
-        <activity android:name=".icon.IconActivity"/>
-        <activity android:name=".icon.IconNoXmlActivity"/>
-        <activity android:name=".icon.IconAttachAndDetachActivity"/>
-        <activity android:name=".icon.IconSpaceActivity"/>
-        <activity android:name=".banner.adjust.AdjustSizeActivity"/>
-        <activity android:name=".banner.adjust.AdjustSizeNoXmlActivity"/>
-        <activity android:name=".banner.adjust.AdjustSizeXmlLayoutActivity"/>
-        <activity android:name=".nativead.NativeLayoutActivity"/>
-        <activity android:name=".nativead.NativeMultipleLayoutListActivity"/>
-        <activity android:name=".nativead.NativeGridActivity"/>
-        <activity android:name=".nativead.NativeRecyclerActivity"/>
-        <activity android:name=".nativead.NativeViewPagerActivity"/>
-        <activity android:name=".nativead.NativeCarouselAdActivity"/>
-        <activity android:name=".nativead.NativeMarqueeActivity"/>
-        <activity android:name=".nativead.NativeAdV2Activity"/>
-        <activity android:name=".nativead.NativeV2OnListActivity"/>
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".icon.IconResourceActivity" />
+        <activity android:name=".icon.IconActivity" />
+        <activity android:name=".icon.IconNoXmlActivity" />
+        <activity android:name=".icon.IconAttachAndDetachActivity" />
+        <activity android:name=".icon.IconSpaceActivity" />
+        <activity android:name=".banner.adjust.AdjustSizeActivity" />
+        <activity android:name=".banner.adjust.AdjustSizeNoXmlActivity" />
+        <activity android:name=".banner.adjust.AdjustSizeXmlLayoutActivity" />
+        <activity android:name=".nativead.NativeLayoutActivity" />
+        <activity android:name=".nativead.NativeMultipleLayoutListActivity" />
+        <activity android:name=".nativead.NativeGridActivity" />
+        <activity android:name=".nativead.NativeRecyclerActivity" />
+        <activity android:name=".nativead.NativeViewPagerActivity" />
+        <activity android:name=".nativead.NativeCarouselAdActivity" />
+        <activity android:name=".nativead.NativeMarqueeActivity" />
+        <activity android:name=".nativead.NativeAdV2Activity" />
+        <activity android:name=".nativead.NativeV2OnListActivity" />
         <activity android:name=".nativeadvideo.ExamplesActivity" />
         <activity android:name=".nativeadvideo.SimpleActivity" />
         <activity android:name=".nativeadvideo.InBannerActivity" />
@@ -79,16 +73,16 @@
         <activity android:name=".nativeadvideo.GridViewInFeedActivity" />
         <activity android:name=".nativeadvideo.RecyclerViewInFeedActivity" />
         <activity android:name=".nativeadvideo.CarouselActivity" />
-        <activity android:name=".fullboard.FullBoardDefaultActivity"/>
-        <activity android:name=".fullboard.FullBoardTabLayoutActivity"/>
+        <activity android:name=".fullboard.FullBoardDefaultActivity" />
+        <activity android:name=".fullboard.FullBoardTabLayoutActivity" />
         <activity
             android:name=".fullboard.FullBoardPagerActivity"
-            android:configChanges="screenSize|orientation"/>
+            android:configChanges="screenSize|orientation" />
         <!-- Optional: Customize transition style -->
         <activity
             android:name="net.nend.android.internal.ui.activities.fullboard.NendAdFullBoardActivity"
             android:theme="@style/FullBoardCustomTheme"
-            tools:replace="android:theme"/>
+            tools:replace="android:theme" />
 
     </application>
 

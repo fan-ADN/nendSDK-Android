@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="net.nend.sample.java">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <application
         android:name=".NendSampleApp"
         android:allowBackup="false"
@@ -15,7 +13,8 @@
         <activity android:name=".SimpleListActivity"></activity>
         <activity
             android:name=".NendSampleActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

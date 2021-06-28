@@ -1,14 +1,14 @@
 package net.nend.sample.java.nativeadvideo;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.View;
 
 import net.nend.android.NendAdNative;
-import net.nend.android.NendAdNativeMediaView;
 import net.nend.android.NendAdNativeMediaStateListener;
+import net.nend.android.NendAdNativeMediaView;
 import net.nend.android.NendAdNativeVideo;
 import net.nend.android.NendAdNativeVideoLoader;
 import net.nend.android.NendAdNativeViewBinder;
@@ -50,7 +50,6 @@ public class SimpleActivity extends AppCompatActivity {
         NendAdNativeVideoLoader videoLoader = new NendAdNativeVideoLoader(this,
                 ExamplesActivity.NATIVE_VIDEO_SPOT_ID, ExamplesActivity.NATIVE_VIDEO_API_KEY);
         videoLoader.setFillerImageNativeAd(485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff");
-        videoLoader.setLocationEnabled(false);
 
         videoLoader.loadAd(new NendAdNativeVideoLoader.Callback() {
             @Override
@@ -90,7 +89,7 @@ public class SimpleActivity extends AppCompatActivity {
 
                         @Override
                         public void onStopFullScreenPlay(@NonNull NendAdNativeMediaView nendAdNativeMediaView) {
-                            
+
                         }
 
                         @Override
