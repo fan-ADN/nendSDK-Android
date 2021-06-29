@@ -1,25 +1,23 @@
 package net.nend.sample.kotlin.video
 
-import android.Manifest
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import com.google.android.material.snackbar.Snackbar
-import net.nend.android.*
+import net.nend.android.NendAdInterstitialVideo
+import net.nend.android.NendAdRewardItem
+import net.nend.android.NendAdRewardedActionListener
+import net.nend.android.NendAdRewardedVideo
+import net.nend.android.NendAdUserFeature
+import net.nend.android.NendAdVideo
+import net.nend.android.NendAdVideoActionListener
+import net.nend.android.NendAdVideoPlayingStateListener
+import net.nend.android.NendAdVideoType
 import net.nend.sample.kotlin.R
 
-
-
 @Suppress("UNUSED_PARAMETER")
-/*
-　このサンプルは広告配信に位置情報をオプションで利用しています。
-  This sample uses location data as an option for ad supply.
-*/
 class VideoActivity : AppCompatActivity() {
 
     private var nendAdRewardedVideo: NendAdRewardedVideo? = null
@@ -27,8 +25,9 @@ class VideoActivity : AppCompatActivity() {
     private lateinit var progressDialog: ProgressDialogFragment
 
     private fun Context.toast(
-            message: CharSequence, duration: Int) =
-            Toast.makeText(this, message, duration).show()
+        message: CharSequence, duration: Int
+    ) =
+        Toast.makeText(this, message, duration).show()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,22 +52,21 @@ class VideoActivity : AppCompatActivity() {
 
     fun onClickLoadReward(view: View) {
         Log.d(TAG, "Click load reward button.")
-        if (!verifyPermissions()) {
-            requestPermissions()
-            return
-        }
 
         if (nendAdRewardedVideo == null) {
-            nendAdRewardedVideo = NendAdRewardedVideo(this,
-                    REWARDED_VIDEO_SPOT_ID, REWARDED_VIDEO_API_KEY).apply {
+            nendAdRewardedVideo = NendAdRewardedVideo(
+                this,
+                REWARDED_VIDEO_SPOT_ID, REWARDED_VIDEO_API_KEY
+            ).apply {
                 setUserId(USER_ID)
                 val feature = NendAdUserFeature.Builder()
-                        .setGender(NendAdUserFeature.Gender.FEMALE)
-                        .build()
+                    .setGender(NendAdUserFeature.Gender.FEMALE)
+                    .build()
                 setUserFeature(feature)
                 setActionListener(object : NendAdRewardedActionListener {
                     override fun onRewarded(
-                            nendAdVideo: NendAdVideo, nendAdRewardItem: NendAdRewardItem) {
+                        nendAdVideo: NendAdVideo, nendAdRewardItem: NendAdRewardItem
+                    ) {
                         val name = nendAdRewardItem.currencyName
                         val amount = nendAdRewardItem.currencyAmount
                         Log.d(TAG, "onRewarded")
@@ -77,25 +75,29 @@ class VideoActivity : AppCompatActivity() {
                         toast("onRewarded, Name : $name Amount : $amount", Toast.LENGTH_LONG)
 
                         when (nendAdVideo.type) {
-                            NendAdVideoType.PLAYABLE -> Log.d(TAG, "Playable ad is not provide playing state listener")
+                            NendAdVideoType.PLAYABLE -> Log.d(
+                                TAG,
+                                "Playable ad is not provide playing state listener"
+                            )
                             NendAdVideoType.NORMAL -> {
                                 nendAdRewardedVideo?.playingState()?.let {
-                                    it.playingStateListener = object : NendAdVideoPlayingStateListener {
-                                        override fun onStarted(nendAdVideo: NendAdVideo) {
-                                            Log.d(TAG, "onStarted reward")
-                                            toast("onStarted reward", Toast.LENGTH_SHORT)
-                                        }
+                                    it.playingStateListener =
+                                        object : NendAdVideoPlayingStateListener {
+                                            override fun onStarted(nendAdVideo: NendAdVideo) {
+                                                Log.d(TAG, "onStarted reward")
+                                                toast("onStarted reward", Toast.LENGTH_SHORT)
+                                            }
 
-                                        override fun onStopped(nendAdVideo: NendAdVideo) {
-                                            Log.d(TAG, "onStopped reward")
-                                            toast("onStopped reward", Toast.LENGTH_SHORT)
-                                        }
+                                            override fun onStopped(nendAdVideo: NendAdVideo) {
+                                                Log.d(TAG, "onStopped reward")
+                                                toast("onStopped reward", Toast.LENGTH_SHORT)
+                                            }
 
-                                        override fun onCompleted(nendAdVideo: NendAdVideo) {
-                                            Log.d(TAG, "onCompleted reward")
-                                            toast("onCompleted reward", Toast.LENGTH_SHORT)
+                                            override fun onCompleted(nendAdVideo: NendAdVideo) {
+                                                Log.d(TAG, "onCompleted reward")
+                                                toast("onCompleted reward", Toast.LENGTH_SHORT)
+                                            }
                                         }
-                                    }
                                 }
                             }
                             else -> Log.d(TAG, nendAdVideo.type.toString())
@@ -168,25 +170,22 @@ class VideoActivity : AppCompatActivity() {
 
     fun onClickLoadInterstitial(view: View) {
         Log.d(TAG, "Click load interstitial button.")
-        if (!verifyPermissions()) {
-            requestPermissions()
-            return
-        }
         if (nendAdInterstitialVideo == null) {
-            nendAdInterstitialVideo = NendAdInterstitialVideo(this,
-                    INTERSTITIAL_VIDEO_SPOT_ID, INTERSTITIAL_VIDEO_API_KEY).apply {
+            nendAdInterstitialVideo = NendAdInterstitialVideo(
+                this,
+                INTERSTITIAL_VIDEO_SPOT_ID, INTERSTITIAL_VIDEO_API_KEY
+            ).apply {
                 setUserId(USER_ID)
                 val feature = NendAdUserFeature.Builder()
-                        .setGender(NendAdUserFeature.Gender.MALE) // 性別
-                        .setBirthday(1985, 1, 1) // 生年月日 (e.g. 1985年1月1日)
-                        .setAge(34) // 年齢
-                        .addCustomFeature("stringParameter", "test") // key-value形式のカスタムパラメーター
-                        .addCustomFeature("booleanParameter", true)
-                        .addCustomFeature("integerParameter", 100)
-                        .addCustomFeature("doubleParameter", 123.45)
-                        .build()
+                    .setGender(NendAdUserFeature.Gender.MALE) // 性別
+                    .setBirthday(1985, 1, 1) // 生年月日 (e.g. 1985年1月1日)
+                    .setAge(34) // 年齢
+                    .addCustomFeature("stringParameter", "test") // key-value形式のカスタムパラメーター
+                    .addCustomFeature("booleanParameter", true)
+                    .addCustomFeature("integerParameter", 100)
+                    .addCustomFeature("doubleParameter", 123.45)
+                    .build()
                 setUserFeature(feature)
-                setLocationEnabled(false)
                 addFallbackFullboard(485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff")
                 isMuteStartPlaying = false
                 setActionListener(object : NendAdVideoActionListener {
@@ -196,25 +195,32 @@ class VideoActivity : AppCompatActivity() {
                         toast("onLoaded interstitial", Toast.LENGTH_SHORT)
 
                         when (nendAdVideo.type) {
-                            NendAdVideoType.PLAYABLE -> Log.d(TAG, "Playable ad is not provide playing state listener")
+                            NendAdVideoType.PLAYABLE -> Log.d(
+                                TAG,
+                                "Playable ad is not provide playing state listener"
+                            )
                             NendAdVideoType.NORMAL -> {
                                 nendAdInterstitialVideo?.playingState()?.let {
-                                    it.playingStateListener = object : NendAdVideoPlayingStateListener {
-                                        override fun onStarted(nendAdVideo: NendAdVideo) {
-                                            Log.d(TAG, "onStarted interstitial")
-                                            toast("onStarted interstitial", Toast.LENGTH_SHORT)
-                                        }
+                                    it.playingStateListener =
+                                        object : NendAdVideoPlayingStateListener {
+                                            override fun onStarted(nendAdVideo: NendAdVideo) {
+                                                Log.d(TAG, "onStarted interstitial")
+                                                toast("onStarted interstitial", Toast.LENGTH_SHORT)
+                                            }
 
-                                        override fun onStopped(nendAdVideo: NendAdVideo) {
-                                            Log.d(TAG, "onStopped interstitial")
-                                            toast("onStopped interstitial", Toast.LENGTH_SHORT)
-                                        }
+                                            override fun onStopped(nendAdVideo: NendAdVideo) {
+                                                Log.d(TAG, "onStopped interstitial")
+                                                toast("onStopped interstitial", Toast.LENGTH_SHORT)
+                                            }
 
-                                        override fun onCompleted(nendAdVideo: NendAdVideo) {
-                                            Log.d(TAG, "onCompleted interstitial")
-                                            toast("onCompleted interstitial", Toast.LENGTH_SHORT)
+                                            override fun onCompleted(nendAdVideo: NendAdVideo) {
+                                                Log.d(TAG, "onCompleted interstitial")
+                                                toast(
+                                                    "onCompleted interstitial",
+                                                    Toast.LENGTH_SHORT
+                                                )
+                                            }
                                         }
-                                    }
                                 }
                             }
                             else -> Log.d(TAG, nendAdVideo.type.toString())
@@ -281,44 +287,6 @@ class VideoActivity : AppCompatActivity() {
 
     private fun createProgressDialog(adType: String) {
         progressDialog.show(supportFragmentManager, "Tag")
-    }
-
-    private fun verifyPermissions(): Boolean {
-        val state = ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION)
-        return state == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun showRequestPermissionDialog() = ActivityCompat.requestPermissions(this,
-            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_PERMISSIONS_REQUEST_CODE)
-
-    private fun requestPermissions() {
-        val shouldRequest = ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION)
-        if (shouldRequest) {
-            Snackbar.make(findViewById(R.id.base_layout),
-                    "Location permission is needed for get the last Location. It's a demo that uses location data.",
-                    Snackbar.LENGTH_LONG).setAction(android.R.string.ok) {
-                showRequestPermissionDialog()
-            }.show()
-        } else {
-            showRequestPermissionDialog()
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-            requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
-            when {
-                grantResults.isEmpty() -> Snackbar.make(findViewById(R.id.base_layout),
-                        "User interaction was cancelled.", Snackbar.LENGTH_LONG).show()
-                grantResults[0] == PackageManager.PERMISSION_GRANTED ->
-                    Snackbar.make(findViewById(R.id.base_layout),
-                            "Permission granted.", Snackbar.LENGTH_LONG).show()
-                else -> Snackbar.make(findViewById(R.id.base_layout),
-                        "Permission denied.", Snackbar.LENGTH_LONG).show()
-            }
-        }
     }
 
     companion object {

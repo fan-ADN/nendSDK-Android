@@ -1,8 +1,6 @@
 package net.nend.sample.java.video;
 
-import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,9 +8,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import net.nend.android.NendAdInterstitialVideo;
 import net.nend.android.NendAdRewardItem;
@@ -25,11 +20,6 @@ import net.nend.android.NendAdVideoPlayingState;
 import net.nend.android.NendAdVideoPlayingStateListener;
 import net.nend.sample.java.R;
 
-
-/*
-　このサンプルは広告配信に位置情報をオプションで利用しています。
-  This sample uses location data as an option for ad supply.
-*/
 public class VideoActivity extends AppCompatActivity {
 
     private static final String TAG = "NEND_VIDEO";
@@ -38,7 +28,6 @@ public class VideoActivity extends AppCompatActivity {
     private static final String REWARDED_VIDEO_API_KEY = "a6eb8828d64c70630fd6737bd266756c5c7d48aa";
     private static final String INTERSTITIAL_VIDEO_API_KEY = "e9527a2ac8d1f39a667dfe0f7c169513b090ad44";
     private static final String USER_ID = "DUMMY_USER_ID";
-    private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     private ProgressDialog mProgressDialog;
     private NendAdRewardedVideo mNendAdRewardedVideo;
     private NendAdInterstitialVideo mNendAdInterstitialVideo;
@@ -65,11 +54,6 @@ public class VideoActivity extends AppCompatActivity {
     }
 
     public void onClickLoadReward(View view) {
-        if (!verifyPermissions()) {
-            requestPermissions();
-            return;
-        }
-
         Log.d(TAG, "Click load reward button.");
 
         if (null == mNendAdRewardedVideo) {
@@ -213,7 +197,6 @@ public class VideoActivity extends AppCompatActivity {
                     .addCustomFeature("doubleParameter", 123.45)
                     .build();
             mNendAdInterstitialVideo.setUserFeature(feature);
-            mNendAdInterstitialVideo.setLocationEnabled(false);
             mNendAdInterstitialVideo.addFallbackFullboard(485520, "a88c0bcaa2646c4ef8b2b656fd38d6785762f2ff");
             mNendAdInterstitialVideo.setMuteStartPlaying(false);
             mNendAdInterstitialVideo.setActionListener(new NendAdVideoActionListener() {
@@ -331,43 +314,5 @@ public class VideoActivity extends AppCompatActivity {
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
-    }
-
-    private boolean verifyPermissions() {
-        int state = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-        return state == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private void showRequestPermissionDialog() {
-        ActivityCompat.requestPermissions(VideoActivity.this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                REQUEST_PERMISSIONS_REQUEST_CODE);
-    }
-
-    private void requestPermissions() {
-        boolean shouldRequest = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION);
-        if (shouldRequest) {
-            Snackbar.make(findViewById(R.id.base_layout), "Location permission is needed for get the last Location. It's a demo that uses location data.", Snackbar.LENGTH_LONG).setAction(android.R.string.ok, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showRequestPermissionDialog();
-                }
-            }).show();
-        } else {
-            showRequestPermissionDialog();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
-            if (grantResults.length <= 0) {
-                Snackbar.make(findViewById(R.id.base_layout), "User interaction was cancelled.", Snackbar.LENGTH_LONG).show();
-            } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Snackbar.make(findViewById(R.id.base_layout), "Permission granted.", Snackbar.LENGTH_LONG).show();
-            } else {
-                Snackbar.make(findViewById(R.id.base_layout), "Permission denied.", Snackbar.LENGTH_LONG).show();
-            }
-        }
     }
 }
