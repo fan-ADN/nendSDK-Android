@@ -296,5 +296,6 @@ class VideoActivity : AppCompatActivity() {
         private const val REWARDED_VIDEO_API_KEY = "a6eb8828d64c70630fd6737bd266756c5c7d48aa"
         private const val INTERSTITIAL_VIDEO_API_KEY = "e9527a2ac8d1f39a667dfe0f7c169513b090ad44"
         private const val USER_ID = "DUMMY_USER_ID"
+        private const val REQUEST_PERMISSIONS_REQUEST_CODE = 1
     }
 }

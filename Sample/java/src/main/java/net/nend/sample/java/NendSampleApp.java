@@ -3,7 +3,10 @@ package net.nend.sample.java;
 import android.app.Application;
 import androidx.annotation.NonNull;
 
+import android.content.Intent;
 import android.util.Log;
+
+import com.google.android.gms.security.ProviderInstaller;
 
 import net.nend.android.NendAdLogger;
 import net.nend.android.NendAdLogging;
@@ -38,6 +41,18 @@ public class NendSampleApp extends Application {
                 }
             }
         };
+
+        ProviderInstaller.installIfNeededAsync(this, new ProviderInstaller.ProviderInstallListener() {
+            @Override
+            public void onProviderInstalled() {
+                Log.d(TAG, "onProviderInstalled");
+            }
+
+            @Override
+            public void onProviderInstallFailed(int errorCode, Intent intent) {
+                Log.e(TAG, "onProviderInstallFailed, errorCode: " + errorCode);
+            }
+        });
     }
 
 
