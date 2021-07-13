@@ -42,6 +42,9 @@ public class NendSampleApp extends Application {
             }
         };
 
+        // Android 4.x系を対象とするアプリケーションの場合、セキュリティプロバイダを検証、更新する必要があります
+        // You need to update security provider if your app target Android 4.x
+        // See also: https://developer.android.com/training/articles/security-gms-provider#patching
         ProviderInstaller.installIfNeededAsync(this, new ProviderInstaller.ProviderInstallListener() {
             @Override
             public void onProviderInstalled() {
