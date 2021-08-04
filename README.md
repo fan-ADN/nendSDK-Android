@@ -10,7 +10,9 @@ nendSDKの導入方法については [Wiki](https://github.com/fan-ADN/nendSDK-
 
 Requirement
 ---------------------------------
-Android 4.4以上
+- Android 4.4以上
+- Android Studio Arctic Fox 2020.3.1以上
+- JDK 11
 
 Usage
 ---------------------------------

@@ -22,7 +22,7 @@ android {
 repositories {
     maven {
         // nendSDK
-        url 'http://fan-adn.github.io/nendSDK-Android-lib/library'
+        url 'https://fan-adn.github.io/nendSDK-Android-lib/library'
     }
 }
 
