@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="net.nend.sample.kotlin">
 
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+
     <application
         android:name=".NendSampleApp"
         android:allowBackup="true"
