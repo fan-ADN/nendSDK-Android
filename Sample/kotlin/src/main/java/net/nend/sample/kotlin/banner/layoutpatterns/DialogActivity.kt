@@ -3,11 +3,11 @@ package net.nend.sample.kotlin.banner.layoutpatterns
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.Window
-import kotlinx.android.synthetic.main.dialog.*
+import androidx.appcompat.app.AppCompatActivity
 import net.nend.sample.kotlin.R
+import net.nend.sample.kotlin.databinding.DialogBinding
 
 class DialogActivity : AppCompatActivity() {
 
@@ -31,23 +31,27 @@ class DialogActivity : AppCompatActivity() {
     }
 
     internal inner class NendDialog(context: Context) : Dialog(context) {
+
+        private lateinit var binding: DialogBinding
+
         init {
             window?.requestFeature(Window.FEATURE_NO_TITLE)
         }
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            setContentView(R.layout.dialog)
+            binding = DialogBinding.inflate(layoutInflater)
+            setContentView(binding.root)
         }
 
         override fun onAttachedToWindow() {
             super.onAttachedToWindow()
-            nend.loadAd()
+            binding.nend.loadAd()
         }
 
         override fun onDetachedFromWindow() {
             super.onDetachedFromWindow()
-            nend.pause()
+            binding.nend.pause()
         }
 
         fun destroy() {

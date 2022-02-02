@@ -1,23 +1,24 @@
 package net.nend.sample.kotlin.icon
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
-import kotlinx.android.synthetic.main.icon_attach_detach.*
+import androidx.appcompat.app.AppCompatActivity
 import net.nend.android.NendAdIconLoader
 import net.nend.android.NendAdIconView
-import net.nend.sample.kotlin.R
+import net.nend.sample.kotlin.databinding.IconAttachDetachBinding
 import net.nend.sample.kotlin.icon.IconSampleActivity.Companion.ICON_API_KEY
 import net.nend.sample.kotlin.icon.IconSampleActivity.Companion.ICON_SPOT_ID
-import java.util.*
+import java.util.Random
 
 class IconAttachAndDetachActivity : AppCompatActivity() {
 
+    private lateinit var binding: IconAttachDetachBinding
     private lateinit var iconLoader: NendAdIconLoader
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.icon_attach_detach)
+        binding = IconAttachDetachBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val view1 = NendAdIconView(applicationContext)
         val view2 = NendAdIconView(applicationContext)
@@ -32,7 +33,7 @@ class IconAttachAndDetachActivity : AppCompatActivity() {
             loadAd()
         }
 
-        icon_container.run {
+        binding.iconContainer.run {
             addView(view1)
             addView(view2)
             addView(view3)
@@ -47,7 +48,7 @@ class IconAttachAndDetachActivity : AppCompatActivity() {
         }
         NendAdIconView(applicationContext).apply {
             iconLoader.addIconView(this)
-            icon_container.addView(this)
+            binding.iconContainer.addView(this)
         }
     }
 
@@ -57,8 +58,8 @@ class IconAttachAndDetachActivity : AppCompatActivity() {
             return
         }
         val index = Random().nextInt(iconLoader.iconCount)
-        val iconView = icon_container.getChildAt(index) as NendAdIconView
+        val iconView = binding.iconContainer.getChildAt(index) as NendAdIconView
         iconLoader.removeIconView(iconView)
-        icon_container.removeViewAt(index)
+        binding.iconContainer.removeViewAt(index)
     }
 }

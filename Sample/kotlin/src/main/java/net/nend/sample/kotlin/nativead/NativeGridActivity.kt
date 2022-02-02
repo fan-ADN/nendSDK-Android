@@ -11,15 +11,20 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.native_grid.*
-import net.nend.android.*
+import net.nend.android.NendAdNative
+import net.nend.android.NendAdNativeClient
+import net.nend.android.NendAdNativeListener
+import net.nend.android.NendAdNativeViewBinder
+import net.nend.android.NendAdNativeViewHolder
 import net.nend.sample.kotlin.R
+import net.nend.sample.kotlin.databinding.NativeGridBinding
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_API_KEY_SMALL_SQUARE
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_LOG_TAG
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_SPOT_ID_SMALL_SQUARE
 
 class NativeGridActivity : AppCompatActivity() {
 
+    private lateinit var binding: NativeGridBinding
     private enum class ViewType(val id: Int) {
         NORMAL(0),
         AD(1)
@@ -32,11 +37,12 @@ class NativeGridActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.native_grid)
+        binding = NativeGridBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val list = (1..99).map { i -> "item$i" }
         val adapter = NativeGridAdapter(this, 0, list)
-        grid.adapter = adapter
+        binding.grid.adapter = adapter
     }
 
     internal inner class NativeGridAdapter(context: Context, resource: Int, list: List<String>) :

@@ -9,21 +9,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import kotlinx.android.synthetic.main.activity_full_board_tab_layout.*
 import net.nend.android.NendAdFullBoard
 import net.nend.android.NendAdFullBoardLoader
 import net.nend.android.NendAdFullBoardView
-import net.nend.sample.kotlin.R
+import net.nend.sample.kotlin.databinding.ActivityFullBoardTabLayoutBinding
 import net.nend.sample.kotlin.fullboard.FullBoardMenuActivity.Companion.FULLBOARD_API_KEY
 import net.nend.sample.kotlin.fullboard.FullBoardMenuActivity.Companion.FULLBOARD_SPOT_ID
 
 class FullBoardTabLayoutActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityFullBoardTabLayoutBinding
     private var fullBoardAd: NendAdFullBoard? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_full_board_tab_layout)
+        binding = ActivityFullBoardTabLayoutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         NendAdFullBoardLoader(applicationContext, FULLBOARD_SPOT_ID, FULLBOARD_API_KEY).apply {
             loadAd(object : NendAdFullBoardLoader.Callback {
@@ -41,19 +42,19 @@ class FullBoardTabLayoutActivity : AppCompatActivity() {
     private fun populateTabs(ad: NendAdFullBoard) {
         fullBoardAd = ad
 
-        tab.addTab(tab.newTab())
-        tab.addTab(tab.newTab())
-        tab.addTab(tab.newTab())
+        binding.tab.addTab(binding.tab.newTab())
+        binding.tab.addTab(binding.tab.newTab())
+        binding.tab.addTab(binding.tab.newTab())
 
-        pager.adapter = Adapter(supportFragmentManager)
-        tab.setupWithViewPager(pager)
+        binding.pager.adapter = Adapter(supportFragmentManager)
+        binding.tab.setupWithViewPager(binding.pager)
     }
 
     class ListFragment : androidx.fragment.app.ListFragment() {
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
-            listAdapter = ArrayAdapter<String>(activity!!, android.R.layout.simple_list_item_1, ITEMS)
+            listAdapter = ArrayAdapter<String>(view.context, android.R.layout.simple_list_item_1, ITEMS)
         }
 
         companion object {
@@ -90,7 +91,7 @@ class FullBoardTabLayoutActivity : AppCompatActivity() {
         }
     }
 
-    private inner class Adapter internal constructor(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    private inner class Adapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getCount() = 3
 

@@ -1,29 +1,31 @@
 package net.nend.sample.kotlin.icon
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
-import kotlinx.android.synthetic.main.icon.*
+import androidx.appcompat.app.AppCompatActivity
 import net.nend.android.NendAdIconLoader
 import net.nend.android.NendAdView
 import net.nend.sample.kotlin.R
+import net.nend.sample.kotlin.databinding.IconBinding
 import net.nend.sample.kotlin.icon.IconSampleActivity.Companion.ICON_API_KEY
 import net.nend.sample.kotlin.icon.IconSampleActivity.Companion.ICON_SPOT_ID
 
 class IconActivity : AppCompatActivity() {
 
+    private lateinit var binding: IconBinding
     private lateinit var iconLoader: NendAdIconLoader
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.icon)
+        binding = IconBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         iconLoader = NendAdIconLoader(applicationContext, ICON_SPOT_ID, ICON_API_KEY).apply {
-            addIconView(icon1)
-            addIconView(icon2)
-            addIconView(icon3)
-            addIconView(icon4)
+            addIconView(binding.icon1)
+            addIconView(binding.icon2)
+            addIconView(binding.icon3)
+            addIconView(binding.icon4)
             loadAd()
 
             setOnReceiveListener {

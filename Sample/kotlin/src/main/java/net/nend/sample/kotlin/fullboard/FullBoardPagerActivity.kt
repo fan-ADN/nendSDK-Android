@@ -19,11 +19,10 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
 import androidx.viewpager.widget.PagerAdapter
-import kotlinx.android.synthetic.main.activity_full_board_pager.*
 import net.nend.android.NendAdFullBoard
 import net.nend.android.NendAdFullBoardLoader
 import net.nend.android.NendAdFullBoardView
-import net.nend.sample.kotlin.R
+import net.nend.sample.kotlin.databinding.ActivityFullBoardPagerBinding
 import net.nend.sample.kotlin.fullboard.FullBoardMenuActivity.Companion.FULLBOARD_API_KEY
 import net.nend.sample.kotlin.fullboard.FullBoardMenuActivity.Companion.FULLBOARD_LOG_TAG
 import net.nend.sample.kotlin.fullboard.FullBoardMenuActivity.Companion.FULLBOARD_SPOT_ID
@@ -32,9 +31,12 @@ import java.util.concurrent.CountDownLatch
 class FullBoardPagerActivity : AppCompatActivity(),
         LoaderManager.LoaderCallbacks<List<NendAdFullBoard>> {
 
+    private lateinit var binding: ActivityFullBoardPagerBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_full_board_pager)
+        binding = ActivityFullBoardPagerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         LoaderManager.getInstance(this).initLoader(0, Bundle(), this)
     }
@@ -43,7 +45,7 @@ class FullBoardPagerActivity : AppCompatActivity(),
         super.onConfigurationChanged(newConfig)
         Handler(Looper.getMainLooper()).post {
             // Update the ad orientation.
-            pager.adapter?.notifyDataSetChanged()
+            binding.pager.adapter?.notifyDataSetChanged()
         }
     }
 
@@ -60,7 +62,7 @@ class FullBoardPagerActivity : AppCompatActivity(),
         } else {
             Log.d(FULLBOARD_LOG_TAG, "Couldn't obtain two ads.")
         }
-        pager.adapter = Adapter(supportFragmentManager, pages)
+        binding.pager.adapter = Adapter(supportFragmentManager, pages)
     }
 
     override fun onLoaderReset(loader: Loader<List<NendAdFullBoard>>) {}
@@ -72,7 +74,7 @@ class FullBoardPagerActivity : AppCompatActivity(),
     class ContentFragment : Fragment() {
         @SuppressLint("SetTextI18n")
         override fun onCreateView(
-                inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+                inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
             return TextView(activity).apply {
                 text = "Content"
                 gravity = Gravity.CENTER

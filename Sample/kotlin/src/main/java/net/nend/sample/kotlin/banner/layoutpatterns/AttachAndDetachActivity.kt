@@ -3,29 +3,31 @@ package net.nend.sample.kotlin.banner.layoutpatterns
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.attach_dettach.*
-import net.nend.sample.kotlin.R
+import net.nend.android.NendAdView
+import net.nend.sample.kotlin.databinding.AttachDettachBinding
 
 /**
  * NendAdViewを削除し、再表示するサンプル
  */
 class AttachAndDetachActivity : AppCompatActivity() {
 
+    private lateinit var binding: AttachDettachBinding
     private lateinit var handler: Handler
     private var isAttached = true
 
     /**
      * NendAdViewの削除、再表示処理
      */
-    private val runnable = Runnable {
+    private fun handleNendAd(layout: ViewGroup, nendAd: NendAdView): Runnable = Runnable {
         isAttached = when (isAttached) {
             true -> {
-                root.removeView(nend)
+                layout.removeView(nendAd)
                 false
             }
             else -> {
-                root.addView(nend)
+                layout.addView(nendAd)
                 true
             }
         }
@@ -34,7 +36,8 @@ class AttachAndDetachActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.attach_dettach)
+        binding = AttachDettachBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         handler = Handler(Looper.getMainLooper())
     }
@@ -48,11 +51,11 @@ class AttachAndDetachActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         // 繰り返し処理を停止
-        handler.removeCallbacks(runnable)
+        handler.removeCallbacks(handleNendAd(binding.root, binding.nend))
     }
 
     private fun doPost() {
         // 5秒ごとに削除と再表示を繰り返す
-        handler.postDelayed(runnable, 5000)
+        handler.postDelayed(handleNendAd(binding.root, binding.nend), 5000)
     }
 }

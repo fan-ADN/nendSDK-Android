@@ -3,28 +3,30 @@ package net.nend.sample.kotlin.banner.layoutpatterns
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import net.nend.sample.kotlin.R
+import net.nend.sample.kotlin.databinding.FragmentBinding
 
 /**
  * Fragment切り替えサンプル
  */
 class FragmentReplaceActivity : AppCompatActivity(), OnClickListener {
 
+    private lateinit var binding: FragmentBinding
     private var count = 0
 
     @SuppressLint("CommitTransaction")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment)
+        binding = FragmentBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        button.setOnClickListener(this)
+        binding.button.setOnClickListener(this)
 
         supportFragmentManager.beginTransaction().run {
             add(R.id.layout, FirstFragment())

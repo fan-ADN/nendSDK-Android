@@ -4,18 +4,20 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.native_get_ad_data.*
 import net.nend.android.NendAdNative
 import net.nend.android.NendAdNativeClient
-import net.nend.sample.kotlin.R
+import net.nend.sample.kotlin.databinding.NativeGetAdDataBinding
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_API_KEY_LARGE_WIDE
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_SPOT_ID_LARGE_WIDE
 
 class NativeAdV2Activity : AppCompatActivity() {
 
+    private lateinit var binding: NativeGetAdDataBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.native_get_ad_data)
+        binding = NativeGetAdDataBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // NendAdNativeClient インスタンス生成
         NendAdNativeClient(this, NATIVE_SPOT_ID_LARGE_WIDE, NATIVE_API_KEY_LARGE_WIDE).run {
@@ -25,18 +27,19 @@ class NativeAdV2Activity : AppCompatActivity() {
                     Log.i(NativeSampleActivity.NATIVE_LOG_TAG, "広告取得成功")
 
                     // 広告オブジェクトからテキストを取得する
-                    title_text.text = nendAdNative.titleText
-                    pr_text.text = NendAdNative.AdvertisingExplicitly.PR.text
-                    content_text.text = nendAdNative.contentText
-                    action_button.text = nendAdNative.actionText
-                    promotion_name.text = nendAdNative.promotionName
-                    promotion_url.text = nendAdNative.promotionUrl
+                    binding.run {
+                        titleText.text = nendAdNative.titleText
+                        contentText.text = NendAdNative.AdvertisingExplicitly.PR.text
+                        actionButton.text = nendAdNative.actionText
+                        promotionName.text = nendAdNative.promotionName
+                        promotionUrl.text = nendAdNative.promotionUrl
+                    }
 
                     // 広告オブジェクトから広告画像を取得する
                     nendAdNative.downloadAdImage(object : NendAdNative.Callback {
                         override fun onSuccess(bitmap: Bitmap) {
                             Log.i(NativeSampleActivity.NATIVE_LOG_TAG, "広告画像取得成功")
-                            ad_image.setImageBitmap(bitmap)
+                            binding.adImage.setImageBitmap(bitmap)
                         }
 
                         override fun onFailure(e: Exception) {
@@ -48,7 +51,7 @@ class NativeAdV2Activity : AppCompatActivity() {
                     nendAdNative.downloadLogoImage(object : NendAdNative.Callback {
                         override fun onSuccess(bitmap: Bitmap) {
                             Log.i(NativeSampleActivity.NATIVE_LOG_TAG, "ロゴ取得成功")
-                            logo_image.setImageBitmap(bitmap)
+                            binding.logoImage.setImageBitmap(bitmap)
                         }
 
                         override fun onFailure(e: Exception) {
@@ -57,11 +60,11 @@ class NativeAdV2Activity : AppCompatActivity() {
                         }
                     })
                     // 広告をアクティブにする
-                    nendAdNative.activate(ad_container, pr_text)
+                    nendAdNative.activate(binding.adContainer, binding.prText)
 
                     // 広告オブジェクトから広告画像、ロゴ画像のDL用URLも取得可能
-                    ad_image_url.text = nendAdNative.adImageUrl
-                    logo_image_url.text = nendAdNative.logoImageUrl
+                    binding.adImageUrl.text = nendAdNative.adImageUrl
+                    binding.logoImageUrl.text = nendAdNative.logoImageUrl
                 }
 
                 override fun onFailure(nendError: NendAdNativeClient.NendError) {

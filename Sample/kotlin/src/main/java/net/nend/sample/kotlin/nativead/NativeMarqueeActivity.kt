@@ -6,11 +6,11 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.native_marquee.*
 import net.nend.android.NendAdNative
 import net.nend.android.NendAdNativeClient
 import net.nend.android.NendAdNativeViewBinder
 import net.nend.sample.kotlin.R
+import net.nend.sample.kotlin.databinding.NativeMarqueeBinding
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_API_KEY_SMALL_SQUARE
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_LOG_TAG
 import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_SPOT_ID_SMALL_SQUARE
@@ -20,6 +20,7 @@ import net.nend.sample.kotlin.nativead.NativeSampleActivity.Companion.NATIVE_SPO
  */
 class NativeMarqueeActivity : AppCompatActivity() {
 
+    private lateinit var binding: NativeMarqueeBinding
     private lateinit var marqueeView: MarqueeView
     private lateinit var textView: TextView
     private lateinit var adContainer: View
@@ -94,7 +95,8 @@ class NativeMarqueeActivity : AppCompatActivity() {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.native_marquee)
+        binding = NativeMarqueeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         marqueeView = findViewById(R.id.horizontalScrollView)
         textView = findViewById(R.id.ad_content)
@@ -148,8 +150,8 @@ class NativeMarqueeActivity : AppCompatActivity() {
         val scale = resources.displayMetrics.density
         val paddingDp = (10 * scale + 0.5f).toInt()
         // set future pr size plus 10dp
-        val prWidth = Layout.getDesiredWidth(ad_pr.text, ad_pr.paint).toInt() + paddingDp
-        ad_pr.width = prWidth / 2
+        val prWidth = Layout.getDesiredWidth(binding.adPr.text, binding.adPr.paint).toInt() + paddingDp
+        binding.adPr.width = prWidth / 2
     }
 
 //    private fun setEndless(isEndless: Boolean) {
