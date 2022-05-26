@@ -1,11 +1,10 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
 
 android {
     compileSdkVersion 31
-    buildToolsVersion '30.0.3'
 
     defaultConfig {
         applicationId "net.nend.sample.kotlin"
@@ -25,13 +24,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-}
-
-repositories {
-    maven {
-        // nendSDK
-        url 'https://fan-adn.github.io/nendSDK-Android-lib/library'
     }
 }
 
