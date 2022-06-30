@@ -30,9 +30,9 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'net.nend.android:nend-sdk:8.1.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
+    implementation 'net.nend.android:nend-sdk:8.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.android.gms:play-services-location:20.0.0'
 }
