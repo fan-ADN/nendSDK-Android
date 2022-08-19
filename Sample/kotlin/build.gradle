@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "net.nend.sample.kotlin"
         minSdkVersion 19
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
@@ -34,5 +34,4 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'net.nend.android:nend-sdk:8.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.android.gms:play-services-location:20.0.0'
 }
