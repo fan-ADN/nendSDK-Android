@@ -15,15 +15,15 @@ import java.util.List;
 
 public class NendSampleActivity extends SimpleListActivity {
 
-    private static final List<Class<?>> SAMPLE_ACTIVITIES = new ArrayList<Class<?>>() {
+    private static final List<String> SAMPLE_ACTIVITIES = new ArrayList<String>() {
         {
-            add(BannerSampleActivity.class);
-            add(IconSampleActivity.class);
-            add(InterstitialActivity.class);
-            add(NativeSampleActivity.class);
-            add(FullBoardMenuActivity.class);
-            add(VideoActivity.class);
-            add(ExamplesActivity.class);
+            add(BannerSampleActivity.class.getName());
+            add(IconSampleActivity.class.getName());
+            add(InterstitialActivity.class.getName());
+            add(NativeSampleActivity.class.getName());
+            add(FullBoardMenuActivity.class.getName());
+            add(VideoActivity.class.getName());
+            add(ExamplesActivity.class.getName());
         }
     };
 

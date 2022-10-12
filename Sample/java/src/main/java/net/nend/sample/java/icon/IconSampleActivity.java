@@ -10,13 +10,13 @@ import java.util.List;
 
 public class IconSampleActivity extends SimpleListActivity {
 
-    private static final List<Class<?>> SAMPLE_ACTIVITIES = new ArrayList<Class<?>>() {
+    private static final List<String> SAMPLE_ACTIVITIES = new ArrayList<String>() {
         {
-            add(IconActivity.class);
-            add(IconResourceActivity.class);
-            add(IconJavaCallActivity.class);
-            add(IconAttachAndDetachActivity.class);
-            add(IconSpaceActivity.class);
+            add(IconActivity.class.getName());
+            add(IconResourceActivity.class.getName());
+            add(IconJavaCallActivity.class.getName());
+            add(IconAttachAndDetachActivity.class.getName());
+            add(IconSpaceActivity.class.getName());
         }
     };
 

@@ -10,11 +10,11 @@ import java.util.List;
 
 public class XmlSampleActivity extends SimpleListActivity {
 
-    private static final List<Class<?>> SAMPLE_ACTIVITIES = new ArrayList<Class<?>>() {
+    private static final List<String> SAMPLE_ACTIVITIES = new ArrayList<String>() {
         {
-            add(XmlLayoutActivity.class);
-            add(XmlResourceActivity.class);
-            add(XmlWithListenerActivity.class);
+            add(XmlLayoutActivity.class.getName());
+            add(XmlResourceActivity.class.getName());
+            add(XmlWithListenerActivity.class.getName());
         }
     };
 

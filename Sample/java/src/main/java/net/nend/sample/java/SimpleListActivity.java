@@ -14,22 +14,29 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.ListFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class SimpleListActivity extends AppCompatActivity {
     private ListFragment listFragment;
 
-    protected void instantiateMenuListFragment(int resId, List<Class<?>> menus) {
+    protected void instantiateMenuListFragment(int resId, List<String> menus) {
         int id = new Random().nextInt(0xFFFF);
         FrameLayout container = new FrameLayout(this);
         container.setId(id);
         setContentView(container, new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
+        SimpleMenuListFragment fragment = new SimpleMenuListFragment();
+        Bundle extras = new Bundle();
+        extras.putInt("resId", resId);
+        extras.putStringArrayList("menus", new ArrayList<>(menus));
+        fragment.setArguments(extras);
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(id, new SimpleMenuListFragment(resId, menus))
+                .add(id, fragment)
                 .commit();
     }
 
@@ -49,24 +56,23 @@ public class SimpleListActivity extends AppCompatActivity {
     }
 
     public static class SimpleMenuListFragment extends ListFragment {
-        private final List<Class<?>> menus;
-        private final int resId;
-
-        public SimpleMenuListFragment(int resId, List<Class<?>> menus) {
-            this.resId = resId;
-            this.menus = menus;
-        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             setHasOptionsMenu(true);
-            return inflater.inflate(resId, container, false);
+            return inflater.inflate(requireArguments().getInt("resId"), container, false);
         }
 
         @Override
         public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
-            Intent intent = new Intent(getActivity(), menus.get(position));
-            startActivity(intent);
+            Class<?> activity;
+            try {
+                activity = Class.forName(requireArguments().getStringArrayList("menus").get(position));
+                Intent intent = new Intent(getActivity(), activity);
+                startActivity(intent);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

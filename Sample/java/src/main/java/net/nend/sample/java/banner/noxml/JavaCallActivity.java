@@ -10,11 +10,11 @@ import java.util.List;
 
 public class JavaCallActivity extends SimpleListActivity {
 
-    private static final List<Class<?>> SAMPLE_ACTIVITIES = new ArrayList<Class<?>>() {
+    private static final List<String> SAMPLE_ACTIVITIES = new ArrayList<String>() {
         {
-            add(JavaCallLinearActivity.class);
-            add(JavaCallRelativeActivity.class);
-            add(JavaCallWithListenerActivity.class);
+            add(JavaCallLinearActivity.class.getName());
+            add(JavaCallRelativeActivity.class.getName());
+            add(JavaCallWithListenerActivity.class.getName());
         }
     };
     

@@ -10,10 +10,10 @@ import java.util.List;
 
 public class AdjustSizeActivity extends SimpleListActivity {
 
-	private static final List<Class<?>> SAMPLE_ACTIVITIES = new ArrayList<Class<?>>() {
+	private static final List<String> SAMPLE_ACTIVITIES = new ArrayList<String>() {
 		{
-			add(AdjustSizeXmlLayoutActivity.class);
-			add(AdjustSizeJavaCallActivity.class);
+			add(AdjustSizeXmlLayoutActivity.class.getName());
+			add(AdjustSizeJavaCallActivity.class.getName());
 		}
 	};
 

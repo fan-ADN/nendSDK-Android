@@ -27,14 +27,18 @@ class SizeSampleActivity : AppCompatActivity() {
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
         supportFragmentManager
                 .beginTransaction()
-                .add(id, SizeSampleListFragment(R.layout.size_sample))
+                .add(id, SizeSampleListFragment().apply {
+                    arguments = Bundle().apply {
+                        putInt("resId", R.layout.size_sample)
+                    }
+                })
                 .commit()
     }
 
-    class SizeSampleListFragment(private val resId: Int) : ListFragment() {
+    class SizeSampleListFragment : ListFragment() {
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             setHasOptionsMenu(true)
-            return inflater.inflate(resId, container, false)
+            return inflater.inflate(requireArguments().getInt("resId"), container, false)
         }
 
         override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {

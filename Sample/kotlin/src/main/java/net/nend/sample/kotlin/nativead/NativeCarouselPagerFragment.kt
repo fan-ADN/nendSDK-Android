@@ -12,7 +12,6 @@ import net.nend.sample.kotlin.R
 class NativeCarouselPagerFragment : Fragment() {
 
     private var callback: OnAdListener? = null
-    var layoutId = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -30,7 +29,7 @@ class NativeCarouselPagerFragment : Fragment() {
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(layoutId,
+        return inflater.inflate(requireArguments().getInt("layoutId"),
                 container, false).apply {
             val adLayout = findViewById<RelativeLayout>(R.id.ad)
             callback?.onAdRequest(adLayout, requireArguments().getInt("position"))
@@ -46,8 +45,8 @@ class NativeCarouselPagerFragment : Fragment() {
             return NativeCarouselPagerFragment().apply {
                 arguments = Bundle().apply {
                     putInt("position", position)
+                    putInt("layoutId", layoutId)
                 }
-                this.layoutId = layoutId
             }
         }
     }

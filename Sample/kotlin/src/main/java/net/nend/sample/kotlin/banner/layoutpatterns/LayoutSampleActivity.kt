@@ -7,14 +7,14 @@ import java.util.*
 
 class LayoutSampleActivity : SimpleListActivity() {
 
-    private val list: ArrayList<Class<*>?> = object : ArrayList<Class<*>?>() {
+    private val list: ArrayList<String> = object : ArrayList<String>() {
         init {
-            add(TopActivity::class.java)
-            add(BottomActivity::class.java)
-            add(AttachAndDetachActivity::class.java)
-            add(ListViewActivity::class.java)
-            add(ViewPagerActivity::class.java)
-            add(FragmentReplaceActivity::class.java)
+            add(TopActivity::class.java.name)
+            add(BottomActivity::class.java.name)
+            add(AttachAndDetachActivity::class.java.name)
+            add(ListViewActivity::class.java.name)
+            add(ViewPagerActivity::class.java.name)
+            add(FragmentReplaceActivity::class.java.name)
         }
     }
 

@@ -7,13 +7,13 @@ import java.util.*
 
 class IconSampleActivity : SimpleListActivity() {
 
-    private val list: ArrayList<Class<*>?> = object : ArrayList<Class<*>?>() {
+    private val list: ArrayList<String> = object : ArrayList<String>() {
         init {
-            add(IconActivity::class.java)
-            add(IconResourceActivity::class.java)
-            add(IconNoXmlActivity::class.java)
-            add(IconAttachAndDetachActivity::class.java)
-            add(IconSpaceActivity::class.java)
+            add(IconActivity::class.java.name)
+            add(IconResourceActivity::class.java.name)
+            add(IconNoXmlActivity::class.java.name)
+            add(IconAttachAndDetachActivity::class.java.name)
+            add(IconSpaceActivity::class.java.name)
         }
     }
 

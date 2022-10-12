@@ -43,23 +43,23 @@ public class SizeSampleActivity extends AppCompatActivity {
         setContentView(container, new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
+        SizeSampleListFragment fragment = new SizeSampleListFragment();
+        Bundle extra = new Bundle();
+        extra.putInt("resId", R.layout.size_sample);
+        fragment.setArguments(extra);
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(id, new SizeSampleListFragment(R.layout.size_sample))
+                .add(id, fragment)
                 .commit();
     }
 
     public static class SizeSampleListFragment extends ListFragment {
-        private final int resId;
-
-        public SizeSampleListFragment(int resId) {
-            this.resId = resId;
-        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             setHasOptionsMenu(true);
-            return inflater.inflate(resId, container, false);
+            return inflater.inflate(requireArguments().getInt("resId"), container, false);
         }
 
         @Override

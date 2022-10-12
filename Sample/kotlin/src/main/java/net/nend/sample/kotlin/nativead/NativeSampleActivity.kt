@@ -70,14 +70,18 @@ class NativeSampleActivity : AppCompatActivity() {
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
         supportFragmentManager
                 .beginTransaction()
-                .add(id, SampleListFragment(R.layout.activity_native_sample))
+                .add(id, SampleListFragment().apply {
+                    arguments = Bundle().apply {
+                        putInt("resId", R.layout.activity_native_sample)
+                    }
+                })
                 .commit()
     }
 
-    class SampleListFragment(private val resId: Int) : ListFragment() {
+    class SampleListFragment: ListFragment() {
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             setHasOptionsMenu(true)
-            return inflater.inflate(resId, container, false)
+            return inflater.inflate(requireArguments().getInt("resId"), container, false)
         }
 
         override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {

@@ -16,14 +16,13 @@ import net.nend.sample.java.R;
 public class NativeCarouselPagerFragment extends Fragment {
 
     OnAdListener mCallback;
-    int layoutId;
 
     public static NativeCarouselPagerFragment newInstance(int position, int layoutId) {
         NativeCarouselPagerFragment fragment = new NativeCarouselPagerFragment();
         Bundle extras = new Bundle();
         extras.putInt("position", position);
+        extras.putInt("layoutId", layoutId);
         fragment.setArguments(extras);
-        fragment.layoutId = layoutId;
         return fragment;
     }
 
@@ -46,16 +45,12 @@ public class NativeCarouselPagerFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Bundle arg = requireArguments();
 
-        View view = inflater.inflate(layoutId, container, false);
+        View view = inflater.inflate(arg.getInt("layoutId"), container, false);
         RelativeLayout adLayout = view.findViewById(R.id.ad);
 
-        Bundle arg = getArguments();
-        int position = 0;
-        if (arg != null) {
-            position = arg.getInt("position");
-        }
-        mCallback.onAdRequest(adLayout, position);
+        mCallback.onAdRequest(adLayout, arg.getInt("position"));
 
         return view;
     }

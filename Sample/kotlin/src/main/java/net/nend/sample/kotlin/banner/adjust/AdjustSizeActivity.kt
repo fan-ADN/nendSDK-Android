@@ -7,10 +7,10 @@ import java.util.*
 
 class AdjustSizeActivity : SimpleListActivity() {
 
-    private val list: ArrayList<Class<*>?> = object : ArrayList<Class<*>?>() {
+    private val list: ArrayList<String> = object : ArrayList<String>() {
         init {
-            add(AdjustSizeXmlLayoutActivity::class.java)
-            add(AdjustSizeNoXmlActivity::class.java)
+            add(AdjustSizeXmlLayoutActivity::class.java.name)
+            add(AdjustSizeNoXmlActivity::class.java.name)
         }
     }
 

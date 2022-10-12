@@ -7,14 +7,14 @@ import java.util.*
 
 class ExamplesActivity : SimpleListActivity() {
 
-    private val list: ArrayList<Class<*>?> = object : ArrayList<Class<*>?>() {
+    private val list: ArrayList<String> = object : ArrayList<String>() {
         init {
-            add(SimpleActivity::class.java)
-            add(InBannerActivity::class.java)
-            add(ListViewInFeedActivity::class.java)
-            add(GridViewInFeedActivity::class.java)
-            add(RecyclerViewInFeedActivity::class.java)
-            add(CarouselActivity::class.java)
+            add(SimpleActivity::class.java.name)
+            add(InBannerActivity::class.java.name)
+            add(ListViewInFeedActivity::class.java.name)
+            add(GridViewInFeedActivity::class.java.name)
+            add(RecyclerViewInFeedActivity::class.java.name)
+            add(CarouselActivity::class.java.name)
         }
     }
 

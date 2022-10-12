@@ -10,14 +10,14 @@ import java.util.List;
 
 public class LayoutSampleActivity extends SimpleListActivity {
 
-    private static final List<Class<?>> SAMPLE_ACTIVITIES = new ArrayList<Class<?>>() {
+    private static final List<String> SAMPLE_ACTIVITIES = new ArrayList<String>() {
         {
-            add(TopActivity.class);
-            add(BottomActivity.class);
-            add(AttachAndDetachActivity.class);
-            add(ListViewActivity.class);
-            add(ViewPagerActivity.class);
-            add(FragmentReplaceActivity.class);
+            add(TopActivity.class.getName());
+            add(BottomActivity.class.getName());
+            add(AttachAndDetachActivity.class.getName());
+            add(ListViewActivity.class.getName());
+            add(ViewPagerActivity.class.getName());
+            add(FragmentReplaceActivity.class.getName());
         }
     };
 

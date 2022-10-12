@@ -24,7 +24,7 @@ class ListViewActivity : SimpleListActivity() {
         super.onStart()
 
         NendAdView(this, BANNER_SPOT_ID_320_50, BANNER_API_KEY_320_50).run {
-            listView?.addHeaderView(this)
+            listFragment.listView.addHeaderView(this)
             loadAd()
         }
     }

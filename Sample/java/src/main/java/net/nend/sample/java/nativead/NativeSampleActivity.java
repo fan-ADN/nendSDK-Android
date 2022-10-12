@@ -49,23 +49,23 @@ public class NativeSampleActivity extends AppCompatActivity {
         setContentView(container, new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
+        SampleListFragment fragment = new SampleListFragment();
+        Bundle extras = new Bundle();
+        extras.putInt("resId", R.layout.native_sample);
+        fragment.setArguments(extras);
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(id, new SampleListFragment(R.layout.native_sample))
+                .add(id, fragment)
                 .commit();
     }
 
     public static class SampleListFragment extends ListFragment {
-        private final int resId;
-
-        public SampleListFragment(int resId) {
-            this.resId = resId;
-        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             setHasOptionsMenu(true);
-            return inflater.inflate(resId, container, false);
+            return inflater.inflate(requireArguments().getInt("resId"), container, false);
         }
 
         @Override

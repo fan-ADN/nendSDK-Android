@@ -16,14 +16,14 @@ import java.util.List;
 
 public class BannerSampleActivity extends SimpleListActivity {
 
-    private static final List<Class<?>> SAMPLE_ACTIVITIES = new ArrayList<Class<?>>() {
+    private static final List<String> SAMPLE_ACTIVITIES = new ArrayList<String>() {
         {
-            add(XmlSampleActivity.class);
-            add(JavaCallActivity.class);
-            add(LayoutSampleActivity.class);
-            add(DialogActivity.class);
-            add(SizeSampleActivity.class);
-            add(AdjustSizeActivity.class);
+            add(XmlSampleActivity.class.getName());
+            add(JavaCallActivity.class.getName());
+            add(LayoutSampleActivity.class.getName());
+            add(DialogActivity.class.getName());
+            add(SizeSampleActivity.class.getName());
+            add(AdjustSizeActivity.class.getName());
         }
     };
 

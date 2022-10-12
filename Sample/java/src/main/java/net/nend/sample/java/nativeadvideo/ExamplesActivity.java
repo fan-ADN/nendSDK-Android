@@ -13,14 +13,14 @@ public class ExamplesActivity extends SimpleListActivity {
     static final int NATIVE_VIDEO_SPOT_ID = 887591;
     static final String NATIVE_VIDEO_API_KEY = "a284d892c3617bf5705facd3bfd8e9934a8b2491";
 
-    private static final List<Class<?>> EXAMPLE_ACTIVITIES = new ArrayList<Class<?>>() {
+    private static final List<String> EXAMPLE_ACTIVITIES = new ArrayList<String>() {
         {
-            add(SimpleActivity.class);
-            add(InBannerActivity.class);
-            add(ListViewInFeedActivity.class);
-            add(GridViewInFeedActivity.class);
-            add(RecyclerViewInFeedActivity.class);
-            add(CarouselActivity.class);
+            add(SimpleActivity.class.getName());
+            add(InBannerActivity.class.getName());
+            add(ListViewInFeedActivity.class.getName());
+            add(GridViewInFeedActivity.class.getName());
+            add(RecyclerViewInFeedActivity.class.getName());
+            add(CarouselActivity.class.getName());
         }
     };
 

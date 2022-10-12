@@ -7,11 +7,11 @@ import java.util.*
 
 class NoXmlLayoutActivity : SimpleListActivity() {
 
-    private val list: ArrayList<Class<*>?> = object : ArrayList<Class<*>?>() {
+    private val list: ArrayList<String> = object : ArrayList<String>() {
         init {
-            add(NoXmlLinearActivity::class.java)
-            add(NoXmlRelativeActivity::class.java)
-            add(NoXmlWithListenerActivity::class.java)
+            add(NoXmlLinearActivity::class.java.name)
+            add(NoXmlRelativeActivity::class.java.name)
+            add(NoXmlWithListenerActivity::class.java.name)
         }
     }
 
