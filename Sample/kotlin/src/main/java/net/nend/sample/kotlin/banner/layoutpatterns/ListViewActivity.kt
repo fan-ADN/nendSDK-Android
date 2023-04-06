@@ -11,6 +11,7 @@ import net.nend.sample.kotlin.banner.BannerSampleActivity.Companion.BANNER_SPOT_
  * ListViewに表示するサンプル
  */
 class ListViewActivity : SimpleListActivity() {
+    private var nendAdView: NendAdView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,9 +24,11 @@ class ListViewActivity : SimpleListActivity() {
     override fun onStart() {
         super.onStart()
 
-        NendAdView(this, BANNER_SPOT_ID_320_50, BANNER_API_KEY_320_50).run {
-            listFragment.listView.addHeaderView(this)
-            loadAd()
+        nendAdView ?: run {
+            nendAdView = NendAdView(this, BANNER_SPOT_ID_320_50, BANNER_API_KEY_320_50).apply {
+                listFragment.listView.addHeaderView(this)
+                loadAd()
+            }
         }
     }
 }

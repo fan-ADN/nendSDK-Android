@@ -48,7 +48,7 @@ open class SimpleListActivity: AppCompatActivity() {
                 .commit()
     }
 
-    private class SimpleMenuListFragment : ListFragment() {
+    class SimpleMenuListFragment : ListFragment() {
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             setHasOptionsMenu(true)
             return inflater.inflate(requireArguments().getInt("resId"), container, false)
