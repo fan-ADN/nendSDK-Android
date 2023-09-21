@@ -1,12 +1,11 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ad"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:paddingBottom="8dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
     android:paddingTop="8dp">
 
     <ImageView
@@ -14,35 +13,41 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:adjustViewBounds="false"
-        android:scaleType="fitXY"/>
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/ad_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="8dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="8dp">
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/ad_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="16dp"
+        app:layout_constrainedWidth="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:maxLines="2"/>
 
-        <TextView
-            android:id="@+id/ad_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="2"/>
+    <TextView
+        android:id="@+id/ad_promotion_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        app:layout_constraintStart_toEndOf="@id/ad_image"
+        app:layout_constraintTop_toBottomOf="@id/ad_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="16dp"/>
 
-        <TextView
-            android:id="@+id/ad_promotion_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:textSize="10sp"/>
-
-        <TextView
-            android:id="@+id/ad_pr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:textSize="10sp"/>
-    </RelativeLayout>
-</LinearLayout>
+    <TextView
+        android:id="@+id/ad_pr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        app:layout_constraintStart_toEndOf="@id/ad_promotion_name"
+        app:layout_constraintTop_toBottomOf="@+id/ad_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="16dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
